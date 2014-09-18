@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>연산자</title>
+</head>
+<body>
+	<input id="v1" type="text">
+	<select id="op">
+		<option>+</option>
+		<option>-</option>
+		<option>*</option>
+		<option>/</option>
+		<option>%</option>
+	</select>
+
+	<input id="v2" type="text">
+	<button id="compute">=</button>
+	<input id="result" type="text">
+
+	<script>
+		"use strict";
+
+		//compute 아이디의 input 태그 객체를 찾는다.
+		var compute = document.getElementById("compute");
+
+		//compute 태그 객체의 함수를 설정한다.
+		// 마우스로 클릭했을 때 호출되는 함수를 설정한다.
+		//onclick() 버튼을 클릭할 때마다 호출될 것이다.
+		compute.onclick = function() {
+			var e1 = document.getElementById("v1");
+			var e2 = document.getElementById("v2");
+
+			//pareInt: 문자형이 아닌 숫자형으로 바꾼다.
+			var num1 = parseInt(e1.value);
+			var num2 = parseInt(e2.value);
+
+			var e4 = document.getElementById("op");
+			
+			var result = document.getElementById("result");
+ 
+			if (e4.value == "+") {
+				result.value = num1 + num2;
+			} else if (e4.value == "-") {
+				result.value = num1 - num2;
+			} else if (e4.value == "*") {
+				result.value = num1 * num2;
+			} else if (e4.value == "/") {
+				result.value = num1 / num2;
+			} else if (e4.value == "%"){
+				result.value = num1 % num2;
+			} 
+		};
+		
+		
+	</script>
+</body>
+</html>

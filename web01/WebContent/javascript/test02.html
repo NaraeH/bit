@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>실행순서</title>
+
+<script>
+	alert('1');
+</script>
+
+</head>
+
+<body>
+	<!-- 스크립트 태그의 실행은 선언된 순서대로 실행한다. 이전 javascipt는 크기가 많지 않아 head에 섰지만, 현재는 크기가 커져서 body하단 부분에 넣는다 -->
+	<h1>2</h1>
+
+	<script>
+		alert('3');
+	</script>
+
+	<h4>4</h4>
+
+	<script>
+		alert('5');
+	</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>변수선언</title>
+
+</head>
+
+<body>
+	<script>
+		/* 
+		 변수선언: 자바스크립트 엔진에 값을 저장할 때 메모리를 준비하라고 명령을 내린다.
+		 변수선언 방법: 변수타입 변수명 
+		 */
+		// 한번에 하나의 변수만 선언
+		var v1;
+
+		//한번에 여러개의 변수를 선언 할 수 있다.
+		var v2, v3, v4;
+
+		//변수에 값 저장 : 할당 연산자(assignment) '='을 사용
+		v1 = 20;
+		v2 = 30;
+		v3 = 40;
+		v4 = 50;
+
+		//변수의 값 출력: 자바스크립트에서 제공하는 함수를 실행한다.
+		//console에 보관된 log() 함수를 실행(호출)한다.
+		console.log(v1, v2, v3, v4);
+
+		//변수 선언과 동시에 값 할당
+		var x = 20, y = 30, z = 40;
+		console.log(x, y, z);
+
+		// 변수 이름짓기: 첫 글자는 문자(알파벳, _, $)이 와야한다. 두번째 문자부터 숫자(0 ~ 9)가 올 수 있다.
+		var abc;
+		var $bc;
+		var _bc;
+		var $; // 기억! => jQuery에서 사용됨.
+		var _;
+		var a;
+		var a123;
+		//var 1a; //오류
+	</script>
+</body>
+</html>
