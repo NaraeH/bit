@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>== 과 === 의 비교</title>
+</head>
+<body>
+<!--
+1. == 연산자
+2. === 연산자
+  -->
+	<script>
+		"use strict";
+		
+		//암시적 형변환 :  연산을 위해 두개의 값을 같은 타입으로 자동으로 형변환하는 것
+		// == 연산에서 암시적 형변환은 어떤 타입의 값을 number로 변환한다.
+		console.log("Boolean('true')  == true : ", Boolean('true') == true);
+		console.log("String('true')   == true : ", String('true') == true);
+		console.log("Number('true')   == true : ", Number('true') == true);
+		console.log("Number('true')           : ", Number('true'));
+		console.log("'true'  == true  : ", 'true' == true);
+		console.log("'false' == false : ", 'false' == false);
+		console.log("  0 == false     : ", 0 == false);		
+		console.log("'100' == 100     : ", '100' == 100);
+		
+		var x = 100;
+		
+		if(x == 100){
+			console.log('x==100  : x의 값은 100입니다');
+		}
+		
+		//===는 타입과 값이 일치할 때만 true이다.(type을 먼저 체크후 값을 비교한다.)
+		if(x === 100){
+			console.log('x=== 100: x의 값은 완전히(타입과 값이) 100입니다');
+		}
+		
+		var y = '오호라';
+		
+		//암시적 형변환에 의해 y가 자동으로 true로 바뀌면서 if안의 조건문이 참이된다.
+		if(y){
+			console.log('Y는 참이다');
+			
+		console.log("'' ==  false", ''== false);
+		console.log("'' === false", ''=== false);
+		console.log("0  ==  false", 0 == false);
+		console.log("0  === false", ''=== false);
+		}
+		
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>조건문1: if문</title>
+</head>
+<body>
+
+	<!--
+조건문 :  조건에 따라 실행 할 명령어를 선택
+
+ -->
+	<script>
+		"use strict";
+
+		var a = 11;
+
+		//따로 설정을 하지 않는다면(블럭{}을 만들지 않으면) ;까지만 if에서 종속되는 문장
+		if (a <= 10)
+			console.log("1: a <= 10");
+		console.log("1: 뭐짐...?");
+
+		if (a <= 10) {
+			console.log("2: a <= 10");
+			console.log("2: 뭐짐...?");
+		}
+
+		console.log("------------------------");
+		if (age < 8)
+			console.log("유아!")
+		else {
+			if (age < 18)
+				console.log("어린이");
+			else {
+				if (age < 35)
+					console.log("청년")
+				else {
+					if (age < 50)
+						console.log("장년");
+					else {
+						if (age < 60)
+							console.log("중년");
+						else {
+							console.log("노인");
+						}
+					}
+				}
+			}
+		}
+
+		console.log("------------------------");
+		if (age < 8) {
+			console.log("유아!");
+
+		} else if (age < 18) {
+			console.log("어린이");
+
+		} else if (age < 35) {
+			console.log("청년");
+
+		} else if (age < 50) {
+			console.log("장년");
+
+		} else if (age < 60) {
+			console.log("중년");
+
+		} else {
+			console.log("노인");
+		}
+	</script>
+
+</body>
+</html>

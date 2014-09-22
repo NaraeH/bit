@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>함수3</title>
+</head>
+<body>
+	<script>
+		/*
+		함수: 반복 사용할 명령어들을 묶어 두는 문법, 나중에 변경하기 쉬운 코드
+		1. function 함수명() {...}
+		2. function 함수명(파라미터, 파라미터, ...) {...}
+		3. function 함수명(){...; return 값;}
+		4. function 함수명(파라미터, 파라미터, ...) {...; return 값;}
+		 */
+		"use strict";
+
+		//파라미터 :X, 리턴 값: X
+		function boundary() {
+			console.log("--------------------");
+		}
+
+		//파라미터 :O, 리턴 값: X
+		//파라미터란 함수를 호출 할 때 넘어오는 값을 담는 변수
+		//아규먼트란 함수를 호출할 때 넘겨주는 값
+		//현업에서는 파라미터와 아규먼트를 그냥 막 쓴다.
+		//분석/설계에서는 구분하여 사용한다.
+		function displayScore(score) {
+			console.log("이름 : ", score[0]);
+			console.log("국어 : ", score[1]);
+			console.log("영어 : ", score[2]);
+			console.log("수학 : ", score[3]);
+			console.log("과학 : ", score[4]);
+			console.log("사회 : ", score[5]);
+			console.log("총점 : ", score[6]);
+			console.log("평균 : ", score[7]);
+		}
+		
+		function computeTotal(score){
+			var sum = 0;
+			
+			for(var i = 1; i < score.length; i++){
+				sum += score[i];
+			}
+			return sum;
+		}
+		
+		function computeAverage(sum, count){
+			return (sum/count);
+		}
+
+		var s1 = [ "홍길동", 100, 100, 50, 80, 90 ];
+		var s2 = [ "임꺽정", 80, 90, 90, 100, 100 ];
+		var s3 = [ "장보고", 100, 100, 100, 80, 80 ];
+
+		boundary();       //함수호출: 위에 정의한 명령어들을 재사용	
+		s1[6] = computeTotal(s1);
+		s1[7] = computeAverage(s1[6], 5);
+		displayScore(s1); //함수의 파라미터 변수 score에 넘겨줄 값 s1(아규먼트)
+
+		boundary();
+		s2[6] = computeTotal(s2);
+		s2[7] = computeAverage(s2[6], 5);
+		displayScore(s2);
+
+
+		boundary();
+		s3[6] = computeTotal(s3);
+		s3[7] = computeAverage(s3[6], 5);
+		displayScore(s3);
+
+	</script>
+
+</body>
+</html>

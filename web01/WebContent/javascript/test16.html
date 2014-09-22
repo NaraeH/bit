@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>형변환</title>
+</head>
+<body>
+<!--
+형변환: 값을 특정 데이터 형으로 변환하는 것.
+1. boolean형으로 변환 : Boolean() 함수 이용 (boolean()이 아님 대소문자 구분하기)
+2. string형으로 변환  : String() 함수 이용
+3. number형으로 변환  : Number() 함수 이용
+  -->
+<script>
+"use strict";
+
+//Boolean()
+console.log(" 0        을 Boolean()로 바꾸기 : ", Boolean(0));    //0외에 모두 true
+console.log(" 2        를 Boolean()로 바꾸기 : ", Boolean(2));
+console.log(" - 2      를 Boolean()로 바꾸기 : ", Boolean(-2));
+console.log(" ''       을 Boolean()로 바꾸기 : ", Boolean(''));  // 빈문자열('')외에 모두 true
+console.log(" 'aa'     을 Boolean()로 바꾸기 : ", Boolean('aa'));
+console.log(" 'false'  을 Boolean()로 바꾸기 : ", Boolean('false'));
+console.log(" 'true'   을 Boolean()로 바꾸기 : ", Boolean(true));//?
+console.log(" true     을 Boolean()로 바꾸기 : ", Boolean(true));
+console.log(" false    을 Boolean()로 바꾸기 : ", Boolean(false));
+console.log(" NaN      을 Boolean()로 바꾸기 : ", Boolean(NaN));
+console.log(" null     을 Boolean()로 바꾸기 : ", Boolean(null));
+console.log(" undefined을 Boolean()로 바꾸기 : ", Boolean(undefined));
+console.log("");
+
+//Number()
+console.log("'100'    을 Number()로 바꾸기", Number('100'));
+console.log("true     을 Number()로 바꾸기", Number(true));
+console.log("false    을 Number()로 바꾸기", Number(false));
+console.log("''       을 Number()로 바꾸기", Number(''));
+console.log("'KFC'    을 Number()로 바꾸기", Number('KFC'));
+console.log("null     을 Number()로 바꾸기", Number(null));
+console.log("undefined을 Number()로 바꾸기", Number(undefined));
+console.log("'100$   '을 Number()로 바꾸기", Number('100$'));
+console.log("'100$   '을 paseInt()로 바꾸기", parseInt('100$'));
+console.log("");
+
+
+//String()
+console.log("'100'    을 String()로 바꾸기", String('100'));
+console.log("true     을 String()로 바꾸기", String(true));
+console.log("false    을 String()로 바꾸기", String(false));
+console.log("''       을 String()로 바꾸기", String(''));
+console.log("'KFC'    을 String()로 바꾸기", String('KFC'));
+console.log("null     을 String()로 바꾸기", String(null));
+console.log("undefined을 String()로 바꾸기", String(undefined));
+console.log("NaN      을 String()로 바꾸기", String(NaN));
+console.log("");
+</script>
+
+</body>
+</html>
