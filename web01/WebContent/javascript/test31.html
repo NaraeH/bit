@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>클로저2</title>
+</head>
+<body>
+	<!-- 
+함수를 argument로 넘기기 -->
+
+	<script>
+		"use strict";
+		
+		//함수를 아규먼트로 넘기기
+		function fire(method) {
+			method(); 
+			for(var i in arguments){
+				console.log(arguments[i]);
+			}
+		}
+
+		//1번) 일반 함수 넘기기
+		function myGun() {
+			console.log("따따따 콩");
+		}
+
+		fire(myGun);
+
+		//2번) 익명 함수 넘기기
+		fire(function() {
+			console.log("드르르륵... 찌르르르륵....");
+			console.log("털털털털....");
+		});
+		
+		//사례2
+		function compute3(money, interest){
+			var sum = money + interest(money);
+			console.log("원금 + 이자 : ", sum);
+		}
+		console.log("------------------");
+		
+		compute3(1000000, function(m){
+			return m * 0.021;
+		});
+		compute3(1000000, function(m){
+			return m * 0.035;
+		});
+		
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>클로저 테스트</title>
+</head>
+<body>
+
+<script>
+"use strict";
+
+function out(){
+	console.log("외부 함수인 out()이 실행되었습니다.");
+	
+	function inner(){
+		console.log("클로저 함수인 inner()이 실행되었습니다.");
+	}
+	return inner;
+}
+var f1 = out();
+f1();
+var f2 = out();
+
+
+f2();
+
+</script>
+
+ <!-- 
+<script>
+"use strict";
+
+function out(){
+	console.log("외부 함수인 out()이 실행되었습니다.");
+	
+	function inner(){
+		console.log("클로저 함수인 inner()이 실행되었습니다.");
+	}
+	return inner;
+}
+
+var f1 = out();
+f1();
+
+
+</script>
+ -->
+ <!-- 
+<script>
+"use strict";
+
+function out(){
+	var test = 0;
+	console.log("외부 함수인 out()이 실행되었습니다.");
+	
+	function inner(){
+		test = 5;
+		console.log("test:", test);
+		console.log("클로저 함수인 inner()이 실행되었습니다.");
+		
+	}
+	return inner;
+}
+
+var f1 = out();
+
+f1();
+</script>
+ -->
+<!--  
+ <script>
+"use strict";
+
+function out(){
+	var test = 0;
+	console.log("test:", test);
+	console.log("외부 함수인 out()이 실행되었습니다.");
+	
+	function inner(){
+		test = 5;
+		console.log("test:", test);
+		console.log("클로저 함수인 inner()이 실행되었습니다.");
+	}
+	return inner;
+}
+
+var f1 = out();
+//var f2 = out();
+
+f1();
+</script> 
+ -->
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>익명함수</title>
+</head>
+<body>
+
+	<script>
+		"use strict";
+
+		//익명함수: 익명함수는 따로 호출할 수 없으므로 변수를 선언하여 변수에다가 저장한다. => 변수는 함수처럼 쓰여짐
+		var f1 = function() {
+			console.log("f1...");
+		};
+
+		var f2 = function() {
+			console.log("f2...");
+		};
+
+		f3(); //에러: f3는 변수에 저장된 것은 "할당문"이기 때문에 함수가 아닌 일반명령문! => 때문에 위에서 아래로 실행!! 되므로 에러!!! 
+
+		var f3 = function() {
+			console.log("f3...");
+		}
+	</script>
+</body>
+</html>

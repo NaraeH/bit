@@ -2,9 +2,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자바스크리브 실행순서1</title>
+
+<script>
+	console.log("11111");
+</script>
 </head>
 <body>
+
+	<!--  
+<자바스크립트의 실행>
+특징1. 자바스크립트는 선언된 순서대로 실행한다.
+ex) <script>A</script>
+    <script>B</script>
+    * A자바스크립트가 모두 실행완료한 후에 B자바스크립트를 실행한다.
+    
+특징2. 하나의 태그가 완전히 실행완료 되어야지 다음 태그로 간다.
+
+
+-->
+
+	<script>
+		"use strict";
+		console.log("22222");
+
+		//함수 선언
+		function f1() {
+			console.log("f1...");
+		}
+	</script>
+
+	<script>
+		console.log("33333");
+	</script>
+	
+	<script>
+		console.log("44444");
+	</script>
 
 </body>
 </html>

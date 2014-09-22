@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>클로저</title>
+</head>
+<body>
+
+	<!-- 클로저: 내부함수(내장함수) => 함수를 리턴하는 것.
+
+ -->
+	<script>
+		"use strict";
+
+		function getInterstComputer(type) {
+			if (type == "보통예금") {
+				return function(money) {
+					return money * 0.021;
+				}
+			} else if (type == "정기예금") {
+				return function(money) {
+					return money * 0.035;
+				}
+			} else {
+				return function(money) {
+					return money * 0.008;
+				}
+			}
+		}
+
+		var func1 = getInterstComputer("보통예금");
+		var func2 = getInterstComputer("정기예금");
+		var func3 = getInterstComputer("기타");
+
+		console.log("보통예금이자: ", func1(1000000));
+		console.log("정기예금이자: ", func2(1000000));
+		console.log(" 기 본 이자: ", func3(1000000));
+		console.log("----------------------------");
+
+		//클로저를 사용하지 않고 만든 계산기
+		var result = 0;
+
+		function compute(op, v1) {
+			if (op == "+") {
+				result += v1;
+			} else if (op == "-") {
+				result -= v1;
+			} else if (op == "*") {
+				result *= v1;
+			} else if (op == "/") {
+				result /= v1;
+			}
+		}
+		//식1: 10 + 20 * 2 - 7 /5 (연산자 우선순위 없이 순서대로 갈경우)
+		//식2: 7 * 3 - 5
+		//=> 두 개의 식을 동시에 계산 하고 싶을 때, 동시에 계산할 수 없고 식1을 다 계산 한 후, 식2를 계산하여야만 한다.
+ 		compute("+", 10);
+		compute("+", 20);
+		compute("*", 2);
+		compute("-", 7);
+		compute("/", 5);
+		console.log("결과값:", result); 
+
+		//클로저를 사용하여 독자 계산기 만들기: 함수안에 함수를 쓰므로써, 한 개의 함수를 복사하여 여러개의 개별적인 함수로 만듬(같은 기능을 하되, 메모리에 값 다르게 저장 위해서)
+		//함수를 사용하여 클로저 생성 및 리턴
+		//함수를 빠져나가도 변수 생성됬던거 없어지지 X
+		function makeComputer() {
+			//클로저가 사용할 로컬 변수를 지정
+			//클로저는 로컬 변수를 복제하여 자신 만의 영역(클로저 영역)에서 관리한다.
+			var result = 0; //결과를 저장할 변수 => 이 변수는 함수를 복사할 때마다 새롭게 복사됨 ex) 내장함수1 => result1, 내장함수2 => result2
+			
+			//클로저 선언
+			//같은 함수를 여러 개 만들어서 사용해야 하는 이유 => 작업결과(계산결과)를 별도로 관리하기 위해!!!!!!
+			function compute2(op, v1) {
+				if (op == "+") {
+					result += v1;
+				} else if (op == "-") {
+					result -= v1;
+				} else if (op == "*") {
+					result *= v1;
+				} else if (op == "/") {
+					result /= v1;
+				}
+				//클로저 리턴
+				return result;
+			}
+			return compute2;
+		}
+
+		var c1 = makeComputer();
+		var c2 = makeComputer();
+
+		//식1: 10 * 7 -5;
+		//식2: 18 - 5 / 3;
+		//식1과 식2 동시에 계산하기
+		console.log("--------------------");
+		c1("+", 10);  //식1
+		c2("+", 18);  //식2
+		
+		c1("*", 7);   //식1
+		c2("-", 5);   //식2
+		
+		console.log(c1("-", 5));   //식1
+		console.log(c2("/", 3));   //식2
+	
+	</script>
+
+</body>
+</html>

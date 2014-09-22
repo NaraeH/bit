@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>함수 파라미터 다루기</title>
+</head>
+<body>
+<!-- 자바스크립트는 오버로딩 불가능 -->
+
+	<script>
+		"use strict";
+
+		//파라미터는 var을 선언하지 않는다. 무조건 변수가 괄호 안에 들어가고 타입은 var 하나밖에 없으므로
+		function plus(a, b) {
+			return (a + b);
+		}
+
+		var sum = plus(10, 20);
+		console.log("sum: ", sum);
+		
+		sum = plus(30, 40, 50, 60); //에러가 나지 않음 앞의 두 값만 받아서 처리
+		console.log(sum);
+		
+		sum = plus(30);
+		console.log(sum); //정수의 값과 undefined값이 더해진 것이것이므로 NaN(Not a Number)
+		
+	</script>
+
+</body>
+</html>

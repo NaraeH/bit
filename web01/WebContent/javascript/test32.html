@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>클로저3</title>
+</head>
+<body>
+	<script>
+		"use strict";
+
+		var score = [ 100, 90, 80, 70, 80 ];
+
+		//문제: 5개의 과목의 성적합계를 구하시오.
+		//클로저 사용 전
+		function add(score) {
+			var sum = 0;
+			
+			for (var i in score) {
+
+				sum += score[i];
+			}
+			console.log("합계: ", sum);
+		}	
+		add(score);
+
+		/*----------------------------------------------------------  */
+		
+		//클로저 사용 후
+		//each()함수는 원래 있다고 가정
+		//each(): arr의 인덱스 만큼 func를 반복해 주는 함수
+		function each(arr, func){
+			for(var i in arr){
+				func(i, arr[i]);
+			}
+		}
+		
+		//총합구하는 것, 평균구하는 것, 인덱스 출력 다 가능
+		//내가 만들어진 함수를 갖다가 쓰고자 할 때 유익함(for문을 쓰지 않아도 되므로)
+		var result2 = 0;
+		each(score, function(index, value){
+			result2 += value;
+		});
+		
+		console.log(result2);
+
+
+	</script>
+
+</body>
+</html>
