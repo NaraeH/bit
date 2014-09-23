@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>내장함수2 - eval(ajax사용할 때 사용)</title>
+</head>
+<body>
+
+	<script>
+		"use strict";
+
+		//eval("자바스크립트 코드"): 자바스크립트의 코드의 문자열을 실행한다.
+
+		var str = "var x = 100; alert(x); x =200;"
+		
+		eval(str); // 실행만 가능
+		//alert(x);  // error
+	</script>
+
+</body>
+</html>

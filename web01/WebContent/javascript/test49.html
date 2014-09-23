@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>String()의 기타 함수들</title>
+</head>
+<body>
+	<script>
+		"use strict";
+		
+		//anchor(): 문자열에 <a>태그를 붙인다.
+		
+		var str1 = "다음카카오";
+		
+		console.log("-------<anchor>------------");
+		//문자열.anchor("이름"): '문자열'에 <a name="이름"></a> 태그를 준다.
+		//document.write("문자열"): 문자열을 화면을 출력한다.줄바꿈X
+		document.write(str1.anchor("daum.net"));
+		
+		console.log("-------<link>------------");
+		//문자열.link("링크될 주소"): '문자열'을 눌렀을 때 '링크될 주소'로 이동한다.
+		document.write(str1.link("http://www.daum.net"));
+		
+		console.log("-------<strike>------------");
+		//문자열.strike(): 문자열을 출력할 때에 del한 것처럼 줄 그어짐
+		document.write(str1.strike());
+		
+		
+	</script>
+
+</body>
+</html>

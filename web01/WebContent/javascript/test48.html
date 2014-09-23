@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>기본객체: Object(), Number(), String()</title>
+</head>
+<body>
+	<script>
+		"use strict";
+
+		var str1 = "Hello, World!";
+		var str2 = new String("Hello, World!");
+
+		console.log("----------<typeof>------------");
+		console.log(typeof (str1)); //string
+		console.log(typeof (str2)); //object
+
+		console.log("----------<length>------------");
+		console.log(str1.length);
+		console.log(str2.length);
+
+		console.log("----------<charAt>------------");
+		console.log(str1.charAt(5));
+
+		console.log("----------<charCodeAt>------------");
+		//charCodeAt():문자열에서 지정된 위치의 Unicode값 리턴
+		//toString(n): n진수로 바꿔라
+		console.log(str1.charCodeAt(0).toString(16)); // 72 -> 0x48
+
+		console.log("----------<concat>------------");
+		//concat(): 여러개의 단어를 다 합쳐라 ,immutable(변하지 않는)
+		//immutable(변하지 않는):스트링 객체에 대한 concat()호출을 하더라도 기존 값은 바뀌지 않는다.
+		//다만, 리턴 값은 새로운 스트링 객체이다.
+		console.log(str1.concat("okok", "nono", "ohora"));
+		console.log(str1);
+
+		console.log("----------<replace>------------");
+		//replace(a, b): 첫번째 만나는 a라는 문자를 b로 바꿔라!(특정 문자열을 다른 문자열로 대체한 새로운 문자열 리턴), immutable 
+		var str3 = str1.replace('o', 'x');
+		console.log(str3);
+		console.log(str1);
+
+		console.log("----------<split>------------");
+		//문자열.split(구분자): '문자열'을 '구분자'로 나눈다. return: 배열
+		var str4 = "http://test.com/board/list?pageno=0&page=3&count=10";
+
+		function splitString(stringToSplit, separator) {
+			var arrayOfStrings = stringToSplit.split(separator);
+
+			return arrayOfStrings;
+		}
+
+		var array2 = splitString(str4, '?');
+		var array3 = splitString(array2[1], '&');
+		for (var i = 0; i < 3; i++) {
+			console.log(array3[i]);
+		}
+
+		console.log("----------<indexof>------------");
+		//문자열.indexOf('찾고자하는문자'): 문자열내에 찾고자하는 문자가 앞에서부터 몇번재에 있는가 return: number 
+		var i = str4.indexOf('?');
+		console.log(i);
+		console.log("----------<lastIndexOf>------------");
+		//문자열.lastIndexOf('찾고자하는문자'): 문자열내에 찾고자하는 문자가 뒤에서부터 몇번재에 있는가 return: number 
+		var i2 = str4.indexOf('&');
+		var i3 = str4.lastIndexOf('&');
+		console.log(i2, i3);
+		
+		console.log("--<substr>, <substring>, <slice>--");
+		//substr(시작인덱스, 개수): '시작 인덱스'부터 '개수'만큼까지 출력
+		//substring(시작인덱스, 끝인덱스): 시작 인덱스부터 끝인덱스 전까지 출력(끝인덱스의 값은 출력X)
+		console.log(str4.substr(7, 8));
+		console.log(str4.substring(7, 15));
+		console.log(str4.slice(7, 15));
+		
+		console.log("-----<toLowerCase>, <toUpperCase>-----");
+		//문자열.toLowerCase(): 문자열은 전부 소문자로 바꿔라.
+		//문자열.toUppereCase(): 문자열을 전부 대문자로 바꿔라.
+		var str5 = "Hello, World!";
+		console.log(str5.toLowerCase());
+		console.log(str5.toUpperCase());
+		
+			
+	</script>
+
+</body>
+</html>

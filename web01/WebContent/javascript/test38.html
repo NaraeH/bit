@@ -33,7 +33,7 @@
 			"math" : 60
 		};
 
-		//팩토리 함수 사용 후 버전
+		//팩토리 함수(값만 넘긴다면 객체를 공장처럼 찍어낸다) 사용 후 버전 => 오타 날 확률 적어짐 
 		function makeStudent(v1, v2, v3, v4) {
 			var obj = {
 				"name" : v1,
@@ -42,6 +42,7 @@
 				"math" : v4
 			}
 			return obj;
+			//return obj = {"name" : v1, "kor" : v2, "eng" : v3, "math" : v4} // 이렇게 하는 것이 더 좋음
 		}
 
 		var student4 = makeStudent("홍길동", 100, 100, 100);

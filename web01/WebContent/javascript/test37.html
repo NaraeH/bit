@@ -14,7 +14,7 @@
 		var calcObj = new Object(); //var clacObj = {}; 와 완벽하게 같음
 		calcObj.result = 0;
 		calcObj.plus = function(value) {
-			this.result += value;
+			this.result += value; //같은 객체내에 result가 있으므로 this 반드시 붙여야함
 		};
 		calcObj.minus = function(value) {
 			this.result -= value;
