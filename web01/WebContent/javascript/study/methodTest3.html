@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		//생성자 함수 
+		function Print(p1, p2) {
+			this.a1 = p1;
+			this.a2 = p2;
+		}
+		
+		//생성자 함수에 공용함수 생성
+		Print.prototype.pro1 = function() {	console.log("pro1 호출");	}
+		Print.prototype.pro2 = function() {	console.log("pro2 호출");	}
+		Print.prototype.pro3 = function() {	console.log("pro3 호출");	}
+		Print.prototype.pro4 = function() {	console.log("pro4 호출");	}
+
+		//객체생성
+		var printTest = new Print(3, 4);
+
+		//메소드 출력테스트
+		printTest.pro1(); //공용함수(prototype) 호출
+		printTest.pro2(); //공용함수(prototype) 호출
+		printTest.pro3(); //공용함수(prototype) 호출
+		printTest.pro4(); //공용함수(prototype) 호출
+	</script>
+
+</body>
+</html>
