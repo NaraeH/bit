@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이벤트 처리: keyEvent</title>
+</head>
+<body>
+	<input type="text" id="input1" onkeyup="keyupFunction()">
+	<br>
+	<input type="text" id="input2">
+	<br>
+	
+	<script>
+		"use strict";
+		function keyupFunction(event){
+			
+			if(event == undefined ){
+			console.log(event);
+			
+			document.getElementById("input2").focus();
+			}
+		}
+		
+	</script>
+
+</body>
+</html>
