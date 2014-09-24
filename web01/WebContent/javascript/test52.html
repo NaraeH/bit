@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>브라우저 객체들: window</title>
+</head>
+<body>
+<!-- 
+window - Browser Object Model
+ -->
+	<script>
+		"use strict";
+
+		//window객체  --하위객체--> location, navigator, history, screen, document
+
+		/* for(var i in window){
+			console.log(i, window[i]);
+		} */
+
+		console.log("-------------<open>-----------");
+		//window.open(URL, name, specs, replace): return: URL에 해당하는 창 연다. 새창 또는 새탭 띄우기
+		window.open("http://www.naver.com", "w1",
+				"munubar=no, location=no, resizable=no, width:700px", "true");
+
+		//setTimeout(callback, milliseconds): milliseconds이 경과하면 callback호출
+		/* window.setTimeout(function() {
+			location.href = "http://daum.net";
+		}, 30000); */
+
+		//setInterval(callback, 밀리초): 지정된 시간이 경과하면 반복호출
+		window.setInterval(function() {
+			var today = new Date();
+			
+			document.body.innerHTML = today.getFullYear() +  '-' + 
+			(today.getMonth()+1) + '-' +
+			today.getDate() + ' ' +
+			today.getHours() + ':' + 
+			today.getMinutes() + ':' + 
+			today.getSeconds();
+			//console.log("setInterval 호출됬다!");
+		}, 1000);
+		
+	var childeWindow = window.open("http://www.google.com", "left=0, rigth=0, width=100px, height=100px");	
+	//window.moveto(x, y) : 현재 위치에서 x, y로 이동하기	
+	//window.moveby(x, y) : 현재 위치에서 x, y만큼 이동하기
+	window.setInterval(function(){
+		childeWindow.moveBy(10, 10);
+	}, 1000);
+	
+	
+	</script>
+
+</body>
+</html>

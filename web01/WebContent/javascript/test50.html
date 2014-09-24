@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Array()</title>
+</head>
+<body>
+	<!-- 
+Array(배열값1, 배열값2, 배열값3, ..., 배열값 n)
+Array(): 생성자 함수
+var arr1 = []; => 이렇게 생성하여도 Array()생성자 함수를 통해 초기화 때문에 굳이 Array()로 초기화 할 필요X 
+ -->
+	<script>
+		"use strict";
+
+		var arr1 = [ 100, 200, 300 ];
+		var arr2 = new Array(100, 200, 300);
+
+		console.log("-------------<Array 확인>----------------");
+		for ( var i in arr2) {
+			console.log(arr2[i]);
+		}
+		console.log("arr2의 인데스개수: ", arr2.length);
+
+		console.log("------<constructor와 typeof>--------");
+		console.log(arr1.constructor); //function Array(){ [native code] }: arr1는  Array()의 생성자 함수를 통해서 초기화 됨
+		console.log(Array.constructor); //function Function() {[ native code]}: Array는 Function()의 생성자 함수를 통해서 초기화 됨.
+		console.log(Array.constructor.constructor);
+
+		console.log("-------------<join>----------------");
+		//join(): return type을 알려줌,  return 종류- number, string, boolean, object, funtion, date, undefined, unknown(8가지 값)
+		console.log(typeof (arr1.join())); //typeof: return을 알 수 있음
+
+		console.log("-------------<pop>----------------");
+		//pop(): return : return: 가장 마지막에 있는 데이터로 삭제되는 데이터 값, 가장 마지막에꺼부터 하나씩 제거
+		console.log(arr1.pop());
+		console.log(arr1.pop());
+
+		console.log("-------------<push>----------------");
+		//push(데이터1, 데이터2, ... , 데이터n): argument: 객체 또는 배열에 추가할 데이터, push()는 값을 추가하는 것.
+		arr1.push(201);
+		arr1.push(301);
+		console.log(arr1);
+
+		console.log("-------------<push>----------------");
+		//데이터.reverse(): return: 데이터를 뒤에서 부터 출력된 객체 또는 배열, reverse는 원본 변경 
+		console.log(arr1); //원본 데이터
+		console.log(arr1.reverse()); //reverse함수 호출
+		console.log(arr1); //reverse 유지
+
+		console.log("-------------<slice>----------------");
+		//데이터.slice(시작인덱스, 끝인덱스): return: 시작인덱스부터 끝인텍스 전까지 출력
+		arr1.push(1, 2, 3, 4, 5, 6);
+		console.log(arr1); //원본 데이터
+		console.log(arr1.slice(2, 4)); //slice 함수 호출
+
+		console.log("-------------<sort>----------------");
+		//데이터.sort(함수): argument:function, return: 작은 것부터 큰 것가지 문자열로 취급하여 정렬
+		console.log(arr1); //원본 데이터
+		console.log(arr1.sort()); //slice 함수 호출
+		console.log(arr1); //sort유지
+
+		/* 		//mySort(): return: index
+		 function mySort(v1, v2) {
+		 if (v1 < v2) {
+		 return -1;   //음수리턴
+		 } else if (v1 == v2) {
+		 return 0;    //0리턴
+		 } else {
+		 return 1;    //1리턴
+		 }
+		 }
+		 //sort()를 할때에 내가 만든 sort써서 해줘~
+		 console.log(arr1.sort(mySort));
+		 */
+
+		console.log(arr1.sort(function(p1, p2) {
+			if (p1 < p2) {
+				return -1; //음수리턴
+			} else if (p1 == p2) {
+				return 0; //0리턴
+			} else {
+				return 1; //1리턴
+			}
+		}));
+		 
+		 //forEach(콜백함수): 배열을 반복하면서 콜백함수를 호출한다.(인덱스만큼 박복 => for문은 없지만 forEach()안에 for문있음)
+		 //콜백함수(값, 인덱스, 배열)
+		 console.log("------------<forEach>--------------");
+		 arr1.forEach(function(value){
+			 console.log(value);
+		 });
+	</script>
+
+</body>
+</html>

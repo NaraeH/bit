@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>window.history</title>
+</head>
+<body>
+
+<input type="button" id="btn1" value="뒤로">
+<input type="button" id="btn1" value="앞으로">
+<script>
+"use strict";
+
+for(var i in history){
+	console.log(i, history[i]);
+}
+
+var b1 = document.getElementById('btn1'){
+	b1.onclick = function(){
+		history.back();
+	}
+};
+
+document.getElementById('btn2').onclick = function{
+	history.forward();
+}
+</script>
+
+</body>
+</html>
