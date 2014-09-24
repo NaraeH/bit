@@ -5,22 +5,25 @@
 <title>이벤트 처리: keyEvent</title>
 </head>
 <body>
-	<input type="text" id="input1" onkeyup="keyupFunction()">
+	<input type="text" id="input1" onkeyup="keyupFunction(event)">
 	<br>
 	<input type="text" id="input2">
 	<br>
-	
+
 	<script>
 		"use strict";
-		function keyupFunction(event){
-			
-			if(event == undefined ){
-			console.log(event);
-			
-			document.getElementById("input2").focus();
+		function keyupFunction(event) {
+
+			console.log(event.keyCode);
+			if (event.keyCode == 13) {
+				document.getElementById("input2").focus();
 			}
 		}
 		
+		//onchange Event: focus를 잃었을 때, 기존 값과 다르면 이벤트 발생
+		document.getElementById("input1").onchange = function(){
+			console.log(event.constructor);
+		}
 	</script>
 
 </body>

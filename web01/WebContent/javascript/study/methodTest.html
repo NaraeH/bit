@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>methodTest</title>
+</head>
+<body>
+
+	<script>
+		"use stirct";
+
+		var arr = [ 1, 2, 3, 4 ];
+
+		console.log(arr.constructor); //construcor: 속성
+		console.log(arr.concat(5));   //concat : method
+		console.log(arr.prototype);
+		console.log("isArray함수: ", Array.isArray(arr));
+		console.log(arr.isArray(arr));
+		
+		console.log(Math.abs(-3));
+		
+		for(var i in arr){
+			console.log(arr[i]);
+		}
+
+		console.log("--------------------");
+		for ( var i in Window) {
+			console.log(i + "=>" + Window[i]);
+		}
+	</script>
+
+
+</body>
+</html>
