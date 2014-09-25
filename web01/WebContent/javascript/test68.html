@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>element 찾기</title>
+</head>
+<body>
+	<h1 id="header1">제목1</h1>
+	<p id="p1">설명들...</p>
+
+	<h2 id="header2">부제목1</h2>
+	<p id="p2">내용</p>
+
+	<h2 id="header3">부제목2</h2>
+	<p id="p3">내용</p>
+
+	<h2 id="header4">부제목3</h2>
+	<p id="p4">내용</p>
+
+	<script>
+	"use strict";
+	
+	//태그의 id는 반드시 HTML 문서에 하나여야 한다.
+	
+	//id로 element찾기
+	var header1 = document.getElementById('header1');
+	var header2 = document.getElementById('header2');
+	var header3 = document.getElementById('header3');
+	var header4 = document.getElementById('header4');
+	
+	//id로 찾기
+	console.log("------<id로 innerHTML출력하기>--------");
+	console.log(header1.innerHTML);
+	console.log(header2.innerHTML);
+	console.log(header3.innerHTML);
+	console.log(header4.innerHTML);
+	
+	//tag 이름으로 찾기
+	var tagList = document.getElementsByTagName('header1');
+	
+	console.log("------<tagList.constructor>--------");
+	console.log(tagList.constructor); //tagList는 HTMLCollection()생성자 함수에 의해 초기화 됨
+	
+	console.log("------<for문 tagList>--------");
+	for(var i=0; i<tagList.length; i++){
+		console.log(i+ "=>   " + tagList[i].innerHTML);
+	}
+	
+	console.log("------<for..in문 tagList>--------");
+	//tagList는 배열이 아니라 객체다. 객체인 경우 객체에 등록된 property를 출력하기 때문에 위의 반복문 결과와 다르다.
+	for(var i in tagList){
+		console.log(i+ "=>   " + tagList[i]);
+	}
+	
+	var tagList2 = document.getElementsByTagName('header2');
+	
+	for(var i =0; i< tagList2.length; i++){
+	console.log(i, tagList2[i].innerHTML);
+	}
+	</script>
+</body>
+
+</html>

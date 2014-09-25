@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>element 값 설정2</title>
+<style>
+body {
+	border: 1px solid green;
+}
+</style>
+</head>
+<body>
+	<p id="p1"></p>
+	<p id="p2"></p>
+	<script>
+		"use strict";
+
+		//innerHTML: content에 HTM이 포함되어 있으면 웹브라우저는 해석하여 태그 생성
+		var p1 = document.getElementById("p1");
+		p1.innerHTML = "<b>비트 교육센터</b>에서 공부한다<br>" + "열심히 공부해서 멋진 개발자되자!"
+				+ "<a href='http://bitacademy.net'>비트교육센터</a>";
+
+		//textContent: content에 HTM이 포함되어 있으면 웹브라우저는 태그를 해석하지 않고 그냥 단순히 문자로 출력
+		//=> 장점: content의 임의의 스크립트가 들어가는 것을 방지할 수 있어 보안에 유리함
+		var p2 = document.getElementById("p2");
+		p2.textContent = "<b>비트 교육센터</b>에서 공부한다<br>" + "열심히 공부해서 멋진 개발자되자!"
+				+ "<a href='http://bitacademy.net'>비트교육센터</a>";
+	</script>
+
+</body>
+</html>

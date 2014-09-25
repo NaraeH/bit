@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>getArribute, setAttribute: 새로운 속성을 만들고 출력할 때</title>
+</head>
+<body>
+	<script>
+		"use strict";
+
+		var e1 = document.createElement('a');
+		e1.href = "http://www.daum.net";    //속성추가
+		e1.innerHTML = "다음";
+		// 추가 되지 않는다 => element의 기존 속성 값을 설정할 때는 일반 객체에 속성 값을 설정하는 방식으로 가능하다.
+		//그러나, 존재하지 않는 속성을 추가할 때는 일반 객체에 속성을 설정하는 방식으로는 불가능하다.
+		
+		//e1.ohora = "헐...";
+		
+		//element에 존재하지 않는 속성 추가하기
+		e1.setAttribute('ohora','헐....');
+		document.body.appendChild(e1);
+		
+		//새롭게 추가한 element 출력해보기
+		console.log(e1.ohora);
+		console.log(e1.getAttribute('ohora'));
+
+		var e2 = document.createElement('button');
+		e2.type = "button";
+		e2.innerHTML = "test";
+		document.body.appendChild(e2);
+		e2.onclick = function(event) {
+			console.log("clicked button");
+		};
+	</script>
+
+
+</body>
+</html>

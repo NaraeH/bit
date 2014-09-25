@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>element값 설정</title>
+</head>
+<body>
+	<input type="text" id="input1">
+	<br>
+	<p id="p1"></p>
+	
+	<script>
+		"use strict";
+		
+		var input1 = document.getElementById("input1");
+		var p1 = document.getElementById("p1");
+		
+		input1.innerHTML = "안되네...";   //innerHTML: element에 content설정(content:시작태그와 끝태그 사이의 내용 => input은 끝태그X)
+		input1.value = "된다!";          //value: form안의 값 설정
+		
+		p1.innerHTML = "될까?: innerHTML";
+		p1.value = "될까?: value"
+	</script>
+
+</body>
+</html>

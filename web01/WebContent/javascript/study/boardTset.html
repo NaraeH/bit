@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form>
+		<h1>게시ㅏㄴ</h1>
+		<table>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>등록일</th>
+				<th>조회수</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+				<td>5</td>
+			</tr>
+		</table>
+
+		<hr>
+		<h2>게시물내용</h2>
+		<table>
+			<tr>
+				<td>제목</td>
+				<td><input type="text" id="title"></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><textarea id="content"></textarea></td>
+
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td><input type="text" id="writer"></td>
+			</tr>
+			<tr>
+				<td>암호</td>
+				<td><input type="password" id="password"></td>
+			</tr>
+		</table>
+		<button id="btnAdd" type="button">글쓰기</button>
+		<button id="btnCancel" type="button">취소</button>
+	</form>
+
+</body>
+
+<script>
+"use strict";
+
+function Board(title, content, writer, password){
+	this.title = title;
+	this.content = content;
+	this.writer = writer;
+	this.password = password;	
+}
+
+ function resetForm(){
+	var event = new MouseEvent('click', {});
+	
+	document.getElementById("btnCancel").dispatchEvent(event);
+ }
+	
+function print(){
+	for(var i in boardList){
+		console.log(boardList[i].title, boardList[i].content, boardList[i].writer, boardList[i].password);
+	}
+}
+var boardList = [];
+document.getElementById("btnAdd").onclick = function(event){
+	var board = new Board(document.getElementById("title").value,
+			document.getElementById("content").value,
+			document.getElementById("writer").value,
+			document.getElementById("password").value);
+	
+	boardList.push(board);
+	resetForm();
+	print();
+};
+</script>
+</html>
