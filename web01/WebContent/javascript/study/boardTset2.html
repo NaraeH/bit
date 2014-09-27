@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<table>
+		<tr>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+
+	<hr>
+	<form>
+		<table>
+			<tr>
+				<th></th>
+				<td><input type="text" id="title"></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><textarea id="content"></textarea></td>
+			</tr>
+
+			<tr>
+				<th></th>
+				<td><input type="text" id="write"></td>
+			</tr>
+
+			<tr>
+				<th></th>
+				<td><input type="password" id="password"></td>
+			</tr>
+
+		</table>
+
+		<button type="button" id="btnAdd">글쓰기</button>
+		<button type="reset" id="btnCancel">취소</button>
+	</form>
+
+</body>
+
+<script>
+	function Board(title, content, write, password) {
+		this.title = title;
+		this.content = content;
+		this.write = write;
+		this.password = password;
+		this.date = new Date();
+		this.count = 0;
+
+	}
+
+	function reset() {
+		var event = new MouseEvent('click', {});
+
+		document.getElementById("btnCancel").dispatchEvent(event);
+	}
+
+	function print() {
+		for ( var i in boardList) {
+			console.log(boardList[i].title, boardList[i].content,
+					boardList[i].write, boardList[i].password, boardList[i].date, boardList[i].count);
+		}
+	}
+	var boardList = [];
+	document.getElementById("btnAdd").onclick = function(event) {
+		var board = new Board(document.getElementById("title").value, document
+				.getElementById("content").value, document
+				.getElementById("write").value, document
+				.getElementById("password").value)
+
+		boardList.push(board);
+		reset();
+		print();
+	}
+</script>
+</html>

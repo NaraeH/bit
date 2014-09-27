@@ -23,96 +23,55 @@ form th {
 </head>
 <body>
 
-		<h1>게시판</h1>
+	<h1>게시판</h1>
 
-		<table>
-			<tr id="tableHeader">
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>등록일</th>
-				<th>조회수</th>
-			</tr>
-			<tr id="list">
-			</tr>
-		</table>
+	<table id="boardTable">
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>등록일</th>
+			<th>조회수</th>
+		</tr>
+	</table>
 
 	<hr>
 
-		<h2>게시물 내용</h2>
-		<form>
-			<table>
-				<tr>
-					<th>제목</th>
-					<td><input type="text" id="title"></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td><textarea id="content"></textarea></td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td><input type="text" id="writer"></td>
-				</tr>
-				<tr>
-					<th>암호</th>
-					<td><input type="password" id="password"></td>
-				</tr>
-			</table>
-			<button id='btnAdd' type='button'>글쓰기</button>
-			<button id='btnCancel' type='reset'>취소</button>
-		</form>
-
-
-	<script>
-		"use strict";
-
-
-		//게시글을 저장하는 객체 생성자
-		function Board(titleValue, contentValue, writerValue, passwordValue) {
-			this.title = titleValue;
-			this.content = contentValue;
-			this.writer = writerValue;
-			this.password = passwordValue;
-			this.date = new Date();
-			this.count = 0;
-		}
-
-		//입력폼 초기화
-		function resetForm() {
-			//reset 버튼에게 click 이벤트를 전달
-			//1. MouseEvent 객체 생성
-			var event = new MouseEvent('click', {
-				//"view" : window,
-				//"bubbles" : true,
-				//"cancelable" : true
-			});
-
-			//2. reset버튼에게 이벤트 전달
-			document.getElementById("btnCancel").dispatchEvent(event);
-		}
-		
-		function outputBoardList() {
- 			for ( var i in boardList) {
-				console.log(boardList[i].title, boardList[i].content,
-						boardList[i].writer, boardList[i].password,
-						boardList[i].date, boardList[i].count)
-			} 
-		}
-
-		var boardList = [];
-		document.getElementById("btnAdd").onclick = function(event) {
-
-			var board = new Board(document.getElementById("title").value,
-					document.getElementById("content").value, document
-							.getElementById("writer").value, document
-							.getElementById("password").value);
-
-			boardList.push(board);
-			resetForm();
-			outputBoardList();
-		}
-	</script>
-
+	<h2>게시물 내용</h2>
+	<form>
+		<table>
+			<tr class="detail">
+				<th>번호</th>
+				<td><input type="text" id="no"></td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td><input type="text" id="title"></td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td><textarea id="content"></textarea></td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td><input type="text" id="writer"></td>
+			</tr>
+			<tr class="create">
+				<th>암호</th>
+				<td><input type="password" id="password"></td>
+			</tr>
+			<tr class="detail">
+				<th>등록일</th>
+				<td><input type="text" id="date" disabled="disabled"></td>
+			</tr>
+		</table>
+		<button id='btnAdd' type='button' class="create">추가</button>
+		<button id='btnChange' type='button' class="detail">변경</button>
+		<button id='btnDelete' type='button' class="detail">삭제</button>
+		<button id='btnCancel' type='reset'>취소</button>
+	</form>
+	<!-- script순서 중요!! -->
+	<script src="test69_common.js"></script>
+	<script src="test69.js"></script>
 </body>
 </html>

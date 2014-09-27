@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>reference</title>
+</head>
+<body>
+<!-- 
+대입을 했을 시, 값을 복사하는 것이 아닌 주소가 넘어감 -->
+<script>
+"use strict";
+
+var obj1 = {"name":"홍길동", "age":30};
+var obj2 = obj1;
+var obj3 = obj1;
+
+console.log(obj1);
+console.log(obj2);
+
+obj3.age = 40;       //obj1에 있는 age의 값을 바꿈 => 주소값을 참조하므로
+console.log(obj1);   //40
+</script>
+
+</body>
+</html>

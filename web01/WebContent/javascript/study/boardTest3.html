@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table id="boardTable">
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>등록일</th>
+			<th>조회수</th>
+		</tr>
+
+	</table>
+
+<hr>
+
+	<form>
+		<table>
+			<tr>
+				<th>제목</th>
+				<td><input type="text" id="title"></td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td><textarea id="content"></textarea></td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td><input type="text" id="writer"></td>
+			</tr>
+			<tr>
+				<th>암호</th>
+				<td><input type="password" id="password"></td>
+			</tr>
+		</table>
+		
+		<button id="btnAdd" type="button">추가</button>
+		<button id="btnCancel" type="reset">취소</button>
+	</form>
+	<script>
+	
+	function Board(title, content, writer, password){
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.password = password;
+		this.date = new Date();
+		this.count = 0;
+	}
+	
+	function resetBoardlist(){
+		var event = new MouseEvent('click',{});
+		
+		document.getElementById("btnCancel").dispatchEvent(event);
+	}
+	
+	function reloadBoardlist(){
+		
+		 var boardTable = document.getElementById("boardTable")
+		 var tbody = boardTable.lastChild;
+		console.log(boardTable);
+		 
+		for(var i = tbody.length-1; i>0; i--){
+			boardTable.removeChild(boardTable[i]);
+		}
+		
+		var tr = 0;
+		var td = 0;
+		var text = 0;
+		
+		for(var i=0; i<boardList.length; i++){
+			tr = document.createElement("tr");
+			
+			td = document.createElement("td");
+			text = document.createTextNode(i);
+			td.appendChild(text);
+			tr.appendChild(td);
+			
+		} 
+	}
+	
+	var boardList = [];
+	document.getElementById("btnAdd").onclick = function(event){
+		var board = new Board(document.getElementById("title").value,
+				document.getElementById("content").value,
+				document.getElementById("writer").value,
+				document.getElementById("password").value);
+		
+		boardList.push(board);
+		resetBoardlist();
+		reloadBoardlist();
+	}
+	
+</script>
+
+</body>
+</html>
