@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS 분리하기</title>
+<link rel="stylesheet" href="test15_common.css" type="text/css">
+<link rel="stylesheet" href="test15_generalpage.css" type="text/css">
+<link rel="stylesheet" href="test15.css" type="text/css">
+<!-- css링크 걸기 html5에서는 type생략 가능 -->
+<!-- 레이아웃 위치이동
+1) float   : 출력 될 현재 위치에서 오른쪽 또는 왼쪽으로 이동, 기본 출력 순서에서 제외 됨
+     * 웹 브라우저는 콘텐츠를 출력할때 항상 좌->우, 위->아래로 출력한다.
+     * 사용법: ex) float: left / float: right
+2) absolute: 현재위치 고수X => 그냥 이동 됨
+             (조상 중에서 absolute인 조상을 기준으로 없으면 바디태그를 기준으로 정렬)
+             =>left right top bottom의 속성 값으로 위치를 조정한다.
+3) relative: 기본 출력순서를 고수하면서 위치를 상하좌우로 움직이고 싶을 때 사용(기존의 출력되었던 공간은 사진의 이동하여도 다른 것들이 침범할 수 없음)
+4) fixed: 브라우저 창을 내용 창(클라이언트=> 내용이 출력되는 창)을 기준으로 위치를 지정한다.
+           => 스크롤해도 움직이지 않는다. 
+
+2. div VS span
+                블럭/라인                      용  도
+------------------------------------------------------
+div:   block(라인점유)     UI 객체를 묶어서 다루고자 할 때
+span: inline(라인에 포함됨)  내용을 구분하고자 할 때
+
+ -->
+
+</head>
+<body>
+	<div id="main">
+		<img src="image1.png" id="image1">
+		<div id="header">
+			<div>
+				<img id="logo"
+					src="http://dummyimage.com/140x50/23c4fa/000000.png&text=BIT+Talk">
+				<div id="menubar">
+					<a href="#">공지사항</a> <a href="#">자료실</a> <a href="#">수업</a> <a
+						href="#">logout</a>
+				</div>
+			</div>
+		</div>
+
+		<div id="sidebar">
+			<div id="user">
+				<img src="ji.PNG"> <span id="userName">홍길동</span>
+			</div>
+
+			<h1>알림</h1>
+			<ul>
+				<li>출석률이 저조합...</li>
+				<li>과제 제출하세요.</li>
+				<li>수당지급 연기되...</li>
+			</ul>
+
+			<h1>소식</h1>
+			<p>와우~~~ 우리가 이길꺼야!!</p>
+			<p>내일 공모전 안한답니다 (real!!)</p>
+			<p>책 공동구매 하려 합니다. 참여하실분..?</p>
+		</div>
+
+		<div id="content">
+			<div id="breadcrumb">공지사항</div>
+			<h1>곤욕 치른 애플, iOS8 상위버전 준비 끝</h1>
+			<p>애플이 말 많고 탈 많은 iOS8 초기버전의 혼란을 잠재울 상위버전 준비를 마치고 업데이트를 제공할 예정이라고
+				29일(현지시간) IT 전문매체 나인투파이브맥이 업계 소식통을 인용해 보도했다. 현재 iOS8은 새로운 기능을 제공함에도
+				와이파이 신호 수신에서 때때로 문제가 발생하는 등 일부 오류(버그)가 나타나 사용자들이 불편을 겪고 있다. 애플은 이를
+				해결하고 사용자들에게 안정화된 환경을 제공하기 위해 iOS8.1은 물론 8.2와 8.3도 이미 준비를 거의 끝마친 것으로
+				전해졌다. 이는 애플이 그 동안 준비한 업데이트 속도와 비교하면 상당히 빠른 것이라는 평가다.</p>
+		</div>
+		<div id="footer">비트교육센터 자바63기</div>
+	</div>
+
+	<div id="msg1" class="msgBox alertWindow">
+		<button id="btnClose">X</button>
+		<p>홍길동 님이 신규 자료를 등록하였습니다.</p>
+	</div>
+
+	<script src="../javascript/test69_common.js">
+		
+	</script>
+	<script>
+		$("#btnClose").click(function(event) {
+			$("#msg1").css("display", "none");
+		});
+	</script>
+</body>
+</html>

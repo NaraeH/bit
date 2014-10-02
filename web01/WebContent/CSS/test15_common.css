@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+/* 모든 페이지에 공통으로 적용할 css */
+body {
+	font-family: Verbana, Geneva, Arial, sans-serif;
+	font-size: small;
+}
+
+div{
+	padding: 10px;
+}
+div#main {
+	width: 600px;
+	
+	border-width: 1px;
+	border-color: green;
+	border-style: solid;
+	
+	padding: 10px;
+	margin: 0 auto;
+}
+
+.msgBox{
+	width: 150px;
+	border: 10x gray solid;
+	background-color: #99FF66;
+}

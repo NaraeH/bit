@@ -1,76 +1,123 @@
 //자주 사용하는 함수는 별도의 파일에 분리해둔다.
 "use strict";
 
-//document.getElementById => $
+// document.getElementById => $
 function bit(value) {
-	var element = null;
+	var elements = null;
 
 	if (value instanceof Element) {
-		element = value;
-	} else if (value.charAt(0) == "#") {
-		element = document.getElementById(value.substring(1)); //#은 들어가면 안되므로 => 0번째 것을 제외한 끝까지
+		elements = [ value ];
 	} else if (value.charAt(0) == "<") {
-		element = document.createElement(value.replace(/<|>/g, ''));
+		elements = [ document.createElement(value.replace(/<|>/g, '')) ];
+	} else {
+		elements = document.querySelectorAll(value); // 값 자체가 배열이므로 배열안묶음
 	}
 
-	//html을 호출할 때 그 객체가 this 즉, 여기서는 element
-	//element.text => 라는 새로운 메소드 만듬
-	element.text = function(value) {
-		this.textContent = value;
-		return this;
-	}
-
-	element.html = function(value) {
-		this.innerHTML = value;
-		return this;
-	}
-
-	element.append = function(child) {
-		this.appendChild(child);
-		return this;
-	}
-
-	element.appendTo = function(parent) {
-		parent.appendChild(this);
-		return this;
-	}
-
-	element.attr = function(name, value) {
-		this.setAttribute(name, value);
-		return this;
-	}
-	element.click = function(listener) {
-		if (listener) {
-			this.onclick = listener;
-		} else {
-			var event = new MouseEvent('click', {
-			// "view" : window,
-			// "bubbles" : true,
-			// "cancelable" : true
-			});
-			this.dispatchEvent(event);
+	// html을 호출할 때 그 객체가 this 즉, 여기서는 element
+	// element.text => 라는 새로운 메소드 만듬
+	// this = > elements
+	elements.text = function(value) {
+		for (var i = 0; i < elements.length; i++) {
+			this[i].textContent = value;
 		}
 		return this;
 	}
 
-	element.val = function(value) {
-		this.value = value;
-		return value;
+	elements.html = function(value) {
+		for (var i = 0; i < this.length; i++) {
+			this[i].innerHTML = value;
+		}
+		return this;
+	};
+
+	elements.append = function(child) {
+		for (var i = 0; i < this.length; i++) {
+			if (child instanceof Element) {
+				this[i].appendChild(child);
+			} else {
+				for (var x = 0; x < child.length; x++) {
+					this[i].appendChild(child[x]);
+				}
+			}
+		}
+		return this;
 	}
 
-	element.css = function(name, value) {
-		this.style[name] = value;
-		return value;
+	elements.appendTo = function(parent) {
+		for (var i = 0; i < elements.length; i++) {
+			if (parent instanceof Element) {
+				parent.appendChild(this[i]);
+			} else {
+				parent[0].appendChild(this[i]);
+			}
+		}
+		return this;
 	}
-	return element;
 
+	// attr - value 있을 때 : 속성 셋팅
+	// attr - value 없을 때 : 속성 갖고옴
+	elements.attr = function(name, value) {
+		if (arguments.length == 2) {
+			for (var i = 0; i < this.length; i++) {
+				this[i].setAttribute(name, value);
+			}
+			return this;
+		} else {
+			return this[0].getAttribute(name);
+		}
+	};
+
+	elements.click = function(listener) {
+		for (var i = 0; i < elements.length; i++) {
+			if (listener) {
+				this[i].onclick = listener;
+			} else {
+				var event = new MouseEvent('click', {});
+				this[i].dispatchEvent(event);
+			}
+		}
+		return this;
+	}
+
+	// 파라미터 O: 값넣기
+	// 파라미터 X: 값설정하기
+	elements.val = function(value) {
+		if (arguments.length == 1) {
+			for (var i = 0; i < this.length; i++) {
+				this[i].value = value;
+			}
+			return this;
+		} else {
+			return this[0].value;
+		}
+	};
+
+	elements.css = function(name, value) {
+		if (arguments.length == 2) {
+			for (var i = 0; i < this.length; i++) {
+				this[i].style[name] = value;
+			}
+			return this;
+		} else {
+			return this[0].style[name];
+		}
+	};
+
+	elements.remove = function() {
+		for (var i = 0; i < this.length; i++) {
+			this[i].parentElement.removeChild(this[i]);
+		}
+		return this;
+	};
+	return elements;
 }
 var $ = bit;
 
-//함수도 객체이기 때문에 다른 저장소로 사용될 수 있다.
-//bit.toYYYYMMDD: 글로벌함수가 아닌 bit에 소속되어있는 함수
-//=> 라이브러리화
-//혹시나 함수이름이 다른 변수의 이름과 겹쳐 값을 덮어쓰면서 프로그램에서 오류나는 것을 방지(하나의 프로그램 내에서는 이름만 같다면 같은 변수로 인식하므로)
+// 함수도 객체이기 때문에 다른 저장소로 사용될 수 있다.
+// bit.toYYYYMMDD: 글로벌함수가 아닌 bit에 소속되어있는 함수
+// => 라이브러리화
+// 혹시나 함수이름이 다른 변수의 이름과 겹쳐 값을 덮어쓰면서 프로그램에서 오류나는 것을 방지(하나의 프로그램 내에서는 이름만 같다면 같은
+// 변수로 인식하므로)
 bit.toYYYYMMDD = function(date) {
 	return (date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date
 			.getDate());

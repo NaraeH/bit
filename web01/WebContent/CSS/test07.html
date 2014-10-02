@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+/* 속성 값으로 선택하기
+[]안에 속성 값 넣음 */
+input[type=text] {
+	border: 1px solid blue;
+}
+</style>
+</head>
+<body>
+	<input type="text" name="title">
+	<input type="text" name="writer">
+	<input type="password" name="password">
+	<input type="checkbox" name="chk1">
+	<input type="checkbox" name="chk2">
+	<!--radio type에서 name이 같을 경우는 버튼 둘 중에 한개밖에 선택X  -->
+	<input type="radio" name="gender" value="male">남자
+	<input type="radio" name="gender" value="female">여자
+	<input type="radio" name="working" value="yes">재직중
+</body>
+</html>
