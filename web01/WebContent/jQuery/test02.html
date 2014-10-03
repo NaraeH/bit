@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>load이벤트1</title>
+<script src="jquery-1.11.1.js"></script>
+<script>
+	//DOM트리가 완성 되었을 때 load 이벤트 발생
+	window.onload = function(event) {
+		alert("11111");  //세번째로 호출된다.
+	}
+	alert("22222"); //첫번째로 호출된다.
+</script>
+
+</head>
+<body>
+
+	<button id="btn1">버튼1</button>
+
+	<div id="formDiv" style="display: none;">
+		<form>
+			이름: <input type="text" name="name"><br> 나이: <input
+				type="text" name="age"><br>
+		</form>
+	</div>
+
+	<script>
+		$("#btn1").click(function(event) {
+			$("#formDiv").css("display", "");
+		});
+		alert("333");  //두번째로 호출된다.
+	</script>
+
+</body>
+</html>

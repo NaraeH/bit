@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>load이벤트 05</title>
+<script src="jquery-1.11.1.js"></script>
+<script>
+	/*
+	 ready()의 축약법 => $(함수객체);
+	 */
+
+	//호출순서 :1 -> 2-> 3 -> 4
+	$(document).ready(function() { //첫번째 호출
+		alert("11111");
+	});
+
+	//위에것($(document).ready)의 축약법  
+	$(function() { //두번째 호출
+		alert("22222");
+	});
+
+	$(document).ready(function() { //세번째 호출
+		alert("33333");
+	});
+
+	$(function() {
+		alert("444444"); //네번째 호출
+	});
+</script>
+
+</head>
+<body>
+
+	<button id="btn1">버튼1</button>
+
+	<div id="formDiv" style="display: none;">
+		<form>
+			이름: <input type="text" name="name"><br> 나이: <input
+				type="text" name="age"><br>
+		</form>
+	</div>
+
+</body>
+</html>

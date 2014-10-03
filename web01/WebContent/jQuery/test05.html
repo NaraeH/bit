@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>load이벤트 04</title>
+<script src="jquery-1.11.1.js"></script>
+<script>
+
+/*
+  DOM 트리가 완성된 후 다음의 순서로 호출된다.
+ 
+1) ready()로 등록된 함수가 순서대로 호출된다.
+2) onload listener 함수가 호출된다.
+*/
+//호출되는 순서 : 3 -> 2 -> 1
+	$(document).ready(function() {  //첫번째 호출
+		alert("33333");
+	});
+	//DOM트리가 완성 되었을 때 load 이벤트 발생
+	window.onload = function(event) {  //세번째 호출
+		alert("11111");
+	}
+
+	$(document).ready(function() {   //두번째 호출
+		alert("22222");
+	});
+</script>
+
+</head>
+<body>
+
+	<button id="btn1">버튼1</button>
+
+	<div id="formDiv" style="display: none;">
+		<form>
+			이름: <input type="text" name="name"><br> 나이: <input
+				type="text" name="age"><br>
+		</form>
+	</div>
+
+</body>
+</html>

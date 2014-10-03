@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>selector</title>
+<script src="jquery-1.11.1.js"></script>
+<!--태그 이름으로 대상 선택하기  -->
+<!--
+1. 태그 이름으로 대상 선택하기
+ $(css 셀렉터 문법) 
+ => 리턴: jQuery함수가 만든 배열, 배열 안에 엘리먼트가 들어있다.  
+ => css selector문법: #아이디 , 태그명, .클래스명, XXXX:수도 셀렉터 등.
+ -->
+<script>
+	$(function() {
+
+		//태그로 이름으로 선택하기
+		
+		//each(콜백함수) : index와 element를 받아서 콜백함수를 인텍스만큼 호출한다.(jQuery 리턴객체에 들어있는 element 개수만큼 반복하면서 콜백함수 호출)
+		//=> function(index, elemnet){ };
+		$("h1").each(function(index, element){
+			console.log(index, element.innerHTML);
+			//console.log(index, element.html()); //오류: html()은 jquery에서 실행가능한 메소드 but element는 javaScript에서의 Element Object임.
+		console.log(index, $(element).html()); //original element를 jqeury의 함수($)호출을 통하여 jQuery처럼 쓸 수 있다.
+		});
+	});
+</script>
+</head>
+<body>
+	<h1>제목1111111</h1>
+	<p>내용.......1</p>
+	<h1>제목1111112</h1>
+	<p>내용.......2</p>
+	<h1>제목1111113</h1>
+	<p>내용.......3</p>
+	<h1>제목1111114</h1>
+	<p>내용.......4</p>
+	<h1>제목1111115</h1>
+	<p>내용.......5</p>
+</body>
+</html>
