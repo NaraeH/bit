@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+div {
+	border: 1px solid red;
+}
+</style>
+
+<script src="jquery-1.11.1.js"></script>
+
+<!-- jQuery 동적생성(test28) -->
+<!--
+3. element 복제하기
+clone(): 선택된 객체를 복제한다.
+ -->
+<script>
+	$(function() {
+		setInterval(function() {
+			$("img:first").clone().appendTo("body");
+		}, 1000);
+	});
+</script>
+
+</head>
+<body>
+	<img src="bin.JPG" width="150">
+	<img src="ji.jpg" width="150">
+	<img src="kka.jpg" width="150">
+	<img src="pizza.bmp" width="150">
+	<img src="you.jpg" width="150">
+</body>
+</html>

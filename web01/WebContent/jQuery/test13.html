@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-1.11.1.js"></script>
+
+<!--태그 이름으로 대상 선택하기  -->
+<!--
+7. 속성으로 태그 찾기
+$("태그이름[속성=값]")
+=>속성= 값인 태그를 찾아라!
+ex)$("input[type=radio]") => input태그에서 type=radio를 찾아라
+
+8. pseudo selector 사용하여 태그 찾기
+$("태그명:속성")
+태그명이 input 일경우 속성: button, checkbox, file, image, password, radio, submit, reset, text,...
+
+9. 입력 항목의 상태로 태그 선택
+$("태그:상태")
+상태: checked(radio 또는 checkbox에 대해 선택된 상태를 찾는다), disabled, enabled, focus, input(모든 폼항목: input, select, button, textarea), selected
+ * 주의할점: radio에서 value가 없을 경우 default는  "on"
+          select에서 value가 없을 경우 default는  "해당 라벨"
+          select는 option을 안쓰고도 바로 쓰는 것가능
+ -->
+<script>
+$(function() {
+	/* 	//속성으로 태그 찾기
+ 	$("input[type=radio]").each(function(index, originalElement){
+ 		console.log($(originalElement).val());
+ 	});  */
+ 	
+/*  	//pseudo selector 사용하여 태그 찾기
+ 	$("input:checkbox").each(function(index, originalElement){
+ 		console.log($(originalElement).val());
+ 	}); */
+
+/* 	$("#btn1").click(function() {
+			//입력 항목의 상태로 태그 선택
+			$("input:checked").each(function(index, originalElement) {
+				console.log($(originalElement).val());
+			});
+		}); */
+ 	
+ /* 	$("#btn1").click(function(){
+ 		//option 태그 중에서 사용자가 선택한 태그만 찾는다.
+ 		$("#s1 option:selected").each(function(index, element){
+ 			console.log($(element).val());
+  		});
+ 	}); */
+ 	
+	/* $("#btn1").click(function(){
+		//select의 option 중에서 사용자가 선택한 option 값 알아내기
+ 		console.log($("#s1").val());
+ 	}); */
+ 	
+	$("#btn1").click(function(){
+		//select의 option 중에서 사용자가 선택한 option 값 알아내기
+ 		console.log($("input[name=gender]:checked").val());
+ 	});
+	});
+</script>
+</head>
+<body>
+<button id="btn1">테스트</button>
+	<form>
+	<input type="text"><br>
+	<input type="password"><br>
+	
+	<input type="checkbox" value="치킨">치킨<br>
+	<input type="checkbox">까르보나라<br>
+	
+	<input type="radio" value="남자" name="gender">남자
+	<input type="radio" value="여자" name="gender">여자
+	<input type="radio" value="아저씨" name="gender">아저씨<br>
+	
+	<input type="radio" value="재직중" name="working">재직중<br>
+	<input type="radio" value="미취업" name="working">미취업<br>
+	
+	<!-- option의 태그의 기본값은 콘텐츠이다. -->
+	사귀고 있는 이성친구의 수<select id="s1">
+	<option value="1">1명</option>
+	<option value="2">2명</option>
+	<option>3명</option>
+	<option>4명</option>
+	</select>
+	</form>
+</body>
+</html>

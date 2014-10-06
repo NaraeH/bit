@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+.selected {
+	background: blue;
+	color: blue;
+}
+
+.head {
+	background: black;
+	color: white;
+}
+
+.no {
+	background: yellow;
+}
+</style>
+
+<script src="jquery-1.11.1.js"></script>
+
+<!-- jQuery 함수 종류 -->
+<!-- 
+4. element의 상태조사
+is("check하고 싶은것"): "check하고 싶은 것"을 상태 조사 하기
+
+5. element 찾기: find()
+find("찾고 싶은 것"): "찾고 싶은 것"을 찾기
+-->
+<script>
+	$(function() {
+
+		//toggleClass사용
+		$("td").click(function(event) {
+
+			//is(), hasClass()의 차이점: is()는 모든 요소 다 가능 but, hasClass()는 class만 가능
+			var element = $(this);
+			if (element.is(".selected")) {
+				element.removeClass("selected");
+			} else {
+				element.addClass("selected");
+			}
+			
+			console.log(element.is(":has(a)"));
+		});
+		
+		$("tr:odd").find("a").css("background", "green");
+	});
+</script>
+
+</head>
+<body>
+	<table border="1">
+		<tr class="head">
+			<th>번호</th>
+			<th>이름</th>
+			<th>전화</th>
+		</tr>
+		<tr>
+			<td class="no">1</td>
+			<td><a href="mailto:test1@test.com">홍길동1</a></td>
+			<td>1111-1111</td>
+		</tr>
+
+		<tr>
+			<td class="no">2</td>
+			<td><a href="mailto:test2@test.com">홍길동2</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">3</td>
+			<td><a href="mailto:test3@test.com">홍길동3</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">4</td>
+			<td><a href="mailto:test4@test.com">홍길동4</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">5</td>
+			<td><a href="mailto:test5@test.com">홍길동5</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">6</td>
+			<td><a href="mailto:test6@test.com">홍길동6</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">7</td>
+			<td><a href="mailto:test7@test.com">홍길동7</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">8</td>
+			<td><a href="mailto:test8@test.com">홍길동8</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">9</td>
+			<td><a href="mailto:test9@test.com">홍길동9</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">10</td>
+			<td><a href="mailto:test10@test.com">홍길동10</a></td>
+			<td>1111-1111</td>
+		</tr>
+	</table>
+
+</body>
+</html>

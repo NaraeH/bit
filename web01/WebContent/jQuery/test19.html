@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<!-- jQuery 함수 종류 (test19 ~ ) -->
+<!-- 
+1. 선택조건을 추가 및 철회: filter() / end()
+1.1 filter(): 선택조건을 추가
+return은 변하지 않음. 단지 true냐 false냐 라고 값만 주어서 true에만 뒤에 함수 적용하는 것
+*장점: DOM 트리를 다시 뒤지지 않는다. => 성능의 향상을 갖고 올수 있음(아래의 예제 코드 참고 하기)
+
+1.2 end(): 추가한 조건을 철회
+-->
+<script src="jquery-1.11.1.js"></script>
+<script>
+	$(function() {
+		//return은 $("tr")와 $("tr").filter(":even")같음 단지 true냐 false냐 라고 값만 주어서 true에만 뒤에 함수 적용
+		//end()할 경우 true, false 주었던 속성 값만 없어짐 결국 $("tr")임
+ 		$("tr").filter(":even").css("color", "red")
+		.end()
+		.css("background","yellow")
+		.filter(":odd")
+		.css("text-decoration","line-through")
+		.end()
+		.filter(":last")
+		.css("font-style","italic");
+		 
+		//DOM tree를 4번 뛰진다. => 성능 떨어짐
+/* 		$("tr").css("background","yellow");
+		$("tr:even").css("color", "red");
+		$("tr:odd").css("text-decoration","line-through");
+		$("tr:last").css("font-style","italic"); */
+	});
+</script>
+<body>
+	<table border="1">
+		<tr class="head">
+			<th>번호</th>
+			<th>이름</th>
+			<th>전화</th>
+		</tr>
+		<tr>
+			<td class="no">1</td>
+			<td><a href="mailto:test1@test.com">홍길동1</a></td>
+			<td>1111-1111</td>
+		</tr>
+
+		<tr>
+			<td class="no">2</td>
+			<td><a href="mailto:test2@test.com">홍길동2</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">3</td>
+			<td><a href="mailto:test3@test.com">홍길동3</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">4</td>
+			<td><a href="mailto:test4@test.com">홍길동4</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">5</td>
+			<td><a href="mailto:test5@test.com">홍길동5</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">6</td>
+			<td><a href="mailto:test6@test.com">홍길동6</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">7</td>
+			<td><a href="mailto:test7@test.com">홍길동7</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">8</td>
+			<td><a href="mailto:test8@test.com">홍길동8</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">9</td>
+			<td><a href="mailto:test9@test.com">홍길동9</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">10</td>
+			<td><a href="mailto:test10@test.com">홍길동10</a></td>
+			<td>1111-1111</td>
+		</tr>
+	</table>
+</body>
+</html>

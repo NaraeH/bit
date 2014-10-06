@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+div {
+	border: 1px solid red;
+}
+</style>
+
+<script src="jquery-1.11.1.js"></script>
+
+<!-- jQuery 동적생성(test25 ~ ) -->
+<!-- 
+2. 동적으로 생성된 자식 추가하기
+2.1 $("자식").appendTo("부모");
+       부모의 막내 자식으로 추가
+2.2 $("자식").prependTo("부모")
+       부모의 첫째 자식으로 추가
+2.3 $(element).insertAfter(형제)
+       엘리먼트를 형제의 다음에 추가(동생)
+2.4 $(element).insertBefore(형제)
+       엘리먼트를 형제의 전에 추가(형)
+2.5 $(부모).append(자식)
+        부모의 마지막 자식으로 추가
+2.6 $(부모).prepend(자식)
+        부모의 첫째 자식으로 추가
+2.7 $(형제).after(element)
+        형제의 동생으로 element 추가
+2.8 $(형제).before(element)
+        형제의 형으로 element 추가
+-->
+<script>
+	$(function() {
+		$("<h1>111111</h1>").appendTo("body");
+		$("<h1>222222</h1>").prependTo("body");
+		$("<h1>333333</h1>").insertAfter("#d1");
+		$("<h1>444444</h1>").insertBefore("#d1");
+		$("#d1").append("<h2>555555</h2>");
+		$("#d1").prepend("<h2>66666</h2>");
+		$("#d1").after("<h2>77777</h2>");
+		$("#d1").before("<h2>88888</h2>");
+	});
+</script>
+
+</head>
+<body>
+	<h1>0000000000</h1>
+	<div id="d1">
+	<h2>aaaaaa</h2>
+	</div>
+	<div id="d2">
+	<h2>bbbbbb</h2>
+	</div>
+</body>
+</html>

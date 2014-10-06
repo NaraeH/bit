@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+div {
+	border: 1px solid red;
+}
+</style>
+
+<script src="jquery-1.11.1.js"></script>
+
+<!-- jQuery 동적생성(test25 ~ ) -->
+<!--
+2.9 응용 - element 이동하기
+
+-->
+<script>
+	$(function() {
+		setInterval(function(){
+			$("img:first").appendTo("body");
+		}, 500);
+
+	});
+</script>
+
+</head>
+<body>
+	<img src="bin.JPG" width="150">
+	<img src="ji.jpg" width="150">
+	<img src="kka.jpg" width="150">
+	<img src="pizza.bmp" width="150">
+	<img src="you.jpg" width="150">
+</body>
+</html>

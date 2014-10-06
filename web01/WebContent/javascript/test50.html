@@ -26,7 +26,7 @@ var arr1 = []; => 이렇게 생성하여도 Array()생성자 함수를 통해 �
 		console.log(arr1.constructor); //function Array(){ [native code] }: arr1는  Array()의 생성자 함수를 통해서 초기화 됨
 		console.log(Array.constructor); //function Function() {[ native code]}: Array는 Function()의 생성자 함수를 통해서 초기화 됨.
 		console.log(Array.constructor.constructor);
-		console.log(typeof(arr1));    //typeof(객체): 객체의 타입이 무엇인지
+		console.log("typeof:", typeof(arr1));    //typeof(객체): 객체의 타입이 무엇인지
 
 		console.log("-------------<join>----------------");
 		//join(): return type을 알려줌,  return 종류- number, string, boolean, object, funtion, date, undefined, unknown(8가지 값)

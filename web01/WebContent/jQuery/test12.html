@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-1.11.1.js"></script>
+
+<!--태그 이름으로 대상 선택하기  -->
+<!--
+6. 자식 및 자손 태그 찾기
+CSS selector: 부모 >자식  (직계 자식)
+CSS selector: 부모  자식   (부모 밑에 있는 모든 요소 => 모든 자식, 자손 포함)
+
+*주의점: 상속되는O 속성 - color, 상속되지X 속성 - border, background(상속안되지만 상속되는 것처럼 보임=> 자식 component의 background는 투명이므로)
+ -->
+<script>
+$(function() {
+	/* $("#main>h2").css("color", "red"); */
+	//$("#d1 > h2").css("color", "red");
+	//$("#d2 > h2").css("background", "lightgray");
+	/* color속성은 자식 태그로 상속된다. border속성은 자식 태그로 상속되지 않는다. */
+ 	$("#main").css("color", "gray").css("border", "1px solid red"); 
+	
+ 	$("#main").css("background", "yellow")
+});
+</script>
+</head>
+<body>
+	<div id="main">
+		<h2>main...h2....1</h2>
+		<h2>main...h2....2</h2>
+		<h2>main...h2....3</h2>
+		
+		<div id="d1">
+			<h2>제목1111111</h2>
+			<p>내용.......1</p>
+			<h2 class="blue yellow">제목1111112</h2>
+			<p>내용.......2</p>
+		</div>
+
+		<div id="d2">
+			<h2 class="blue">제목1111113</h2>
+			<p>내용.......3</p>
+			<h2 class="yellow">제목1111114</h2>
+			<p>내용.......4</p>
+			<h2 class="blue">제목1111115</h2>
+			<p>내용.......5</p>
+		</div>
+	</div>
+</body>
+</html>

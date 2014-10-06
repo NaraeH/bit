@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-1.11.1.js"></script>
+
+<!--태그 이름으로 대상 선택하기  -->
+<!--
+5. 클래스로 묶인 태그 찾기
+CSS selector 문법: .클래스명
+
+*주의점: 아이디는 파일 내에 유일해야 하지만, 클래스는 여러개 존재하는 것 가능. 떄문에, 같은 속성을 줄 떄에 class지정으로 함.
+ -->
+<script>
+$(function() {
+	$(".blue").css("color", "blue");
+	$(".yellow").css("background", "yellow");
+	$(".blue.yellow").css("font-style", "italic");
+});
+</script>
+</head>
+<body>
+	<h2>제목1111111</h2>
+	<p>내용.......1</p>
+	<h2 class="blue yellow">제목1111112</h2>
+	<p>내용.......2</p>
+	<h2 class="blue">제목1111113</h2>
+	<p>내용.......3</p>
+	<h2 class="yellow">제목1111114</h2>
+	<p>내용.......4</p>
+	<h2 class="blue">제목1111115</h2>
+	<p>내용.......5</p>
+</body>
+</html>

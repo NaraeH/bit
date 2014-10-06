@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>selector</title>
+<script src="jquery-1.11.1.js"></script>
+
+<!--태그 이름으로 대상 선택하기  -->
+<!--
+2. 여러개의 태그를 찾기
+CSS selector 문법: 태그명, 태그명, 태그명....
+ -->
+<script>
+	$(function() {
+
+		$("h1, p").each(function(index, element){
+			console.log(index, element.innerHTML);
+		});
+	});
+</script>
+</head>
+<body>
+	<h1>제목1111111</h1>
+	<p>내용.......1</p>
+	<h1>제목1111112</h1>
+	<p>내용.......2</p>
+	<h1>제목1111113</h1>
+	<p>내용.......3</p>
+	<h1>제목1111114</h1>
+	<p>내용.......4</p>
+	<h1>제목1111115</h1>
+	<p>내용.......5</p>
+</body>
+</html>

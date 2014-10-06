@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>클래스 추가삭제</title>
+<style>
+.selected {
+	background: blue;
+	color: blue;
+}
+
+.head {
+	background: black;
+	color: white;
+}
+
+.no {
+	background: yellow;
+}
+</style>
+
+<script src="jquery-1.11.1.js"></script>
+
+<!--jQuery다루기  -->
+<!--
+2. class 다루기(class 추가, 삭제)
+2.1 $().addClass("클래스명");
+
+2.2 $().remove("클래스명");
+ -->
+<script>
+
+	$(function() {
+		/*
+		//toggleClass사용
+		$("td").click(function(event) {
+			$(this).toggleClass("selected");
+		}); */
+		
+		//hasClass 사용
+		var element = $(this);
+		
+		if(element.hasClass("selected")==1){
+			element.removeClass("selected");
+		}else{
+			element.addClass("selected");
+		}
+	});
+</script>
+
+</head>
+<body>
+	<table border="1">
+		<tr class="head">
+			<th>번호</th>
+			<th>이름</th>
+			<th>전화</th>
+		</tr>
+		<tr>
+			<td class="no">1</td>
+			<td><a href="mailto:test1@test.com">홍길동1</a></td>
+			<td>1111-1111</td>
+		</tr>
+
+		<tr>
+			<td class="no">2</td>
+			<td><a href="mailto:test2@test.com">홍길동2</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">3</td>
+			<td><a href="mailto:test3@test.com">홍길동3</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">4</td>
+			<td><a href="mailto:test4@test.com">홍길동4</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">5</td>
+			<td><a href="mailto:test5@test.com">홍길동5</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">6</td>
+			<td><a href="mailto:test6@test.com">홍길동6</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">7</td>
+			<td><a href="mailto:test7@test.com">홍길동7</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">8</td>
+			<td><a href="mailto:test8@test.com">홍길동8</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">9</td>
+			<td><a href="mailto:test9@test.com">홍길동9</a></td>
+			<td>1111-1111</td>
+		</tr>
+		<tr>
+			<td class="no">10</td>
+			<td><a href="mailto:test10@test.com">홍길동10</a></td>
+			<td>1111-1111</td>
+		</tr>
+	</table>
+
+</body>
+</html>
