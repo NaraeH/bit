@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이벤트 리스너 등록</title>
+<style>
+div {
+	border: 1px solid red;
+}
+</style>
+
+<script src="jquery-1.11.1.js"></script>
+
+<!-- jQuery 이벤트 리스너 등록 및 해제(test29 ~ ) -->
+<!--
+1. bind():이벤트 리스너 등록
+1.1 등록하기
+      한번에 한 개의 이벤트 리스너 등록
+     $(selector).bind(event name, function);
+      한번에 여러개의 이벤트 리스너 등록
+     $(selector).bind({event name1:function1, event name2: function, ...});
+    
+1.2 이벤트 종류
+click
+ready
+ -->
+<script>
+	//ready event: DOM tree가 완성되었을 떄 이벤트 호출
+	$(document).bind("ready", function() {
+		alert("okok");
+	});
+
+	//onclick은 함수이름 (IE8 이하는 이벤트 이름)이지, 이벤트 이름이 X
+	//click는 이벤트이름
+	$(function() {
+
+		/* 		
+		 //selector가 하나로 지정되었을 경우
+		 $("#img1").bind('click', function(event){
+		 $(this).appendTo("body");
+		 }); */
+
+		//selector에서 배열을 리턴하는 경우 모든 경우에 대해서 함수를 리턴한다.
+		$("img").bind('click', function(event) {
+			$(this).appendTo("body");
+		});
+	});
+</script>
+
+</head>
+<body>
+	<img id="img1" src="bin.JPG" width="150">
+	<img id="img2" src="ji.jpg" width="150">
+	<img id="img3" src="kka.jpg" width="150">
+</body>
+</html>

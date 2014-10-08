@@ -37,6 +37,8 @@ find("찾고 싶은 것"): "찾고 싶은 것"을 찾기
 
 			//is(), hasClass()의 차이점: is()는 모든 요소 다 가능 but, hasClass()는 class만 가능
 			var element = $(this);
+			console.log(element);
+			console.log(element.is(".selected"));
 			if (element.is(".selected")) {
 				element.removeClass("selected");
 			} else {

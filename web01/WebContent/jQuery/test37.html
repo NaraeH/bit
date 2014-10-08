@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이벤트 리스너 등록</title>
+<style>
+#d1{
+border: 1px solid red;
+}
+#img1{
+width:150px;
+}
+</style>
+
+<script src="jquery-1.11.1.js"></script>
+
+<!-- jQuery 이벤트 리스너 등록 및 해제(test29 ~) -->
+<!--
+5.3 mouseover와  mouseout
+mouseover:해당 엘레먼트 위에 마우스 커서가 있을 때
+                  자식 엘리먼트에 의해 가려졌다가 다시 나타나도 이벤트 발생(자식과 부모의 영역 둘다 보아야 함)
+mouseout: 해당 엘리먼트 위에 마우스 커서가 사라질 때
+            자식 엘리먼트에 의해 가려질 때도 이벤트 발생(자식과 부모의 영역 둘다 보아야 함)
+ -->
+<script>
+	$(function() {
+		
+		$("#d1").mouseover(function(event){
+			console.log("mouseover");
+		}).mouseout(function(event){
+			console.log("mouseout");
+		});
+		
+		
+		//bubleing 하는 것 없애기
+		$("#img1").mouseover(function(event){
+			event.stopPropagation();
+		}).mouseout(function(event){
+			event.stopPropagation();
+		});
+
+
+	});
+</script>
+
+</head>
+<body>
+<div id="d1">
+	<button id="btn1">이미지 추가</button>
+	<img id="img1" src="bin.JPG" >
+	<button id="btnClose">X</button>
+	</div>
+</body>
+</html>

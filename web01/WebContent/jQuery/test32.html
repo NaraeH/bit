@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이벤트 리스너 등록</title>
+<style>
+div {
+	border: 1px solid red;
+}
+</style>
+
+<script src="jquery-1.11.1.js"></script>
+
+<!-- jQuery 이벤트 리스너 등록 및 해제(test29 ~) -->
+<!--
+4. 이벤트 리스너 등록: on()
+$().on(event name,function); 
+  bind()와 동일
+ -->
+<script>
+	$(function() {
+		
+		//DOM tree에서 모든 img 태그를 찾아 리스너를 추가하라.
+		$("img").on("click", function(event){
+			console.log($(this).attr("src"));
+		});
+		
+		//DOM tree에서 btn1 아이디의 태그를 찾아 리스너를 추가하라.
+		$("#btn1").on("click", function(evnet){
+			$("<img>").attr("src", "bin.JPG")
+			.css({"border":"5px solid green","width": "100px"})
+			.on("click",function(event){console.log($(this).attr("src"));})
+			.appendTo("body");
+		});
+	});
+</script>
+
+</head>
+<body>
+	<button id="btn1">이미지 추가</button><br>
+	<img id="img1" src="bin.JPG" width="150">
+</body>
+</html>

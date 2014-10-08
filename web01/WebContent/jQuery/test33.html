@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이벤트 리스너 등록</title>
+<style>
+div {
+	border: 1px solid red;
+}
+</style>
+
+<script src="jquery-1.11.1.js"></script>
+
+<!-- jQuery 이벤트 리스너 등록 및 해제(test29 ~) -->
+<!--
+4. 이벤트 리스너 등록: 
+4.1 on()
+$().on(event name, [selector], [function]); 
+  이전의 live()와 동일 => 현재 존재하는 태그 뿐만아니라, 앞으로 생성 될 태그에도 적용한다.
+  파라미터 개수에 따라서 자동적으로 이벤트 리스너 등록 
+
+4.2 off()
+이벤트 리스너 해제
+$().off(event name, [selector], [function]); 
+
+ -->
+<script>
+	$(function() {
+		
+		//현재 DOM tree에서 모든 img 태그 뿐만 아니라 앞으로 생성 될 img 태그에 대해서도 호출될 리스너를 추가하라.
+		$(document).on("click", "img", function(event){
+			console.log($(this).attr("src"));
+		});
+		
+		//DOM tree에서 btn1 아이디의 태그를 찾아 리스너를 추가하라.
+		$("#btn1").on("click", function(evnet){
+			$("<img>").attr("src", "bin.JPG")
+			.css({"border":"5px solid green","width": "100px"})
+			.appendTo("body");
+		});
+		
+		$("#btn2").on("click", function(event){
+			//img 태그에 등록된 모든 리스너 제거
+			$(document).off("click", "img");
+		});
+	});
+</script>
+
+</head>
+<body>
+	<button id="btn1">이미지 추가</button>
+	<button id="btn2">이벤트 해제</button><br>
+	<img id="img1" src="bin.JPG" width="150">
+</body>
+</html>

@@ -16,6 +16,9 @@
 
 	<h2 id="header4">부제목3</h2>
 	<p id="p4">내용</p>
+	
+	
+	<div name="n1">후훗</div>
 
 	<script>
 	"use strict";
@@ -57,6 +60,18 @@
 	for(var i =0; i< tagList2.length; i++){
 	console.log(i, tagList2[i].innerHTML);
 	}
+	console.log("---------------");
+	console.log(document.getElementById("header1"));
+	
+	console.log("---------------");
+	var test = document.getElementsByTagNameNS("*", "p");
+	for(var i in test){
+		console.log(i, test[i]);
+	}
+	document.getE
+var n1 = document.getElementsByTagName("div");
+console.log("n1:", n1);
+	
 	</script>
 </body>
 

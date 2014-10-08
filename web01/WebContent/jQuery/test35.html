@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이벤트 리스너 등록</title>
+<style>
+div {
+	border: 1px solid red;
+}
+</style>
+
+<script src="jquery-1.11.1.js"></script>
+
+<!-- jQuery 이벤트 리스너 등록 및 해제(test29 ~) -->
+<!--
+내용X
+ -->
+<script>
+	$(function() {
+		var state = false;
+
+		//버튼을 누를 때 마다 번갈아 가면서 이미지 태그를 생성
+		$("#btn1").click(function(evnet) {
+			if(state){
+				$("<img>").attr("src", "bin.JPG")
+				.css("width","100px")
+				.appendTo("body");
+				state = false;
+			}else{
+				$("<img>").attr("src", "ji.jpg")
+				.css("width","100px")
+				.appendTo("body");
+				state = true;
+			}
+		});
+
+	});
+</script>
+
+</head>
+<body>
+	<button id="btn1">이미지 추가</button>
+	<img id="img1" src="bin.JPG" width="150">
+</body>
+</html>
