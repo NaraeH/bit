@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<script>
+	/*	//배열생성1
+ 		var scores = new Array(3);
+		scores[0] = 100;
+		scores[1] = 100;
+		scores[2] = 90;
+		scores[3] = 80; //errorX: 기본으로 3개의 크기를 생성한 것일뿐, 추가 가능
+		scores[7] = 70; //errorX: 인덱스를 건너뛰오도 상관X 
+
+		for ( var i in scores) {
+			console.log(i, " => ",scores[i]);
+		}
+		 */
+		 //배열생성2
+		var scores = [100,90, 100];
+		
+		for ( var i in scores) {
+			console.log(i, " => ",scores[i]);
+		}
+		
+		//배열생성3
+		//실제 자바의 Array의 객체와 사용법이 비슷하다.
+		var student = ["홍길동", 100, 100, 90, 290, new Date()];
+		
+		console.log(student);
+	</script>
+
+</body>
+</html>
