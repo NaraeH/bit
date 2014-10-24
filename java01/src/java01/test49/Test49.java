@@ -41,13 +41,15 @@ public class Test49 {
 		System.out.println(key6.hashCode());
 
 		// int, String의 주소는 다르더라도 같은 값을 갖고 있다면 같은 hashCode값을 갖는다. 이유는 실행결과 밑에서
+		System.out.println("-------주소 비교----------");
 		System.out.println("주소: key1 == key2? => " + (key1 == key2));
 		System.out.println("주소: key3 == key4? => " + (key3 == key4));
 		System.out.println("주소: key5 == key6? => " + (key5 == key6));
 
+		System.out.println("-------hashCode 비교----------");
 		System.out.println("hashCode: key1 == key2? => " + (key1.hashCode() == key2.hashCode()));
 		System.out.println("hashCode: key3 == key4? => " + (key3.hashCode() == key4.hashCode()));
-		System.out.println("hashCode: key4 == key6? => " + (key5.hashCode() == key6.hashCode()));
+		System.out.println("hashCode: key5 == key6? => " + (key5.hashCode() == key6.hashCode()));
 		
 		/*Q. 왜 Integer와 String의 값이 같다면 왜 같은 hashCode 값을 갖을까?
 		Object에서 상속받은 원래 메서드는 인스턴스가 다르면 해시값도 다르도록 프로그램되어 있다.
@@ -55,10 +57,10 @@ public class Test49 {
 		=> 비록 인스턴스가 다르더라도 값이 같다면 같은 해시 값을 리턴하도록 재정의 하는 것이다.
 		*/
 		
-		System.out.println("-------equals조사----------");
+		System.out.println("-------equals 비교----------");
 		System.out.println("equals: key1 == key2? => " + key1.equals(key2));
-		System.out.println("equals: key1 == key2? => " + key3.equals(key4));
-		System.out.println("equals: key1 == key2? => " + key5.equals(key6));
+		System.out.println("equals: key3 == key4? => " + key3.equals(key4));
+		System.out.println("equals: key5 == key6? => " + key5.equals(key6));
 
 	}
 

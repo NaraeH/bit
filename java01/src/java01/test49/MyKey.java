@@ -63,8 +63,10 @@ public class MyKey {
 			return false;
 		return true;
 	}
-
-/*	@Override
+	
+/*	
+ 	//source -> Generate equals() and hashCode()...
+ 	@Override
 	public boolean equals(Object obj) {
 		if(obj == null){
 			return false;
