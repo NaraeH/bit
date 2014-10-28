@@ -27,7 +27,7 @@ public class test02 {
 
 		try {
 			FileInputStream input = new FileInputStream(args[0]);
-			FileOutputStream output = new FileOutputStream(fileName1 + "-0" + i + "." +  fileName2);
+			FileOutputStream output = new FileOutputStream(fileName1 + "-0" + i + "." +  fileName2); //argument: 만들고자 하는 파일이름
 
 			while ((b = input.read()) != -1) {
 				output.write(b);

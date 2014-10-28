@@ -25,7 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class test03 {
+public class test03_0 {
 
 	public static void main(String[] args) {
 

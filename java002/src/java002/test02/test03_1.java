@@ -34,8 +34,14 @@ public class test03_1 {
 		String fileName = fullFileName.split("\\.")[0];
 		String fileExtension = fullFileName.split("\\.")[1];
 
-		File toFile = new File(fullFileName);
+		File toFile = new File(".");
 		Path toPath = Paths.get(fileName + "-01." + fileExtension);
+		
+		String[] list = toFile.list();
+		
+		for(String item:list){
+			System.out.println(item);
+		}
 
 		try {
 			

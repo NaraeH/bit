@@ -16,7 +16,7 @@ public class Test01 {
 		try {
 			// 1. 입력 스트링 객체를 준비한다.
 			// 현재 파일의 위치는 project directory이다.
-			in = new FileInputStream("img1.jpg");
+			in = new FileInputStream("img1.jpg"); //argument를 불러와라
 			int count = 0;
 			int b = -1;
 			
