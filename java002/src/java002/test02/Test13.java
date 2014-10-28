@@ -32,7 +32,7 @@ public class Test13 {
 	}
 	
 	public static void main(String[] args) throws Exception{
-		FileInputStream in = new FileInputStream("test11_2.txt");
+		FileInputStream in = new FileInputStream("test11_3.txt");
 		DataInputStream in2 = new DataInputStream(in); //도우미 클래스
 		
 		Score obj1 = new Score();

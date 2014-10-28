@@ -29,7 +29,7 @@ public class Test12 {
 	}
 	
 	public static void main(String[] args) throws Exception{
-		FileOutputStream out = new FileOutputStream("test11_2.txt");
+		FileOutputStream out = new FileOutputStream("test11_3.txt");
 		DataOutputStream out2 = new DataOutputStream(out); //도우미 클래스
 		
 		int kor = 100;

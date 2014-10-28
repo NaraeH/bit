@@ -84,18 +84,14 @@ public class Score {
 
 	public static void add(String name, int kor, int eng, int math) {
 		// list.length-1 데이터 추가 => 나래
-		if ((kor >= 0) && (eng >= 0) && (math >= 0)) {
-			int length = dataList.size() > 0 ? dataList.size() - 1 : 0;
-			
-			Score score = new Score(name, kor, eng, math);
-			
-			dataList.add(length, score);
 
-			System.out.println("저장되었습니다.");
-		}else {
-			System.out.println("잘못된 입력입니다. 점수는 정수만 입력가능합니다.");
-			return;
-		}
+		//int length = dataList.size() > 0 ? dataList.size() - 1 : 0;
+
+		Score score = new Score(name, kor, eng, math);
+
+		dataList.add(score);
+
+		System.out.println("저장되었습니다.");
 
 	}
 
@@ -146,7 +142,6 @@ public class Score {
 		}else{
 			System.out.println("찾으려는 항목의 값이 잘못되었습니다.");
 		}
-
 	}
 
 	public static void view(int index) {
