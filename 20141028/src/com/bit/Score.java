@@ -58,7 +58,8 @@ public class Score {
 				return true;
 			}
 		} catch (Exception e) {
-			System.out.println("잘못된 값을 입력하셨습니다.");
+			System.out.println("입력이 바르지 않습니다.");
+			System.out.println(e.getStackTrace());
 			return true;
 		}
 	}
@@ -83,17 +84,16 @@ public class Score {
 
 	public static void add(String name, int kor, int eng, int math) {
 		// list.length-1 데이터 추가 => 나래
-		System.out.println(name + kor + eng + math);
-		if ((name != null) && (kor >= 0) && (eng >= 0) && (math >= 0)) {
+		if ((kor >= 0) && (eng >= 0) && (math >= 0)) {
 			int length = dataList.size() > 0 ? dataList.size() - 1 : 0;
+			
 			Score score = new Score(name, kor, eng, math);
+			
 			dataList.add(length, score);
 
-			for (Object item : dataList) {
-				System.out.println(item);
-			}
+			System.out.println("저장되었습니다.");
 		}else {
-			System.out.println("잘못된 입력입니다");
+			System.out.println("잘못된 입력입니다. 점수는 정수만 입력가능합니다.");
 			return;
 		}
 
@@ -106,8 +106,46 @@ public class Score {
  	}
 
 	public static void update(int index) {
+		Scanner upScanner = new Scanner(System.in);
+		String name, kor, eng, math, selector;
 		System.out.println("update" + index);
+		System.out.println(dataList.size());
+		
 		//해당 인덱스의 값 수정 => 나래
+		if(index < dataList.size()){
+			Score sData = (Score)dataList.get(index);
+			
+			System.out.println("이름(" + sData.name + ")? ");
+			if((name = upScanner.nextLine()) != null){}
+			
+			System.out.println("국어(" + sData.kor + ")? ");
+			if((kor = upScanner.nextLine()) != null){}
+			
+			System.out.println("영어(" + sData.eng + ")? ");
+			if((eng = upScanner.nextLine()) != null){}
+			
+			System.out.println("수학(" + sData.math + ")? ");
+			if((math = upScanner.nextLine()) != null){}
+			
+			System.out.println("정말 변경하시겠습니까?(y / n): ");
+			selector = upScanner.nextLine();
+			
+			switch(selector){
+			case "y": case "Y":
+				sData.name = name;
+				sData.kor = Integer.parseInt(kor);
+				sData.eng = Integer.parseInt(eng);
+				sData.math = Integer.parseInt(math);
+				System.out.println("변경하였습니다");
+				break;
+			case "n": case "N":
+				System.out.println("변경이 취소되었습니다");
+				break;
+			}
+			
+		}else{
+			System.out.println("찾으려는 항목의 값이 잘못되었습니다.");
+		}
 
 	}
 
