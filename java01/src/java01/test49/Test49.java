@@ -21,7 +21,7 @@ public class Test49 {
 		HashMap 냉장고2 = new HashMap();
 		// Map에 데이터를 저장할 때 원리
 		// key객체의 hash 값을 사용하여 저장한다.
-		냉장고2.put(key1, "보약");
+		냉장고2.put(key3, "보약");
 
 		// 그러고 어머니느 놀러 가셨다.
 		// 아들 퇴근..
@@ -30,7 +30,7 @@ public class Test49 {
 		// Map에서 값을 꺼낼 때 원리
 		// 1) 저장할 때 사용한 키의 해시값이 같은지 조사
 		// 2) equals()를 호출하여 값이 같은지 조사
-		System.out.println(냉장고2.get(key2));
+		System.out.println(냉장고2.get(key4));
 
 		System.out.println("----------------------");
 		System.out.println(key1.hashCode());

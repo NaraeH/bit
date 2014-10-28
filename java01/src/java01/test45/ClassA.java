@@ -17,6 +17,4 @@ public class ClassA {
 	static{
 		System.out.println("static 블럭이 여러개일 경우 순차적으로 실행");
 	}
-	
-
 }

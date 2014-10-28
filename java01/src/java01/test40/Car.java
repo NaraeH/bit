@@ -5,7 +5,7 @@ import java.util.Date;
 public class Car {
 	
 	private String  maker;
-	private String model;
+	protected String model;
 	private int cc = 800;
 	private boolean diesel;
 	private Date releaseDate;

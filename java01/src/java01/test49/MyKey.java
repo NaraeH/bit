@@ -19,6 +19,8 @@ public class MyKey {
 	String password;
 	int specialNo;
 	int secreatNo;
+	
+	public MyKey(){}
 
 	public MyKey(String password, int specialNo, int secreateNo) {
 		this.password = password;

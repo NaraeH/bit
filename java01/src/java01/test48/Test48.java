@@ -9,7 +9,7 @@ public class Test48 {
 		Student s1 = new Student("홍길동 jr.", 20);
 		Student s2 = new Student("임꺽정 jr.", 10);
 		
-		//instance 별로 hash 갑이 다른다.
+		//instance 별로 hash 값이 다른다.
 		System.out.println(s1.hashCode());
 		System.out.println(s2.hashCode());
 	}
