@@ -51,6 +51,7 @@ public class Score {
 			exit();
 			return false;
 		default:
+			System.out.println("잘못된 명령어 입니다.");
 			return true;
 		}
 	}
