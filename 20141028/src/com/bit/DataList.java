@@ -27,7 +27,6 @@ public class DataList {
 			Boolean flag = null;
 
 			while (true) {
-
 				flag = Score.menu();
 
 				if (flag.equals(false)) {

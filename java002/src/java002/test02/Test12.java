@@ -32,10 +32,6 @@ public class Test12 {
 		FileOutputStream out = new FileOutputStream("test11_3.txt");
 		DataOutputStream out2 = new DataOutputStream(out); //도우미 클래스
 		
-		int kor = 100;
-		int math = 90;
-		int money = 145630;
-		
 		Score obj = new Score("홍길동", 100, 90, 80);
 		
 		out2.writeUTF(obj.name);
