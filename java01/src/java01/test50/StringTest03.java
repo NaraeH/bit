@@ -27,15 +27,33 @@ public class StringTest03 {
 		String str2 = str1.intern();
 		String str3 = "Hello";
 		
-		if(str1 == str2){
-			System.out.println("str1 == str2");
+/*		if(str1 == str2){
+			System.out.println("==> str1 == str2");
 		}
 		
 		if(str2 == str3){
 			System.out.println("str2 == str3");
-		}
+		}*/
+		test(str2);
 		
 	}
+	
+	public static void test(String str2){
+		String strt1 = new String("Hello");
+		String strt2 = strt1.intern();
+		String strt3 = "Hello";
+		
+		if(strt2 == strt3){
+			System.out.println("strt2 == strt3");
+		}
+		
+		if(strt2 == str2){
+			System.out.println("strt2 == str2");
+		}
+	}
+	
+
+	
 	
 	public static void main01(String[] args) {
 		
@@ -50,7 +68,7 @@ public class StringTest03 {
 		System.out.println(str4);
 		
 		if(str2 == str4){
-			System.out.println("str2 == str4");
+			System.out.println("==> str2 == str4");
 		}
 		
 		if(str2.equals(str4)){
