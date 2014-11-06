@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import java002.test06.Command;
-import java002.test06.Score;
-import java002.test06.ScoreDao;
+import java002.test05.Command;
+import java002.test05.Score;
+import java002.test05.ScoreDao;
 
 public class DeleteCommand implements Command{
 
@@ -16,8 +16,9 @@ public class DeleteCommand implements Command{
 		return "delete";
 	}
 
+
 	@Override
-	public void service(HashMap<String, Object> params) throws Exception {
+	public void service(Map<String, Object> params) throws Exception {
 		ScoreDao scoreDao = (ScoreDao)params.get("scoreDao");
 		Scanner scanner = (Scanner) params.get("scanner");
 		
@@ -38,6 +39,7 @@ public class DeleteCommand implements Command{
 	    } else {
 	      System.out.println("삭제 취소하였습니다.");
 	    }
+		
 	}
 
 }

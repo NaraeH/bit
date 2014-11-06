@@ -1,6 +1,6 @@
 /* 데이터 보관처리 =>
  * - File I/0 API를 사용하여 데이터를 저장하고 꺼낸다.
- * -load(), sava()
+ * -load(), save()
  */
 package java002.test04;
 

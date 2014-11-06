@@ -1,14 +1,13 @@
 package java002.test09.commands;
 
 import java.util.HashMap;
-
-import java002.test09.Command;
 import java002.test09.Score;
 import java002.test09.ScoreDao;
+import java002.test09.annotation.Command;
 import java002.test09.annotation.Component;
 
 @Component("list")
-public class ListCommand implements Command {
+public class ListCommand {
 	//총괄 관리자로부터 의존 객체를 주입받고 싶으면 setter method를 준비하라.
 	ScoreDao scoreDao;
 
@@ -17,13 +16,8 @@ public class ListCommand implements Command {
 		this.scoreDao = scoreDao;
 	}
 
-	@Override
-	public String getCommandInfo() {
-		return "list";
-	}
-
-	@Override
-	public void service(HashMap<String, Object> params) throws Exception {
+	@Command
+	public void listTest(HashMap<String, Object> params) throws Exception {
 		//이 메서드가 호출되기 전에 ScoreDao 의존 객체가 저장 될 것이기 때문에 다음 코드는 제거한다.
 		//ScoreDao scoreDao = (ScoreDao) params.get("scoreDao");
 

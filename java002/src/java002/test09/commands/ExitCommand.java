@@ -1,13 +1,12 @@
 package java002.test09.commands;
 
 import java.util.HashMap;
-
-import java002.test09.Command;
 import java002.test09.ScoreDao;
 import java002.test09.annotation.Component;
+import java002.test10.annotation.Command;
 
 @Component("exit")
-public class ExitCommand implements Command{
+public class ExitCommand {
 	
 	// 총괄 관리자로부터 의존 객체를 주입받고 싶으면 setter method를 준비하라.
 	ScoreDao scoreDao;
@@ -17,13 +16,8 @@ public class ExitCommand implements Command{
 		this.scoreDao = scoreDao;
 	}
 
-	@Override
-	public String getCommandInfo() {
-		return "exit";
-	}
-
-	@Override
-	public void service(HashMap<String, Object> params) throws Exception {
+	@Command
+	public void exitTest(HashMap<String, Object> params) throws Exception {
 		//ScoreDao scoreDao = (ScoreDao)params.get("scoreDao");
 	
 		try{

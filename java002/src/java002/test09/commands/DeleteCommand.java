@@ -3,14 +3,13 @@ package java002.test09.commands;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-
-import java002.test09.Command;
 import java002.test09.Score;
 import java002.test09.ScoreDao;
+import java002.test09.annotation.Command;
 import java002.test09.annotation.Component;
 
 @Component("delete")
-public class DeleteCommand implements Command{
+public class DeleteCommand {
 	
 	// 총괄 관리자로부터 의존 객체를 주입받고 싶으면 setter method를 준비하라.
 	ScoreDao scoreDao;
@@ -26,13 +25,8 @@ public class DeleteCommand implements Command{
 		this.scanner = scanner;
 	}
 
-	@Override
-	public String getCommandInfo() {
-		return "delete";
-	}
-
-	@Override
-	public void service(HashMap<String, Object> params) throws Exception {
+	@Command
+	public void deleteTest(HashMap<String, Object> params) throws Exception {
 		//ScoreDao scoreDao = (ScoreDao)params.get("scoreDao");
 		//Scanner scanner = (Scanner) params.get("scanner");
 		

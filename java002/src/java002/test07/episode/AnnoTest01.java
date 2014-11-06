@@ -2,10 +2,10 @@
  <에노테이션 사용>
  => 컴파일러나 JVM에게 전달하는 주석
  
- 1. 에소테이션 정의
+ 1. 에노테이션 정의
    - MyAnnotation 생성
  2. 에노테이션 적용
-   - MyObject 생성 및 에놑이션 적용
+   - MyObject 생성 및 에노테이션 적용
  3. 에너테이션 추출
  */
 package java002.test07.episode;
@@ -30,6 +30,7 @@ public class AnnoTest01 {
 		
 		//.class는 확장자가 아니다!!!!!!!!!!!!!!!!!!!!! => 변수이다. JVM에서 자동으로 생성된 static 변수(내가 만드는게 아님)
 		MyAnnotation myAnno = (MyAnnotation)clazz.getAnnotation(MyAnnotation.class);
+		System.out.println("=====>" + MyAnnotation.class);
 		System.out.println(myAnno);
 		
 	}

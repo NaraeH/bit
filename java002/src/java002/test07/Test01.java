@@ -32,12 +32,18 @@ public class Test01 {
 		Class clazz = null;
 		Command command= null;
 		Component component = null;
-		
+				
 		//2) 클래스 로딩
 		for(String className:classNames){
+			//forName(): 클래스 로딩후 클래스를 다루는 관리자(class변수)를 리턴
 			clazz = Class.forName(className);
 			
 			//3) 로딩된 클래스 중에서 @component 에노테이션이 붙은 클래스만 인스턴스를 생성한다.
+			//class 변수 => new class()라고 하여 새로운 class 객체를 생성하는 것
+			//타입정보(크기, 용도, 메서드 등...)를 다루는 객체, 그 타입 객체(Component)를 다루는 도구의 주소가 들어있음
+			//항상 타입(클래스, 인터페이스, 에노테이션으로 정의된 타입)에는 도구(Class변수)가 따라다닌다. ex) String.class, Object.class, File.class 등.. 
+			//class 변수에는 클래스이름 이름은 뭔지, method는 뭐가 있는지 등의 도구가 들어있다.
+			//getAnnotation(annotation 정보를 담고있는 class변수)
 			component = (Component) clazz.getAnnotation(Component.class);
 			
 			if(component != null){
@@ -105,9 +111,9 @@ public class Test01 {
 	public static void main(String[] args) throws Exception{
 		Test01 app = new Test01();
 		
-		app.init();
+		app.init();    //service를 하기 위한 자원 준비 commandMap, command 등
 		app.service();
-		app.distroy();
+		app.distroy(); //service를 종료한 후 닫아야 할 자원을 닫음.
 	}
 
 

@@ -3,14 +3,13 @@ package java002.test09.commands;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-
-import java002.test09.Command;
 import java002.test09.Score;
 import java002.test09.ScoreDao;
+import java002.test09.annotation.Command;
 import java002.test09.annotation.Component;
 
 @Component("update")
-public class UpdateCommand implements Command{
+public class UpdateCommand {
 	
 	ScoreDao scoreDao;
 	Scanner scanner;
@@ -24,13 +23,8 @@ public class UpdateCommand implements Command{
 		this.scanner = scanner;
 	}
 
-	@Override
-	public String getCommandInfo() {
-		return "update";
-	}
-
-	@Override
-	public void service(HashMap<String, Object> params) throws Exception {
+	@Command
+	public void updateTest(HashMap<String, Object> params) throws Exception {
 		
 	//ScoreDao scoreDao = (ScoreDao)params.get("scoreDao");
 	//Scanner scanner = (Scanner) params.get("scanner");

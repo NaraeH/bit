@@ -1,12 +1,10 @@
 package java002.test05.commands;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
-
-import java002.test06.Command;
-import java002.test06.Score;
-import java002.test06.ScoreDao;
+import java002.test05.Command;
+import java002.test05.Score;
+import java002.test05.ScoreDao;
 
 public class ViewCommand implements Command{
 
@@ -16,7 +14,7 @@ public class ViewCommand implements Command{
 	}
 
 	@Override
-	public void service(HashMap<String, Object> params) throws Exception {
+	public void service(Map<String, Object> params) throws Exception {
 		ScoreDao scoreDao = (ScoreDao)params.get("scoreDao");
 		
 		ArrayList<String> options = (ArrayList<String>)params.get("options");

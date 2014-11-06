@@ -2,13 +2,12 @@ package java002.test09.commands;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import java002.test09.Command;
 import java002.test09.Score;
 import java002.test09.ScoreDao;
+import java002.test09.annotation.Command;
 import java002.test09.annotation.Component;
 @Component("view")
-public class ViewCommand implements Command{
+public class ViewCommand{
 	
 	// 총괄 관리자로부터 의존 객체를 주입받고 싶으면 setter method를 준비하라.
 	ScoreDao scoreDao;
@@ -18,13 +17,9 @@ public class ViewCommand implements Command{
 		this.scoreDao = scoreDao;
 	}
 
-	@Override
-	public String getCommandInfo() {
-		return "view";
-	}
 
-	@Override
-	public void service(HashMap<String, Object> params) throws Exception {
+	@Command
+	public void viewTest(HashMap<String, Object> params) throws Exception {
 		//ScoreDao scoreDao = (ScoreDao)params.get("scoreDao");
 		
 		ArrayList<String> options = (ArrayList<String>)params.get("options");

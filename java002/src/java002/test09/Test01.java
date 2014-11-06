@@ -1,18 +1,33 @@
+/*
+ * interface 종속을 없애기
+ * Command interface를 제거하고 @command Annotation을 사용하여
+ * 명령처리 클래스를 만든다.
+ * 
+ * 목표
+ * 1) 메소드에 에노테이션을 붙이는 방법
+ * 2) 특정 에너테이션이 붙은 메서드를 찾아 호출하는 방법
+ */
 package java002.test09;
+
+import static org.reflections.ReflectionUtils.getMethods;
+import static org.reflections.ReflectionUtils.withAnnotation;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
+
+import java002.test09.annotation.Command;
 import java002.test09.annotation.Component;
 
 import org.reflections.Reflections;
 
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class Test01 {
 	Scanner scanner;
 	ScoreDao scoreDao;
-	HashMap<String, Command> commandMap;
+	HashMap<String, Object> commandMap;
 	
 	public void init() throws Exception{
 		scoreDao = new ScoreDao();
@@ -23,50 +38,46 @@ public class Test01 {
 		}
 		
 		scanner = new Scanner(System.in);
-		commandMap = new HashMap<String, Command>();
+		commandMap = new HashMap<String, Object>();
 		
-		Reflections reflections = new Reflections("java002.test08");
+		Reflections reflections = new Reflections("java002.test09");
 		Set<Class<?>> clazzList = reflections.getTypesAnnotatedWith(Component.class);
 		
-		Command command= null;
 		Component component = null;
 		Method method = null;
+		Object command = null;
 		
 		for(Class clazz:clazzList){
 			component = (Component) clazz.getAnnotation(Component.class);
-			
-			if(component != null){
-				command = (Command)clazz.newInstance();
-				
-				//class 관리자로 부터 해당 클래스의 method 객체를 얻는다.
-				//invoke()를 사용하여 메서드를 호출한다.
-				try {
-
-					// 만약, setScoreDao가 있다면 호출하여 ScoreDao객체를 주입한다.
-					//parameter1: 메서드 이름, parameter2: ScoreDao.class는 파라미터 타입
-					method = clazz.getMethod("setScoreDao", ScoreDao.class);
-					//System.out.println(clazz.getName() + "====>" + method.getName());
-					method.invoke(command, scoreDao);
-
-				} catch (Exception e) {}
-				
-				//scanner 의존 객체 주입
-				try {
-
-					method = clazz.getMethod("setScanner", Scanner.class);
-					//System.out.println(clazz.getName() + "====>" + method.getName());
-					method.invoke(command, scanner);
-
-				} catch (Exception e) {}
-				
-			}
-
+			command = clazz.newInstance();
 			commandMap.put(component.value(), command);
+			
+			//class 관리자로 부터 해당 클래스의 method 객체를 얻는다.
+			//invoke()를 사용하여 메서드를 호출한다.
+			try {
+
+				// 만약, setScoreDao가 있다면 호출하여 ScoreDao객체를 주입한다.
+				//parameter1: 메서드 이름, parameter2: ScoreDao.class는 파라미터 타입
+				//setScoreDao가 overload되있을 수도 있으니 그 중 파라미터가 ScoreDao.class인 것을 찾아라.
+				method = clazz.getMethod("setScoreDao", ScoreDao.class);
+				//System.out.println(clazz.getName() + "====>" + method.getName());
+				method.invoke(command, scoreDao);
+
+			} catch (Exception e) {}
+
+			//scanner 의존 객체 주입
+			try {
+
+				method = clazz.getMethod("setScanner", Scanner.class);
+				//System.out.println(clazz.getName() + "====>" + method.getName());
+				method.invoke(command, scanner);
+
+			} catch (Exception e) {}
 		}
 	}
 
 	public void service(){
-		Command command = null;
+		Object command = null;
 
 		loop: while (true) {
 			try {
@@ -87,9 +98,15 @@ public class Test01 {
 					options.add(token[i]);
 				}
 				params.put("options", options);
-				command.service(params);
-
-				if (token[0].equals("exit")) {
+				
+				Set<Method> methods = getMethods(command.getClass(), withAnnotation(Command.class));
+				
+				for(Method m: methods){
+					//System.out.println(command.getClass().getName() + "==>" + m.getName());
+					m.invoke(command, params);
+					break; //한 번만 반복하기 => method는 
+				}
+				if(token[0].equals("exit")){
 					break loop;
 				}
 

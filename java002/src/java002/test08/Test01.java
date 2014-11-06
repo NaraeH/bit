@@ -46,7 +46,9 @@ public class Test01 {
 		scanner = new Scanner(System.in);
 		commandMap = new HashMap<String, Command>();
 		
+		//Reflections class: open source로 해당 메소드를 찾고, 해당 클래스를 찾는 용도
 		Reflections reflections = new Reflections("java002.test08");
+		//?는 클래스 타입
 		Set<Class<?>> clazzList = reflections.getTypesAnnotatedWith(Component.class);
 		
 		Command command= null;
@@ -55,34 +57,32 @@ public class Test01 {
 		
 		for(Class clazz:clazzList){
 			component = (Component) clazz.getAnnotation(Component.class);
-			
-			if(component != null){
-				command = (Command)clazz.newInstance();
+			commandMap.put(component.value(), (Command)clazz.newInstance());
+
+			//class 관리자로 부터 해당 클래스의 method 객체를 얻는다.
+			//invoke()를 사용하여 메서드를 호출한다.
+			try {
+				// 만약, setScoreDao가 있다면 호출하여 ScoreDao객체를 주입한다.
+				//해당 clazz에 parameter1(setScoreDao)이 있다면 파라미터 타입이 ScoreDao.class인 것을 찾아라.
+				//parameter1: 메서드 이름, parameter2: 타입정보를 넘김 (타입정보는 객체.class에 있으므로 ScoreDao.class를 넘김) =>ScoreDao.class라는 타입을 갖는 것
+				method = clazz.getMethod("setScoreDao", ScoreDao.class);
+				//System.out.println(clazz.getName() + "====>" + method.getName());
 				
-				//class 관리자로 부터 해당 클래스의 method 객체를 얻는다.
-				//invoke()를 사용하여 메서드를 호출한다.
-				try {
+				//아규먼트1: method이름, 아규먼트2: 해당 method(command)에 넘겨줄 아규먼트 
+				method.invoke(command, scoreDao);
+				//위의 문장은 command.setScoreDao(scoreDao)와 같다.
 
-					// 만약, setScoreDao가 있다면 호출하여 ScoreDao객체를 주입한다.
-					//parameter1: 메서드 이름, parameter2: ScoreDao.class는 파라미터 타입
-					method = clazz.getMethod("setScoreDao", ScoreDao.class);
-					//System.out.println(clazz.getName() + "====>" + method.getName());
-					method.invoke(command, scoreDao);
+			} catch (Exception e) {}
 
-				} catch (Exception e) {}
-				
-				//scanner 의존 객체 주입
-				try {
+			//scanner 의존 객체 주입
+			//scanner 라는 객체가 계속 사용되므로 항상 파라미터로 보내지 말고, 항상 만들어서 갖고있자(?)
+			try {
 
-					method = clazz.getMethod("setScanner", Scanner.class);
-					//System.out.println(clazz.getName() + "====>" + method.getName());
-					method.invoke(command, scanner);
+				method = clazz.getMethod("setScanner", Scanner.class);
+				//System.out.println(clazz.getName() + "====>" + method.getName());
+				method.invoke(command, scanner);
 
-				} catch (Exception e) {}
-				
-			}
-
-			commandMap.put(component.value(), command);
+			} catch (Exception e) {}
 		}
 	}
 
