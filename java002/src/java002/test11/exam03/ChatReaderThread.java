@@ -1,0 +1,24 @@
+package java002.test11.exam03;
+
+import java.util.Scanner;
+
+public class ChatReaderThread extends Thread{
+	Scanner in;
+	
+	public ChatReaderThread(Scanner in){
+		this.in = in;
+	}
+	
+	@Override
+	public void run() {
+		String message = null;
+		try {
+			while (true) {
+				message = in.nextLine();
+				System.out.println("\n==> " + message);
+			}
+		} catch (Exception e) {
+			System.out.println("데이터 수신 중 오류 발생");
+		}
+	}
+}
