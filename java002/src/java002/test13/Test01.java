@@ -17,6 +17,10 @@
 
 package java002.test13;
 
+//0) 패키지 멤버 클래스는 
+//public 또는 default 접근 제어만 가능 => private, protected 안된다!
+//그러나 inner class는 특정 class의 멤버이기 때문에 메서드나 변수처럼 모든 접근 제어 설정가능
+//=> public protected default private 다 가능
 public class Test01 {
 	static int i;   //static 변수
 	int k;          // instance 변수
@@ -65,7 +69,15 @@ public class Test01 {
 		
 		//3) local inner class
 		//특정 메서드에서만 사용가능
-		
+		class LocalInnerClass {
+			public void test() {
+				i = 20;
+				
+				// error! => static 블럭은 바깥 클래스의 인스턴스 주소를 가리킬 수 없다
+				//Test01.this.k = 20; 
+			}
+			
+		}
 	}
 
 }

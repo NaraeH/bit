@@ -6,7 +6,6 @@
 package java002.test02;
 
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.FileInputStream;
 
 public class Test13 {

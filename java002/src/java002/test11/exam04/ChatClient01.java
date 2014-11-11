@@ -33,7 +33,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class ChatClient extends Frame{
+public class ChatClient01 extends Frame{
 	TextField serverAddr = new TextField(10);
 	TextField name = new TextField(8);
 	Button connectBtn = new Button("connect");
@@ -41,7 +41,7 @@ public class ChatClient extends Frame{
 	TextField input = new TextField(30);
 	Button sendBtn = new Button("send");
 	
-	public ChatClient(){
+	public ChatClient01(){
 		//window준비
 		Panel toolbar = new Panel(new FlowLayout(FlowLayout.LEFT));
 		toolbar.add(new Label("name: "));
@@ -94,7 +94,7 @@ public class ChatClient extends Frame{
 		MenuBar menubar = new MenuBar();
 		menubar.add(menu);
 
-		ChatClient wnd = new ChatClient();
+		ChatClient01 wnd = new ChatClient01();
 		wnd.setMenuBar(menubar);
 		wnd.setSize(400, 600);
 		wnd.setBackground(Color.GREEN);

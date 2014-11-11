@@ -25,18 +25,21 @@ public class test16 {
 	//버퍼 사용 후
 		public static void main(String[] args) throws Exception {
 
-			FileInputStream in = new FileInputStream("C:/Users/Narae/Desktop/test.pdf");
+			//FileInputStream in = new FileInputStream("C:/Users/Narae/Desktop/test.pdf");
+			FileInputStream in = new FileInputStream("test14.dat");
 			BufferedInputStream in2 = new BufferedInputStream(in);
 			
 			int b = 0;
 			
-			long start = System.currentTimeMillis();
+			//long start = System.currentTimeMillis();
 
-			while ((b = in2.read()) != -1) {}
+			while ((b = in2.read()) != -1) {
+				System.out.println(b);
+			}
 
-			long end = System.currentTimeMillis();
+			//long end = System.currentTimeMillis();
 
-			System.out.println(end - start);
+			//System.out.println(end - start);
 
 			in2.close();
 			in.close();

@@ -5,7 +5,6 @@
  */
 package java002.test02;
 
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 
 public class Test10 {

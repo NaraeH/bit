@@ -19,6 +19,8 @@ import java.io.Serializable;
 //단지 바이트 배열로 출력할 수 있다는 표시용이다.
 //조상 중에 하나라도 Serializale이라면 모든 자식 다 Serializable이다.
 class Score implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	String name;
 	int kor;
 	int eng;
@@ -27,8 +29,6 @@ class Score implements Serializable {
 	float avg;
 	
 	public Score(String name, int kor, int eng, int math){
-		
-		//FileOutputStream out = new FileOutputStream("test14.dat");
 		
 		this.name =name;
 		this.kor = kor;
@@ -41,22 +41,19 @@ class Score implements Serializable {
 
 
 public class Test14 {
-	//@SuppressWarnings("serial")
 
 	public static void main(String[] args) throws Exception{
 		
-/*		private static final long SerialVersion = 1;
 		
+		FileOutputStream out = new FileOutputStream("test14.dat");
 		ObjectOutputStream out2 = new ObjectOutputStream(out); //도우미 클래스
 		
 		Score obj =new Score("홍길동", 100, 200, 50);
 		
 		//instance에 값을 byte 배열로 만들어서 출력한다. 단, 해당 클래스가 허락해야 한다.
-		//선언을 해라
 		out2.writeObject(obj);
 
-		
 		out2.close();
-		out.close();*/
+		out.close();
 	}
 }
