@@ -1,17 +1,17 @@
-package java002.test15.commands;
+package java002.test16.command;
 
 import java.util.HashMap;
 
-import java002.test15.ProductDao;
-import java002.test15.annotation.Command;
-import java002.test15.annotation.Component;
+import java002.test16.MemberDao;
+import java002.test16.annotation.Command;
+import java002.test16.annotation.Component;
 
 @Component
 public class GeneralCommand {
-	ProductDao productDao;
+	MemberDao memberDao;
 
-	public void setScoreDao(ProductDao productDao) {
-		this.productDao = productDao;
+	public void setScoreDao(MemberDao memberDao) {
+		this.memberDao = memberDao;
 	}
 
 	@Command("exit")

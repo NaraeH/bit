@@ -1,4 +1,4 @@
-package java002.test15;
+package java002.test16;
 
 import static org.reflections.ReflectionUtils.getMethods;
 import static org.reflections.ReflectionUtils.withAnnotation;
@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
-import java002.test15.annotation.Command;
-import java002.test15.annotation.Component;
+import java002.test16.annotation.Command;
+import java002.test16.annotation.Component;
 
 import org.reflections.Reflections;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class ProductMgt {
+public class MemberMgt {
 	
 	static class CommandInfo{
 		public Object instance;
@@ -22,7 +22,7 @@ public class ProductMgt {
 	}
 	
 	Scanner scanner;
-	ProductDao productDao;
+	MemberDao memberDao;
 	HashMap<String, CommandInfo> commandMap;
 	
 	public void init() throws Exception{
@@ -31,12 +31,12 @@ public class ProductMgt {
 		CommandInfo commandInfo = null;
 		Command commandAnno = null;
 
-		productDao = new ProductDao();
+		memberDao = new MemberDao();
 		
 		scanner = new Scanner(System.in);
 		commandMap = new HashMap<String, CommandInfo>();
 		
-		Reflections reflections = new Reflections("java002.test15");
+		Reflections reflections = new Reflections("java002.test16");
 		Set<Class<?>> clazzList = reflections.getTypesAnnotatedWith(Component.class);
 		
 		for(Class clazz:clazzList){
@@ -53,8 +53,8 @@ public class ProductMgt {
 			}
 			
 			try {
-				method = clazz.getMethod("setProductDao", ProductDao.class);
-				method.invoke(commandInfo.instance, productDao);
+				method = clazz.getMethod("setMemberDao", MemberDao.class);
+				method.invoke(commandInfo.instance, memberDao);
 
 			} catch (Exception e) {}
 
@@ -112,7 +112,7 @@ public class ProductMgt {
 	}
 	
 	public static void main(String[] args) throws Exception{
-		ProductMgt app = new ProductMgt();
+		MemberMgt app = new MemberMgt();
 		
 		app.init();
 		app.service();
