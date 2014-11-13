@@ -1,0 +1,42 @@
+//gradle 빌드 명령어를 담고있는 라이브러리를 import한다.
+//build.gradle처럼 특정(Specific) 영역(Domain)에서 사용하는 언어(Language)
+//   => Domain-specific Language(DSL)  ex) bulid.gradle의 언어는 groovy
+
+//groovy문법
+//apply는 function이다!!
+//apply(["key":"value", "key": "value"...]) 에서 groovy 문법에 따라 괄호를 없앤것 (괄호 없앨때는 ()뿐만아니라 []도 없어애 한다.)
+//문자열은 ""생략가능
+//apply() 함수는 자바 plugin에 있는 함수들 loading(불러오는) 기능
+
+//jar
+//jar({ 내부함수 })  => 파라미터로 내부함수를 보냄 ({}는 함수이므로)
+//groovy는 () 생략가능 => jar { 내부함수 }
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+//encoding error날 때 해결하기
+	compileJava {
+	//sourceCompatibility: 소스의 자바 버전 지정
+	//검사할때 사용 => 버전을 지정하면 그 문법에 맞지 않는 문법은 다 에러를 띄운다.(지정된 버전의 문법의 아닌 경우 오류 출력)
+	sourceCompatibility = 1.7
+	options.encoding = 'UTF-8'
+}
+
+	//의존 라이브러리를 받아 올 서버 지정
+repositories {
+	mavenCentral()
+}
+
+//의존 라이브러리 지정
+//의존 라이브러리 검색 사이트 => mvnrepository.com
+//가장 상위버전을 추가하면 된다.(어짜피 하위버전은 상위버전에 호환되므로)
+dependencies {
+	compile 'mysql:mysql-connector-java:5.1.34'
+	compile 'org.reflections:reflections:0.9.9'
+	compile 'org.mybatis:mybatis:3.2.8'
+	//testCompile 'junit:junit:4.+'
+}
+
+
+
