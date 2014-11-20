@@ -3,99 +3,46 @@
  */
 package java002.test19.server;
 
-import static org.reflections.ReflectionUtils.getMethods;
-import static org.reflections.ReflectionUtils.withAnnotation;
-
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.lang.reflect.Method;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Set;
-import java002.test19.server.annotation.Command;
-import java002.test19.server.annotation.Component;
+import java002.test19.server.CommandMapping.CommandInfo;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.reflections.Reflections;
 
-@SuppressWarnings({"unchecked", "rawtypes"})
 public class ProductMgtServer {
-	
-	static class CommandInfo{
-		public Object instance;
-		public Method method;
-	}
-	
 	Scanner scanner;
 	ProductDao productDao;
-	HashMap<String, CommandInfo> commandMap;
+	ApplicationContext appCtx;
+	CommandMapping commandMapping;
 	
 	public void init() throws Exception{
-		//mybatis 설정시작-------------------------------------
-		// MyBatis 설정 파일 경로
-		//String resource = "java002/test19/server/mybatis-config.xml";
 		String resource = "java002/test19/server/mybatis-config.xml";
-		
-		//설정 파일을 읽어들일 입력스트림 객체를 준비한다.
-		//Resources 클래스의 getResourceAsStream 메서드를 사용하면,
-		//mybatis 설정 파일을 클래스 경로에서 찾는 스트림 객체를 리턴한다.
-		//직접 파일경로를 바꿀 수고를 덜 수 있다.
-		//FileInputStream in = new FileInputStream("/home/bit/git/java003/bit/" + resource)와 동일하다. 하지만 이걸 사용하면 경로가 바뀌면계속 새롭게 셋팅해주어야 한다.
 		InputStream inputStream = Resources.getResourceAsStream(resource);
-		
-		//SqlSessionFactoryBuilder().build(inputStream): 설계 도면(inputStream)으로 부터 공장을 만들어서 공장에서 찍어서 값을 보내달라.
-		//mybatis 설정 파일대로 동장할 SqlSessionFactory를 얻는다.
-		//빌더 역할을 수행하는 객체를 통해서 얻는다.
+		//받아온 파일을 SqlSessionFactoryBuilder에 의해 만듬으로써, 해당 파일의 문장들이 실행된다.
+		//어떤 것이 실행될까? 해당 파일의 내용인,  DB연결, SQL 파일 맵핑이 실행된다
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		//mybatis 설정끝----------------------------------------------------
 
-		Method method = null;
-		Object command = null;
-		CommandInfo commandInfo = null;
-		Command commandAnno = null;
-
-		productDao = new ProductDao();
-		productDao.setSqlSessionFactory(sqlSessionFactory);
+		//java0.test19.server 패키지 및 하위 패키지의 모든 클래스를 뒤진다.
+		//@Component 애노테이션이 붙은 클래스를 찾는다
+		//해당 클래스의 인스턴스를 생성하여 보관한다.
+		appCtx = new ApplicationContext("java002.test19.server");
 		
-		scanner = new Scanner(System.in);
-		commandMap = new HashMap<String, CommandInfo>();
+		//자동으로 주입 못하는 것은 메서드를 이용해서 주입하자.
+		appCtx.addBean("sqlSessionFactory", sqlSessionFactory);
+		//의존 객체 주입 => 서로 의존되어 있는 메서드끼리 짝지어서 객체 주입해주기
+		appCtx.injectDependency();
 		
-		Reflections reflections = new Reflections("java002.test19");
-		Set<Class<?>> clazzList = reflections.getTypesAnnotatedWith(Component.class);
+		//objPool에서 @Command 에노테이션이 붙은 메서드를 찾는다.
+		//명령어와 메서드 연결 정보를 구축한다.
+		commandMapping = new CommandMapping();
+		commandMapping.prepare(appCtx.getBeansAll());
 		
-		for(Class clazz:clazzList){
-			command = clazz.newInstance();
-			
-			Set<Method> methods = getMethods(clazz, withAnnotation(Command.class));
-			
-			for(Method m: methods){
-				commandAnno = m.getAnnotation(Command.class);
-				commandInfo = new CommandInfo();
-				commandInfo.instance = command;
-				commandInfo.method = m;
-				commandMap.put(commandAnno.value(), commandInfo);
-			}
-			
-			try {
-				method = clazz.getMethod("setProductDao", ProductDao.class);
-				method.invoke(commandInfo.instance, productDao);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			try {
-				method = clazz.getMethod("setScanner", Scanner.class);
-				method.invoke(commandInfo.instance, scanner);
-
-			} catch (Exception e) {
-				//e.printStackTrace(); //setScanner를 못찾으면 에러 띄우기 => 현재는 사용X
-			}
-
-		}
 	}
 	
 	class Servicetheread extends Thread {
@@ -122,18 +69,17 @@ public class ProductMgtServer {
 		@Override
 		public void run(){
 			CommandInfo commandInfo = null;
-
-			String[] token = in.nextLine().split("\\?");
-			//System.out.println(token[0]);
-			commandInfo = commandMap.get(token[0]);
-
-			if (commandInfo == null) {
-				System.out.println("해당 명령을 지원하지 않습니다.");
-				out.println(); //서버에서 더이상 데이터를 보낼 것이 없다는 표시
-				return; 
-			}
-
 			try{
+				String[] token = in.nextLine().split("\\?");
+				commandInfo = commandMapping.getCommandInfo(token[0]);
+				
+				System.out.println(commandInfo);
+				
+				if (commandInfo == null) {
+					System.out.println("해당 명령을 지원하지 않습니다.");
+					out.println(); //서버에서 더이상 데이터를 보낼 것이 없다는 표시
+					return; 
+				}
 
 				HashMap<String, Object> params = new HashMap<String, Object>();
 				params.put("out", out);

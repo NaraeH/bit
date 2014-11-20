@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 팩토리 클래스로부터 객체 얻기 -->
+	<!-- factory-method는 static 메소드 이름과 동일하게 한다. -->
+	<!-- e01로 리턴되는 것은 Engine 객체이지, EnginFactory 객체가 아니다. 해당 클래스로 Engine을 만들어서 리턴하는 것이다. -->
+	<!-- 방법1 : static method -->
+	<bean id="e01" class="java002.test21.spring.exam10.EnginFactory" factory-method="createEngine">
+		<constructor-arg value="sedan"/>
+	</bean>
+	
+	<!-- 팩토리 클래스로부터 객체 얻기 => 인스턴스 메서드 호출 -->
+	<!-- 방법2 : non-static method -->
+	<bean id="ef" class="java002.test21.spring.exam10.EnginFactory2"/>
+	<bean id="e02" factory-bean="ef" factory-method="createEngine">
+		<constructor-arg value="sport"/>
+	</bean>
+	
+	<!-- 스트링 프레임워크 규칙에 따라 만든 팩토리클래스 사용하기 -->
+	<!-- factoyBean의 인스턴스를 생성하는게 아니라 factory bean은 객체를 만들어주는 클래스이므로
+	해당 클래스 내부에서 createInstance()를 이용하여 factory가 아닌 새로운 객체를 생성해준다. -->
+	<!-- 방법3 : AbstractFactoryBean 상속하여서 만들기-->
+	<bean id="e03" class="java002.test21.spring.exam10.EngineFactoryBean">
+		<property name="type" value="suv"/>
+	</bean>
+
+</beans>

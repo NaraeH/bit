@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+        
+    <!-- @Autowired @Qualifier 등 특정 에너테이션을 처리할 BeanPostProcessor를 설정하는 것은 매우 번거로운 일이다.
+        => 그래서 스프링에서는 다음 태그를 사용하여 BeanPostProcessor 활성화를 자동화하는 태그를 지원한다.
+    -->
+	<!-- <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> -->
+	
+	<!-- context네임스페이스의 annotation-config 태그를 설정한다.
+		context 네임스페이스 사용
+		1) xmls 추가: xmlns:context="http://www.springframework.org/schema/context"
+		2) 네임스페이스 파일 경로 추가 : xsi:schemaLocation 속성에 네임스페이스 파일 경로를 추가한다.
+		                       ex) 네임스페이스명 (공백:white space=> new line, tap 등..) 네임스페이스 URL 
+	-->
+	<!-- 에노테이션을 처리할 관련 BeanPostProcessor들을 자동으로 등록한다. -->
+	<context:annotation-config/>
+	
+	<!-- 따로 설정 안해주면 error남!! 위의 코드에 의해 자동으로 engine을 injection하려고 했지만 engine이 2개 이다 어떻것을 injection할지 알 수 없다.
+	같은 타입의 객체가 여러개가 있을 경우 오류발생!! => 해결책: 정확하게 어떤 객체를 주입할지 지정한다. -->
+	<bean id="engine01" class="java002.test21.spring.exam13.Engine" p:maker="기아자동차" p:valve="16"/>
+	<bean id="engine02" class="java002.test21.spring.exam13.Engine" p:maker="현대자동차" p:valve="16"/>
+
+	<bean id="c01" class="java002.test21.spring.exam13.Car02">
+		<property name="model" value="티코" />
+		<property name="cc" value="800" />
+	</bean>
+	
+	<bean id="c02" class="java002.test21.spring.exam13.Car03">
+		<property name="model" value="소나타" />
+		<property name="cc" value="1997" />
+	</bean>
+	
+	<bean id="c03" class="java002.test21.spring.exam13.Car04">
+		<property name="model" value="그랜저" />
+		<property name="cc" value="3000" />
+	</bean>
+
+</beans>

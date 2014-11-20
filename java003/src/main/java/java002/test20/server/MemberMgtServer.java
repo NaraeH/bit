@@ -8,10 +8,10 @@ import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
-
 import java002.test20.server.annotation.Command;
 import java002.test20.server.annotation.Component;
 
@@ -79,16 +79,68 @@ public class MemberMgtServer {
 			} catch (Exception e) {}
 		}
 	}
-
-	public void service() throws Exception{
-		ServerSocket serverSocket = new ServerSocket(8888);
+	
+	public class ServiceThread extends Thread{
 		Socket socket = null;
+		Scanner in;
 		PrintStream out = null;
 		
-		CommandInfo commandInfo = null;
+		public ServiceThread(Socket socket) throws Exception{
+			this.socket = socket;
+			in = new Scanner(socket.getInputStream());
+			out = new PrintStream(socket.getOutputStream());
+		}
+
+		@Override
+		public void run() {
+			CommandInfo commandInfo = null;
+			String[] token = scanner.nextLine().split("//?");
+			
+			commandInfo = commandMap.get(token[0]);
+			
+			if(commandInfo == null){
+				System.out.println("해당 명령어를 지원하지 않습니다.");
+				out.println();
+				return;
+			}
+			
+			try{
+				HashMap<String, Object> params = new HashMap<String, Object>();
+				params.put("out", out);
+				
+				if(token.length > 1){
+					prrseQueryString(token[1], params);
+				}
+
+				commandInfo.method.invoke(commandInfo.instance, params);
+
+				if(token[0].equals("exit")){
+				}
+
+			}catch(Exception e){ }
+		}
+		
+		private void prrseQueryString(String query, HashMap<String, Object> map){
+			String[] entryList = query.split("&");
+			
+			String[] token = null;
+			for(String entry:entryList){
+				token = entry.split("=");
+				map.put(token[0], token[1]);
+			}
+		}
+	}
+	
+	public void service() throws Exception{
+		ServerSocket serverSocket = new ServerSocket(8888);
+
+		while(true){
+			new ServiceThread(serverSocket.accept()).start();
+		}
+
+		/*	CommandInfo commandInfo = null;
 
 		loop: while (true) {
-			out = new PrintStream(socket.getOutputStream());
 			try {
 				serverSocket.accept();
 				String[] token = scanner.nextLine().split("?");
@@ -99,7 +151,7 @@ public class MemberMgtServer {
 					continue; 
 				}
 
-	/*			HashMap<String, Object> params = new HashMap<String, Object>();
+				HashMap<String, Object> params = new HashMap<String, Object>();
 
 				ArrayList<String> options = new ArrayList<String>();
 				for (int i = 1; i < token.length; i++) {
@@ -107,7 +159,7 @@ public class MemberMgtServer {
 				}
 				params.put("options", options);
 				
-				commandInfo.method.invoke(commandInfo.instance, params);*/
+				commandInfo.method.invoke(commandInfo.instance, params);
 				
 				if(token[0].equals("exit")){
 					break loop;
@@ -117,7 +169,7 @@ public class MemberMgtServer {
 				e.printStackTrace();
 				System.out.println("명령어 처리 중 오류 발생. 다시 시도해 주세요.");
 			}
-		}
+		}*/
 	}
 	
 	public void distroy(){

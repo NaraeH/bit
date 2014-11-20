@@ -4,6 +4,7 @@
 	src/main/java => 자바 소스
 	src/main/resources => .xml, .txt, .properties 등 파일
 	src/main/webapp => .html, .css, .js, .gif 등 웹 관련 파일 
+	src/main/webapp/WEB-INF => .xml 파일 넣기
 	
 	src/test => JUnit 등 단위 테스트를 수행할 소스
 	src/test/main

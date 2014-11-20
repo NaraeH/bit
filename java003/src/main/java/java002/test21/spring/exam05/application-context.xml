@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 방법1 -->
+	<!-- 윗부분 xmlns에서 이름을 정의하여서 사용할 수 있다. "http://www.springframework.org/schema/p"는 이미 정의되있음 갖다 쓰기만 하면된다. -->
+	<!-- p는 properties 즉,setter method호출  -->
+	<bean id="b01" class="java002.test21.spring.exam05.Car" p:model="그랜저" p:cc ="1000" />
+
+	<!-- 방법2 -->
+	<!-- c는 constructor(생성자) -->
+	<bean id="b02" class="java002.test21.spring.exam05.Car" c:model="그랜저" c:cc="1999" />
+
+    
+</beans>

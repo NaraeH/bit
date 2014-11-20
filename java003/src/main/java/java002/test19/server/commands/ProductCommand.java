@@ -9,7 +9,7 @@ import java002.test19.server.ProductDao;
 import java002.test19.server.annotation.Command;
 import java002.test19.server.annotation.Component;
 
-@Component
+@Component("product")
 public class ProductCommand {
 	ProductDao productDao;
 	Scanner scanner;
@@ -17,11 +17,11 @@ public class ProductCommand {
 	public void setProductDao(ProductDao productDao) {
 		this.productDao = productDao;
 	}
-	public void setScanner(Scanner scanner) {
-		this.scanner = scanner;
-	}
+//	public void setScanner(Scanner scanner) {
+//		this.scanner = scanner;
+//	}
 	
-	@Command("add")
+	@Command("product/add")
 	public void add(Map<String, Object> params){
 		PrintStream out = (PrintStream)params.get("out");
 
@@ -43,7 +43,7 @@ public class ProductCommand {
 	}
 
 
-	@Command("delete")
+	@Command("product/delete")
 	public void delete(HashMap<String, Object> params){
 		PrintStream out = (PrintStream)params.get("out");
 		Product product  = productDao.selectOne(Integer.parseInt((String)params.get("no")));
@@ -59,7 +59,7 @@ public class ProductCommand {
 
 	}
 
-	@Command("list")
+	@Command("product/list")
 	public void list(HashMap<String, Object> params){
 		PrintStream out = (PrintStream)params.get("out");
 
@@ -86,7 +86,7 @@ public class ProductCommand {
 		out.println(); //입력의 끝
 	}
 
-	@Command("update")
+	@Command("product/update")
 	public void update(HashMap<String, Object> params){
 		PrintStream out = (PrintStream)params.get("out");
 		Product product = productDao.selectOne(Integer.parseInt((String)params.get("no")));
@@ -106,7 +106,7 @@ public class ProductCommand {
 		out.println();
 	}
 
-	@Command("view")
+	@Command("product/view")
 	public void view(HashMap<String, Object> params) {
 		PrintStream out = (PrintStream)params.get("out");
 		

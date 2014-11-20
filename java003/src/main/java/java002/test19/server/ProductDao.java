@@ -8,10 +8,12 @@ package java002.test19.server;
 
 import java.util.HashMap;
 import java.util.List;
+import java002.test19.server.annotation.Component;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+@Component
 public class ProductDao {
 	SqlSessionFactory sqlSessionFactory;
 
@@ -22,6 +24,7 @@ public class ProductDao {
 	}
 
 	public Product selectOne(int no) {
+		//sqlSessionFactory.openSession()에서 argument를 "true"로 주면 auto commit이다.
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		try{
