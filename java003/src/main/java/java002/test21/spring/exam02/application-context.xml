@@ -10,7 +10,7 @@
     <!-- Bean의 이름 지정하기  id가 없으면 bean의 첫번째 별명을 ID로 지정한다.-->
     <bean name="b02" class="java002.test21.spring.exam02.Car"/>
     
-    <!-- Bean의 이름을 여러개 지정하기 (id는 무조건 하나지만, Bean의 경우 여러개 지정이 가능ㅎ다.) -->
+    <!-- Bean의 이름을 여러개 지정하기 (id는 무조건 하나지만, Bean의 경우 여러개 지정이 가능하다.) -->
     <bean name="b03 b04 b05" class="java002.test21.spring.exam02.Car"/>
     
     <!--  bean의 id와 별명을 함께 지정할 수있다. -->
