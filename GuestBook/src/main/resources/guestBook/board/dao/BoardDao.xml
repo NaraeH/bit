@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="java63.assign01.dao.ProductDao">
+<mapper namespace="guestBook.board.dao.BoardDao">
 	<resultMap type="Product" id="productMap">
 		<id column="PNO" property="no" />
 		<result column="PNAME" property="name" />

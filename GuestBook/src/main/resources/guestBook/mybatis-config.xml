@@ -4,7 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="java63.servlets.test04.domain.Product" alias="Product" />
+		<typeAlias type="guestBook.member.domain.Member" alias="Member" />
+		<typeAlias type="guestBook.board.domain.Board" alias="Board" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -22,6 +23,7 @@
   
   
   <mappers>
-    <mapper resource="java63/servlets/test04/dao/ProductDao.xml"/>
+    <mapper resource="guestBook/member/Dao/MemberDao.xml"/>
+     <mapper resource="guestBook/board/Dao/BoardDao.xml"/>
   </mappers>
 </configuration>
