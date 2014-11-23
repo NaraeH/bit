@@ -1,5 +1,8 @@
 package guestBook.board;
 
+import guestBook.board.dao.BoardDao;
+import guestBook.board.domain.Board;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -23,20 +26,18 @@ public class BoardViewServlet extends GenericServlet{
 			throws ServletException, IOException {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-/*
-		ProductDao productDao = (ProductDao) this.getServletContext().getAttribute("productDao");
-		Product product = productDao.selectOne(no);
+
+		BoardDao productDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
+		Board board = productDao.selectOne(no);
 		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-
+		
 		out.println("<html>");
 		out.println("<head>");
-		
-		//다른 서블릿을 실행 => 실행 후 제어권이 되돌아 온다.
-		RequestDispatcher rd = request.getRequestDispatcher("/common/header");
-		rd.include(request, response); 
-
+		out.println("<link rel='stylesheet' href='../css/bootstrap.min.css'>");
+		out.println("<link rel='stylesheet' href='../css/bootstrap-theme.min.css'>");
+		out.println("<link rel='stylesheet' href='../css/common.css'>");
 		out.println("</head>");
 		out.println("<body>");
 		
@@ -49,28 +50,42 @@ public class BoardViewServlet extends GenericServlet{
 		out.println("   <label for='no' class='col-sm-2 control-label'>#</label>");
 		out.println("   <div class='col-sm-10'>");
 		out.println("    <input type='text' class='form-control' readonly id='no' name='no' value='"
-				+ product.getNo() + "'>");
+				+ board.getNo() + "'>");
 		out.println("    </div>");
 		out.println("  </div>");
+		
+		out.println("  <div class='form-group'>");
+		out.println("    <label for='name' class='col-sm-2 control-label'>제품</label>");
+		out.println("    <div class='col-sm-10'>");
+		out.println("      <input type='text' class='form-control' id='name' name='name' value='" + board.getTitle() + "'>");
+		out.println("    </div>");
+		out.println(" </div>");
 		  
 		out.println("  <div class='form-group'>");
 		out.println("    <label for='name' class='col-sm-2 control-label'>제품</label>");
 		out.println("    <div class='col-sm-10'>");
-		out.println("      <input type='text' class='form-control' id='name' name='name' value='" + product.getName() + "'>");
+		out.println("      <input type='text' class='form-control' id='name' name='name' value='" + board.getContent() + "'>");
 		out.println("    </div>");
 		out.println(" </div>");
 		
 		out.println("  <div class='form-group'>");
 		out.println("    <label for='qty' class='col-sm-2 control-label'>수량</label>");
 		out.println("    <div class='col-sm-10'>");
-		out.println("      <input type='text' class='form-control' id='qty' name='qty' value='" + product.getQuantity() + "'>");
+		out.println("      <input type='text' class='form-control' id='qty' name='qty' value='" + board.getName() + "'>");
 		out.println("    </div>");
 		out.println("  </div>");
 		
 		out.println("  <div class='form-group'>");
 		out.println("    <label for='mkno' class='col-sm-2 control-label'>제조사</label>");
 		out.println("    <div class='col-sm-10'>");
-		out.println("    <input type='text' class='form-control' id='mkno' name='mkno' value='"	+ product.getMakerNo() + "'>");
+		out.println("    <input type='text' class='form-control' id='mkno' name='mkno' value='"	+ board.getDate() + "'>");
+		out.println("    </div>");
+		out.println(" </div>");
+		
+		out.println("  <div class='form-group'>");
+		out.println("    <label for='mkno' class='col-sm-2 control-label'>제조사</label>");
+		out.println("    <div class='col-sm-10'>");
+		out.println("    <input type='text' class='form-control' id='mkno' name='mkno' value='"	+ board.getuId() + "'>");
 		out.println("    </div>");
 		out.println(" </div>");
 		
@@ -82,7 +97,7 @@ public class BoardViewServlet extends GenericServlet{
 		out.println("</div>");
 		out.println("</form>");
 
-		out.println("<script src='../../js/jquery-1.11.1.js'></script>");
+		out.println("<script src='../js/jquery-1.11.1.js'></script>");
 		out.println("<script>");
 		out.println("$('#btnCancel').click(function(){");
 		out.println("	history.back();");
@@ -90,7 +105,7 @@ public class BoardViewServlet extends GenericServlet{
 
 		out.println("$('#btnDelete').click(function(){");
 		out.println("	if(window.confirm('삭제하시겠습니까?z')){");
-		out.println("		location.href = 'delete?no=" + product.getNo()+ "';");
+		out.println("		location.href = 'delete?no=" + board.getNo()+ "';");
 		out.println("	}");
 		out.println("});");
 		
@@ -115,6 +130,6 @@ public class BoardViewServlet extends GenericServlet{
 		
 		out.println("</body>");
 		out.println("</html>");
-*/
+
 	}
 }

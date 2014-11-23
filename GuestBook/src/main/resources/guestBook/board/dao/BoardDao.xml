@@ -15,7 +15,7 @@
 	</resultMap>
 	
 	<sql id="boardSelect">
-	SELECT PNO, PNAME, QTY, MKNO
+	SELECT BTITLE, BCONTENT, BNAME, BDATE, UID
 	FROM BOARD
 	</sql>
 
