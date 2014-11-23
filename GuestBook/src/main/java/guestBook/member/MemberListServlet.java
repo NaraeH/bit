@@ -5,8 +5,10 @@ import guestBook.member.domain.Member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.GenericServlet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -60,13 +62,25 @@ public class MemberListServlet extends GenericServlet{
 		out.println("<th>제조사</th>");*/
 		out.println("</tr>");
 		MemberDao memberDao = (MemberDao) this.getServletContext().getAttribute("memberDao");
+		
 		for (Member member : memberDao.selectList(pageNo, pageSize)) {
 			out.println("<tr>");
 			out.println("<td><a href=view?no=" + member.getId() + ">" 
 					+ member.getName()+ "</a></td>");
 			out.println("</tr>");
+			
+			request.setAttribute("test", memberDao.selectList(pageNo, pageSize));
+			
+			//request.setAttribute("viewAddr", "view?no=" + member.getId());
+			request.setAttribute("member", member.toString());
+			request.setAttribute("id", member.getId());
+			request.setAttribute("name", member.getName());
+			//System.out.println(member.toString());
 		}
-		out.println("</table>");
+		RequestDispatcher view = request.getRequestDispatcher("../member.jsp");
+		view.forward(request,  response);
+
+		/*out.println("</table>");
 		
 		out.println("</div>");
 		
@@ -74,6 +88,7 @@ public class MemberListServlet extends GenericServlet{
 		out.println("</body>");
 		
 		out.println("<script src='../js/jquery-1.11.1.js'></script>");
-		out.println("</html>");
+		out.println("</html>");*/
+		
 	}
 }

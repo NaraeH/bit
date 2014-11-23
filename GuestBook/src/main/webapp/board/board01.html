@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+<link rel='stylesheet' href='../../css/bootstrap.min.css'>
+<link rel='stylesheet' href='../../css/bootstrap-theme.min.css'>
+<link rel='stylesheet' href='../../css/common.css'>
+
+
+
+</head>
+<body>
+
+
+
+	<!-- <div class='container'> -->
+	<div>
+		<form class='form-horizontal' role='form' action='add' method='post' >
+
+			<table border='1' cellpadding='10'>
+				<tr>
+					<td rowspan="2"><img src="img00.jpg"></td>
+					<td colspan="2"><input type='text' size='58' maxlength='50'
+						class='form-control' id='title' name='title' placeholder='제목'>
+				</tr>
+				<tr>
+					<td><textarea rows='6' cols='55' name='content'
+							maxlength='255' id='content'></textarea></td>
+					<td>
+						<div>
+							<div>
+								<input type='text' size='10' maxlength='10' class='form-control'
+									id='name' name='name' placeholder='글쓴이'>
+							</div>
+							<br>
+							<div>
+								<input type='password' size='10' maxlength='10'
+									class='form-control' id='pwd' name='pwd' placeholder='비밀번호'>
+							</div>
+							<br>
+							<div>
+								<button id='btnAdd' type='submit' class='btn btn-primary'>등록</button>
+								<button id='btnCancel' type='button' class='btn btn-primary'>취소</button>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+
+		</form>
+
+	</div>
+	<script src='../../js/jquery-1.11.1.js'></script>
+	<script>
+		
+		$('#btnCancel').click(function() {
+			history.back();
+		});
+		$('#btnAdd').click(function() {
+			if ($('#name').val().length == 0) {
+				alert('이름은 필수 입력 항목입니다.');
+				return false;
+			}
+			if ($('#pwd').val().length == 0) {
+				alert('암호는 필수 입력 항목입니다.');
+				return false;
+			}
+			if ($('#title').val().length == 0) {
+				alert('글 제목은 필수 입력 항목입니다.');
+				return false;
+			}
+			if ($('#content').val().length == 0) {
+				alert('글 내용은 필수 입력 항목입니다.');
+				return false;
+			}
+		});
+	</script>
+</body>
+</html>

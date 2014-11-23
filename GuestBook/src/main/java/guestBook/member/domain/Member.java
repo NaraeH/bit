@@ -27,7 +27,7 @@ public class Member implements Serializable, Cloneable{
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", name=" + name + ", photo=" + photo + "]";
+		return "id=" + id + ", name=" + "'" + name + "'" + ", photo=" + "'" + photo + "'";
 	}
 
 	@Override

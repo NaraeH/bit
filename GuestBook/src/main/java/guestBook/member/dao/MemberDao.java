@@ -15,7 +15,7 @@ public class MemberDao {
 	SqlSessionFactory sqlSessionFactory;
 
 	public MemberDao() {}
-
+	
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.GenericServlet;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -20,15 +19,16 @@ public class BoardViewServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
 	
 	SqlSessionFactory sqlSessionFactory = null;
+	public int no;
 
 	@Override
 	public void service(ServletRequest request, ServletResponse response)
 			throws ServletException, IOException {
 		
-		int no = Integer.parseInt(request.getParameter("no"));
+		no = Integer.parseInt(request.getParameter("no"));
 
-		BoardDao productDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
-		Board board = productDao.selectOne(no);
+		BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
+		Board board = boardDao.selectOne(no);
 		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
