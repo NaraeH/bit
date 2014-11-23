@@ -11,7 +11,6 @@
 package guestBook.member;
 
 import java.io.InputStream;
-import java63.servlets.test04.dao.ProductDao;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -22,13 +21,13 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-@WebServlet(name="ContextLoaderListener")
+//@WebServlet(name="ContextLoaderListener")
 public class ContextLoaderListener implements ServletContextListener{
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		try{
-			ServletContext ctx = sce.getServletContext();
+			/*ServletContext ctx = sce.getServletContext();
 			InputStream inputStream = Resources.getResourceAsStream(ctx.getInitParameter("mybatisConfig"));
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 			
@@ -36,7 +35,7 @@ public class ContextLoaderListener implements ServletContextListener{
 			productDao.setSqlSessionFactory(sqlSessionFactory);
 			
 			//servletContext보관소에 객체저장!
-			ctx.setAttribute("productDao", productDao);
+			ctx.setAttribute("productDao", productDao);*/
 			}catch(Exception e){
 				e.printStackTrace();
 			}

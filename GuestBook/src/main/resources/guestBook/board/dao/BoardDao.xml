@@ -4,37 +4,40 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="guestBook.board.dao.BoardDao">
-	<resultMap type="Product" id="productMap">
-		<id column="PNO" property="no" />
-		<result column="PNAME" property="name" />
-		<result column="QTY" property="quantity" />
-		<result column="MKNO" property="makerNo" />
+	<resultMap type="Board" id="boardMap">
+		<id column="BNO" property="no" />
+		<result column="BTITLE" property="title" />
+		<result column="BCONTENT" property="content" />
+		<result column="BPWD" property="pwd" />
+		<result column="BNAME" property="name" />
+		<result column="BDATE" property="date" />
+		<result column="UID" property="uId" />
 	</resultMap>
 	
-	<sql id="productSelect">
+	<sql id="boardSelect">
 	SELECT PNO, PNAME, QTY, MKNO
-	FROM PRODUCTS
+	FROM BOARD
 	</sql>
 
-	<select id="selectList" parameterType="map" resultMap="productMap">
-	<include refid="productSelect"/>
+	<select id="selectList" parameterType="map" resultMap="boardMap">
+	<include refid="boardSelect"/>
     <if test="pageSize > 0">
       limit #{startNo}, #{pageSize}
     </if>
   </select>
   
-  <select id="selectOne" parameterType="integer" resultMap="productMap">
-    <include refid="productSelect"/>
-    WHERE PNO=#{value}
+  <select id="selectOne" parameterType="integer" resultMap="boardMap">
+    <include refid="boardSelect"/>
+    WHERE BNO=#{value}
   </select>
   
-  <insert id="insert" parameterType="Product">
-    INSERT INTO PRODUCTS(PNAME,QTY,MKNO) 
+  <insert id="insert" parameterType="Board">
+    INSERT INTO BOARD(PNAME,QTY,MKNO) 
     VALUES (#{name}, #{quantity}, #{makerNo})
   </insert>
   
-  <update id="update" parameterType="Product">
-    UPDATE PRODUCTS SET 
+  <update id="update" parameterType="Board">
+    UPDATE BOARD SET 
       PNAME=#{name},
       QTY=#{quantity},
       MKNO=#{makerNo} 
@@ -42,7 +45,7 @@
   </update>
   
   <delete id="delete" parameterType="integer">
-    DELETE FROM PRODUCTS WHERE PNO=#{value}
+    DELETE FROM BOARD WHERE BNO=#{value}
   </delete>
 </mapper>
 

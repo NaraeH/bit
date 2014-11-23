@@ -2,9 +2,6 @@ package guestBook.board;
 
 import java.io.IOException;
 
-import java63.servlets.test04.dao.ProductDao;
-import java63.servlets.test04.domain.Product;
-
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -14,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 
-@WebServlet("/test04/product/update")
-public class ProductUpdateServlet extends GenericServlet{
+@WebServlet("/board/update")
+public class BoardUpdateServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
 	
 	SqlSessionFactory sqlSessionFactory = null;
@@ -26,7 +23,7 @@ public class ProductUpdateServlet extends GenericServlet{
 		//다음코드는 필터로 대채함
 		//request.setCharacterEncoding("UTF-8");
 
-		Product product =new Product();
+		/*Product product =new Product();
 
 		product.setNo(Integer.parseInt(request.getParameter("no")));
 		product.setName(request.getParameter("name"));
@@ -39,7 +36,7 @@ public class ProductUpdateServlet extends GenericServlet{
 		//단점: 위의 방식보다 코드가 늘었다.
 		//장점: 특정 클래스에 종속되지 않는다. 유지보수에서 더 중요!
 		ProductDao productDao = (ProductDao) this.getServletContext().getAttribute("productDao");
-		productDao.update(product);
+		productDao.update(product);*/
 		
 		HttpServletResponse orginResponse = (HttpServletResponse)response;
 		orginResponse.sendRedirect("list");

@@ -10,8 +10,9 @@
  */
 package guestBook.board;
 
+import guestBook.board.dao.BoardDao;
+
 import java.io.InputStream;
-import java63.servlets.test04.dao.ProductDao;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -32,20 +33,16 @@ public class ContextLoaderListener implements ServletContextListener{
 			InputStream inputStream = Resources.getResourceAsStream(ctx.getInitParameter("mybatisConfig"));
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 			
-			ProductDao productDao = new ProductDao();
-			productDao.setSqlSessionFactory(sqlSessionFactory);
+			BoardDao boardDao = new BoardDao();
+			boardDao.setSqlSessionFactory(sqlSessionFactory);
 			
-			//servletContext보관소에 객체저장!
-			ctx.setAttribute("productDao", productDao);
+			ctx.setAttribute("boardDao", boardDao);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
 		
 	}
 
-	/*웹 어플리케이션이 종료할 때 호출되
-	  => 서블릿이 사용한 자원을 해제할 때
-	 */
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
 		

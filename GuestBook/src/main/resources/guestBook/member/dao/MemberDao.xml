@@ -4,36 +4,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="guestBook.member.dao.MemberDao">
-	<resultMap type="Product" id="productMap">
+	<resultMap type="Member" id="memberMap">
 		<id column="PNO" property="no" />
 		<result column="PNAME" property="name" />
 		<result column="QTY" property="quantity" />
 		<result column="MKNO" property="makerNo" />
 	</resultMap>
 	
-	<sql id="productSelect">
+	<sql id="memberSelect">
 	SELECT PNO, PNAME, QTY, MKNO
 	FROM PRODUCTS
 	</sql>
 
-	<select id="selectList" parameterType="map" resultMap="productMap">
-	<include refid="productSelect"/>
+	<select id="selectList" parameterType="map" resultMap="memberMap">
+	<include refid="memberSelect"/>
     <if test="pageSize > 0">
       limit #{startNo}, #{pageSize}
     </if>
   </select>
   
-  <select id="selectOne" parameterType="integer" resultMap="productMap">
-    <include refid="productSelect"/>
+  <select id="selectOne" parameterType="integer" resultMap="memberMap">
+    <include refid="memberSelect"/>
     WHERE PNO=#{value}
   </select>
   
-  <insert id="insert" parameterType="Product">
+  <insert id="insert" parameterType="Member">
     INSERT INTO PRODUCTS(PNAME,QTY,MKNO) 
     VALUES (#{name}, #{quantity}, #{makerNo})
   </insert>
   
-  <update id="update" parameterType="Product">
+  <update id="update" parameterType="Member">
     UPDATE PRODUCTS SET 
       PNAME=#{name},
       QTY=#{quantity},

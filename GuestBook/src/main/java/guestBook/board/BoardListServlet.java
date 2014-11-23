@@ -3,9 +3,6 @@ package guestBook.board;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import java63.servlets.test04.dao.ProductDao;
-import java63.servlets.test04.domain.Product;
-
 import javax.servlet.GenericServlet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,8 +12,8 @@ import javax.servlet.annotation.WebServlet;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 
-@WebServlet("/test04/product/list")
-public class ProductListServlet extends GenericServlet{
+@WebServlet("/board/list")
+public class BoardListServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
 	static final int PAGE_DEFAULT_SIZE = 3;  //변하지 않는 값이고, 만약 3을 대입한다면 눈에 확연히 보이지 않으므로 final상수로 설정해준다.
 	
@@ -69,8 +66,8 @@ public class ProductListServlet extends GenericServlet{
 			//ProductDao를 ServletContext보관소에서 꺼내는 방식을 사용
 			//단점: 위의 방식보다 코드가 늘었다.
 			//장점: 특정 클래스에 종속되지 않는다. 유지보수에서 더 중요!
-		ProductDao productDao = (ProductDao) this.getServletContext().getAttribute("productDao");
-		for (Product product : productDao.selectList(pageNo, pageSize)) {
+		//ProductDao productDao = (ProductDao) this.getServletContext().getAttribute("productDao");
+/*		for (Product product : productDao.selectList(pageNo, pageSize)) {
 			out.println("<tr>");
 			out.println("<td>" + product.getNo()+ "</td>");
 			out.println("<td><a href=view?no=" + product.getNo() + ">" 
@@ -78,7 +75,7 @@ public class ProductListServlet extends GenericServlet{
 			out.println("<td>" + product.getQuantity()+ "</td>");
 			out.println("<td>" + product.getMakerNo()+ "</td>");
 			out.println("</tr>");
-		}
+		}*/
 		out.println("</table>");
 		
 		out.println("</div>");

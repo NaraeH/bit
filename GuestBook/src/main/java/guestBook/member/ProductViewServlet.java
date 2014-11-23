@@ -3,9 +3,6 @@ package guestBook.member;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import java63.servlets.test04.dao.ProductDao;
-import java63.servlets.test04.domain.Product;
-
 import javax.servlet.GenericServlet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +12,7 @@ import javax.servlet.annotation.WebServlet;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 
-@WebServlet("/test04/product/view")
+@WebServlet("/member/view")
 public class ProductViewServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
 	
@@ -27,7 +24,7 @@ public class ProductViewServlet extends GenericServlet{
 		
 		int no = Integer.parseInt(request.getParameter("no"));
 
-		ProductDao productDao = (ProductDao) this.getServletContext().getAttribute("productDao");
+		/*ProductDao productDao = (ProductDao) this.getServletContext().getAttribute("productDao");
 		Product product = productDao.selectOne(no);
 		
 		response.setContentType("text/html;charset=UTF-8");
@@ -117,7 +114,7 @@ public class ProductViewServlet extends GenericServlet{
 		out.println("</script>");
 		
 		out.println("</body>");
-		out.println("</html>");
+		out.println("</html>");*/
 
 	}
 }
