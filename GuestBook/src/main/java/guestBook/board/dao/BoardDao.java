@@ -28,7 +28,7 @@ public class BoardDao {
 		
 		try{
 		return sqlSession.selectList(
-				"guestBook.member.domain.Member.selectList",
+				"guestBook.board.dao.BoardDao.selectList",
 				paramMap);
 		}finally {
 			sqlSession.close();
@@ -40,7 +40,7 @@ public class BoardDao {
 
 		try{
 			return sqlSession.selectOne(
-					"guestBook.member.domain.Member.selectOne", no);
+					"guestBook.board.dao.BoardDao.selectOne", no);
 		}finally {
 			sqlSession.close();
 		}
@@ -52,7 +52,7 @@ public class BoardDao {
 
 		try{
 			sqlSession.insert(
-					"guestBook.member.domain.Member.insert", board);
+					"guestBook.board.dao.BoardDao.insert", board);
 			sqlSession.commit();
 		}finally {
 			sqlSession.close();
@@ -65,7 +65,7 @@ public class BoardDao {
 
 		try{
 			sqlSession.update(
-					"guestBook.member.domain.Member.update", board);
+					"guestBook.board.dao.BoardDao.update", board);
 			sqlSession.commit();
 		}finally {
 			sqlSession.close();
@@ -77,7 +77,7 @@ public class BoardDao {
 
 		try{
 			sqlSession.delete(
-					"guestBook.member.domain.Member.delete", no);
+					"guestBook.board.dao.BoardDao.delete", no);
 			sqlSession.commit();
 		}finally {
 			sqlSession.close();

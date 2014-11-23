@@ -1,6 +1,6 @@
 package guestBook.member.dao;
 
-import guestBook.board.domain.Board;
+import guestBook.member.domain.Member;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +20,7 @@ public class MemberDao {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}
 
-	public List<Board> selectList(int pageNo, int pageSize) {
+	public List<Member> selectList(int pageNo, int pageSize) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		HashMap<String, Object> paramMap = new HashMap<>();
@@ -29,31 +29,31 @@ public class MemberDao {
 		
 		try{
 		return sqlSession.selectList(
-				"guestBook.board.dao.BoardDao.selectList",
+				"guestBook.member.domain.Member.selectList",
 				paramMap);
 		}finally {
 			sqlSession.close();
 		}
 	}
 	
-	public Board selectOne(int no) {
+	public Member selectOne(int no) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		try{
 			return sqlSession.selectOne(
-					"guestBook.board.dao.BoardDao.selectOne", no);
+					"guestBook.member.domain.Member.selectOne", no);
 		}finally {
 			sqlSession.close();
 		}
 	}
 
 
-	public void insert(Board board){
+	public void insert(Member member){
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		try{
 			sqlSession.insert(
-					"guestBook.board.dao.BoardDao.insert", board);
+					"guestBook.member.domain.Member.insert", member);
 			sqlSession.commit();
 		}finally {
 			sqlSession.close();
@@ -61,12 +61,12 @@ public class MemberDao {
 	}
 
 	
-	public void update(Board board) {
+	public void update(Member member) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		try{
 			sqlSession.update(
-					"guestBook.board.dao.BoardDao.update", board);
+					"guestBook.member.domain.Member.update", member);
 			sqlSession.commit();
 		}finally {
 			sqlSession.close();
@@ -78,7 +78,7 @@ public class MemberDao {
 
 		try{
 			sqlSession.delete(
-					"guestBook.board.dao.BoardDao.delete", no);
+					"guestBook.member.domain.Member.delete", no);
 			sqlSession.commit();
 		}finally {
 			sqlSession.close();
