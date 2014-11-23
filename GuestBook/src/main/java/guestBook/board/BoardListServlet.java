@@ -17,7 +17,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 @WebServlet("/board/list")
 public class BoardListServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
-	static final int PAGE_DEFAULT_SIZE = 3;  //변하지 않는 값이고, 만약 3을 대입한다면 눈에 확연히 보이지 않으므로 final상수로 설정해준다.
+	static final int PAGE_DEFAULT_SIZE = 5;  //변하지 않는 값이고, 만약 3을 대입한다면 눈에 확연히 보이지 않으므로 final상수로 설정해준다.
 	
 	SqlSessionFactory sqlSessionFactory = null;
 	
@@ -51,17 +51,26 @@ public class BoardListServlet extends GenericServlet{
 		
 		out.println("<div class='container'>");
 		out.println("<h1>방명록</h1>");
-		out.println("<p><a href='product-form.html'  class='btn btn-primary'>새글작성</a></p>");
 		
 		out.println("<div id='accordion'>");
 
 		BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
 		for (Board board : boardDao.selectList(pageNo, pageSize)) {
-			out.println("<h3>" + board.getTitle() + "</h3>");
+			out.println("<h3><div class='title'>No." + board.getNo() + " : " + board.getTitle() + "</div>" 
+					+ "<div>" + board.getDate() + "</div></h3>");
+
 			out.println("<div>");
-			out.println("  <p>" + board.getName() + "    " + board.getDate() + "</p>");
+			out.println("	<div class='content'>");
 			out.println("  <p>" + board.getContent() + "</p>");
+			out.println("	</div>");
+			out.println("	<div>");
+		
+	    //out.println("<p><a href='product-form.html' class='btn btn-primary'>수정</a></p>");
+		
+			out.println(" 	<button id='btnModify' type='button' class='btn btn-info'>수정</button>");
+			out.println("	</div>");
 			out.println("</div>");
+			
 		}
 		
 		out.println("</div>");
@@ -74,6 +83,13 @@ public class BoardListServlet extends GenericServlet{
 		out.println("<script src='//code.jquery.com/ui/1.11.2/jquery-ui.js'></script>");
 		out.println("<script>");
 		out.println("$(function() { $( '#accordion' ).accordion();});");
+		
+		
+		out.println("		$('#btnModify').click(function(){");
+    out.println("    if (window.confirm('수정하시겠습니까?')) {");
+		out.println("			location.href = 'view?no=" + "';"); // no????
+    out.println("    }");
+		out.println("		});");		
 		out.println("</script>");
 		
 		out.println("</html>");
