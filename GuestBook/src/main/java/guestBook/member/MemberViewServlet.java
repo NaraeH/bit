@@ -18,7 +18,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 public class MemberViewServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
 	//주석
-	SqlSessionFactory sqlSessionFactory = null;
+	SqlSessionFactory sqlSessionFactory = null; 
 
 	@Override
 	public void service(ServletRequest request, ServletResponse response)
@@ -27,7 +27,10 @@ public class MemberViewServlet extends GenericServlet{
 		int no = Integer.parseInt(request.getParameter("no"));
 
 		MemberDao memberDao = (MemberDao) this.getServletContext().getAttribute("memberDao");
+		
+		try{
 		Member member = memberDao.selectOne(no);
+		
 		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -100,6 +103,11 @@ public class MemberViewServlet extends GenericServlet{
 		
 		out.println("</body>");
 		out.println("</html>");
+		
+		}catch(Exception e){
+			System.out.println("zz");
+			e.printStackTrace();
+		}
 
 	}
 }
