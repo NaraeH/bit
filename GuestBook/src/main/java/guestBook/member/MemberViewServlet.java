@@ -17,7 +17,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 @WebServlet("/member/view")
 public class MemberViewServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
-	
+	//주석
 	SqlSessionFactory sqlSessionFactory = null;
 
 	@Override
