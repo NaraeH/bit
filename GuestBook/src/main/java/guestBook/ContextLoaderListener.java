@@ -11,6 +11,7 @@
 package guestBook;
 
 import guestBook.board.dao.BoardDao;
+import guestBook.member.dao.MemberDao;
 
 import java.io.InputStream;
 
@@ -36,7 +37,11 @@ public class ContextLoaderListener implements ServletContextListener{
 			BoardDao boardDao = new BoardDao();
 			boardDao.setSqlSessionFactory(sqlSessionFactory);
 			
+			MemberDao memberDao = new MemberDao();
+			memberDao.setSqlSessionFactory(sqlSessionFactory);
+			
 			ctx.setAttribute("boardDao", boardDao);
+			ctx.setAttribute("memberDao", memberDao);
 			}catch(Exception e){
 				e.printStackTrace();
 			}

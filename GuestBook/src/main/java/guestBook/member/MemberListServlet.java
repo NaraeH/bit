@@ -1,10 +1,12 @@
 package guestBook.member;
 
+import guestBook.member.dao.MemberDao;
+import guestBook.member.domain.Member;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.GenericServlet;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -40,10 +42,10 @@ public class MemberListServlet extends GenericServlet{
 
 		out.println("<html>");
 		out.println("<head>");
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/common/header");
-		rd.include(request, response); 
-		
+		out.println("<link rel='stylesheet' href='../css/bootstrap.min.css'>");
+		out.println("<link rel='stylesheet' href='../css/bootstrap-theme.min.css'>");
+		out.println("<link rel='stylesheet' href='../css/common.css'>");
+		out.println("<link rel='stylesheet' href='//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css'>");
 		out.println("</head>");
 		out.println("<body>");
 		
@@ -52,32 +54,26 @@ public class MemberListServlet extends GenericServlet{
 		out.println("<p><a href='product-form.html'  class='btn btn-primary'>새제품</a></p>");
 		out.println("<table class='table table-hover'>");
 		out.println("<tr>");
-		out.println("<th>#</th>");
+		/*out.println("<th>#</th>");
 		out.println("<th>제품</th>");
 		out.println("<th>수량</th>");
-		out.println("<th>제조사</th>");
+		out.println("<th>제조사</th>");*/
 		out.println("</tr>");
-		/*ProductDao productDao = (ProductDao) this.getServletContext().getAttribute("productDao");
-		for (Product product : productDao.selectList(pageNo, pageSize)) {
+		MemberDao memberDao = (MemberDao) this.getServletContext().getAttribute("memberDao");
+		for (Member member : memberDao.selectList(pageNo, pageSize)) {
 			out.println("<tr>");
-			out.println("<td>" + product.getNo()+ "</td>");
-			out.println("<td><a href=view?no=" + product.getNo() + ">" 
-					+ product.getName()+ "</a></td>");
-			out.println("<td>" + product.getQuantity()+ "</td>");
-			out.println("<td>" + product.getMakerNo()+ "</td>");
+			out.println("<td><a href=view?no=" + member.getId() + ">" 
+					+ member.getName()+ "</a></td>");
 			out.println("</tr>");
-		}*/
+		}
 		out.println("</table>");
 		
 		out.println("</div>");
 		
-		//다른 서블릿을 실행 => 실행 후 제어권이 되돌아 온다.
-		rd = request.getRequestDispatcher("/common/footer");
-		rd.include(request, response); 
-				
+		out.println("<address class='copyright'>Copyright&copy; Bit</address>");		
 		out.println("</body>");
 		
-		out.println("<script src='../../js/jquery-1.11.1.js'></script>");
+		out.println("<script src='../js/jquery-1.11.1.js'></script>");
 		out.println("</html>");
 	}
 }

@@ -29,8 +29,7 @@ public class MemberDao {
 		
 		try{
 		return sqlSession.selectList(
-				"guestBook.member.domain.Member.selectList",
-				paramMap);
+				"guestBook.member.dao.MemberDao.selectList", paramMap);
 		}finally {
 			sqlSession.close();
 		}
@@ -41,7 +40,7 @@ public class MemberDao {
 
 		try{
 			return sqlSession.selectOne(
-					"guestBook.member.domain.Member.selectOne", no);
+					"guestBook.member.dao.MemberDao.selectOne", no);
 		}finally {
 			sqlSession.close();
 		}

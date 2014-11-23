@@ -25,16 +25,11 @@ public class MemberViewServlet extends GenericServlet{
 			throws ServletException, IOException {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-
 		MemberDao memberDao = (MemberDao) this.getServletContext().getAttribute("memberDao");
-		
-		try{
 		Member member = memberDao.selectOne(no);
-		
 		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<link rel='stylesheet' href='../css/bootstrap.min.css'>");
@@ -70,7 +65,7 @@ public class MemberViewServlet extends GenericServlet{
 		out.println("</div>");
 		out.println("</form>");
 
-		out.println("<script src='../../js/jquery-1.11.1.js'></script>");
+		out.println("<script src='../js/jquery-1.11.1.js'></script>");
 		out.println("<script>");
 		out.println("$('#btnCancel').click(function(){");
 		out.println("	history.back();");
@@ -103,11 +98,5 @@ public class MemberViewServlet extends GenericServlet{
 		
 		out.println("</body>");
 		out.println("</html>");
-		
-		}catch(Exception e){
-			System.out.println("zz");
-			e.printStackTrace();
-		}
-
 	}
 }
