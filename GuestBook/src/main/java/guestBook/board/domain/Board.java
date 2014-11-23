@@ -1,8 +1,6 @@
 package guestBook.board.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
-
 
 public class Board implements Serializable, Cloneable{
 	private static final long serialVersionUID = 1L;
@@ -12,13 +10,13 @@ public class Board implements Serializable, Cloneable{
 	protected String content;
 	protected int    pwd;
 	protected String name;
-	protected Date date;
+	protected String date;
 	protected int    uId;
 	
 	public Board(){}
 	
 	public Board(int no, String title, String content, int pwd, String name,
-			Date date, int uId) {
+			String date, int uId) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -133,19 +131,19 @@ public class Board implements Serializable, Cloneable{
 		this.name = name;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
-	public int getuId() {
+	public int getUId() {
 		return uId;
 	}
 
-	public void setuId(int uId) {
+	public void setUId(int uId) {
 		this.uId = uId;
 	}
 

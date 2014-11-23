@@ -5,15 +5,14 @@
   
 <mapper namespace="guestBook.member.dao.MemberDao">
 	<resultMap type="Member" id="memberMap">
-		<id column="PNO" property="no" />
-		<result column="PNAME" property="name" />
-		<result column="QTY" property="quantity" />
-		<result column="MKNO" property="makerNo" />
+		<id column="UID" property="id" />
+		<result column="UNAME" property="name" />
+		<result column="UPHOTO" property="photo" />
 	</resultMap>
 	
 	<sql id="memberSelect">
-	SELECT PNO, PNAME, QTY, MKNO
-	FROM PRODUCTS
+	SELECT UID, UNAME, UPHOTO
+	FROM MEMBERS
 	</sql>
 
 	<select id="selectList" parameterType="map" resultMap="memberMap">
@@ -25,25 +24,25 @@
   
   <select id="selectOne" parameterType="integer" resultMap="memberMap">
     <include refid="memberSelect"/>
-    WHERE PNO=#{value}
+    WHERE UID=#{value}
   </select>
   
-  <insert id="insert" parameterType="Member">
-    INSERT INTO PRODUCTS(PNAME,QTY,MKNO) 
+<!--   <insert id="insert" parameterType="Member">
+    INSERT INTO MEMBERS(PNAME,QTY,MKNO) 
     VALUES (#{name}, #{quantity}, #{makerNo})
-  </insert>
+  </insert> -->
   
-  <update id="update" parameterType="Member">
+<!--   <update id="update" parameterType="Member">
     UPDATE PRODUCTS SET 
       PNAME=#{name},
       QTY=#{quantity},
       MKNO=#{makerNo} 
     WHERE PNO=#{no}
-  </update>
+  </update> -->
   
-  <delete id="delete" parameterType="integer">
+<!--   <delete id="delete" parameterType="integer">
     DELETE FROM PRODUCTS WHERE PNO=#{value}
-  </delete>
+  </delete> -->
 </mapper>
 
 

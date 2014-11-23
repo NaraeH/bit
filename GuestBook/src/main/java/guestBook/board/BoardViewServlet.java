@@ -85,7 +85,7 @@ public class BoardViewServlet extends GenericServlet{
 		out.println("  <div class='form-group'>");
 		out.println("    <label for='mkno' class='col-sm-2 control-label'>제조사</label>");
 		out.println("    <div class='col-sm-10'>");
-		out.println("    <input type='text' class='form-control' id='mkno' name='mkno' value='"	+ board.getuId() + "'>");
+		out.println("    <input type='text' class='form-control' id='mkno' name='mkno' value='"	+ board.getUId() + "'>");
 		out.println("    </div>");
 		out.println(" </div>");
 		

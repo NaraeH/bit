@@ -32,16 +32,17 @@
   </select>
   
   <insert id="insert" parameterType="Board">
-    INSERT INTO BOARD(PNAME,QTY,MKNO) 
-    VALUES (#{name}, #{quantity}, #{makerNo})
+    INSERT INTO BOARD(BTITLE,BCONTENT,BNAME, BPWD, BDATE, UID) 
+    VALUES (#{title}, #{content}, #{name}, #{pwd}, #{date}, #{uId})
   </insert>
   
   <update id="update" parameterType="Board">
     UPDATE BOARD SET 
-      PNAME=#{name},
-      QTY=#{quantity},
-      MKNO=#{makerNo} 
-    WHERE PNO=#{no}
+      BTITLE=#{title},
+      BCONTENT=#{content},
+      BNAME=#{name},
+      BDATE=#{date}
+    WHERE BNO=#{no}
   </update>
   
   <delete id="delete" parameterType="integer">

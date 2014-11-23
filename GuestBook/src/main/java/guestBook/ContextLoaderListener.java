@@ -8,7 +8,7 @@
 
   
  */
-package guestBook.board;
+package guestBook;
 
 import guestBook.board.dao.BoardDao;
 

@@ -13,12 +13,12 @@
 	</context-param>
 	
 	<listener>
-		<listener-class>guestBook.board.ContextLoaderListener</listener-class>
+		<listener-class>guestBook.ContextLoaderListener</listener-class>
 	</listener>
 	
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
-		<filter-class>guestBook.board.CharacterEncodingFilter</filter-class>
+		<filter-class>guestBook.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>charset</param-name>
 			<param-value>UTF-8</param-value>

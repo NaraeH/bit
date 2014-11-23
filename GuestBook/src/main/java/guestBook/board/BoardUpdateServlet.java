@@ -1,6 +1,12 @@
 package guestBook.board;
 
+import guestBook.board.dao.BoardDao;
+import guestBook.board.domain.Board;
+
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
@@ -20,24 +26,25 @@ public class BoardUpdateServlet extends GenericServlet{
 	@Override
 	public void service(ServletRequest request, ServletResponse response)
 			throws ServletException, IOException {
-		//다음코드는 필터로 대채함
-		//request.setCharacterEncoding("UTF-8");
-
-		/*Product product =new Product();
-
-		product.setNo(Integer.parseInt(request.getParameter("no")));
-		product.setName(request.getParameter("name"));
-		product.setQuantity(Integer.parseInt(request.getParameter("qty")));
-		product.setMakerNo(Integer.parseInt(request.getParameter("mkno")));
-		//AppInitServlet.productDao.update(product);
-		//ContextLoaderListener.productDao.update(product);
 		
-		//ProductDao를 ServletContext보관소에서 꺼내는 방식을 사용
-		//단점: 위의 방식보다 코드가 늘었다.
-		//장점: 특정 클래스에 종속되지 않는다. 유지보수에서 더 중요!
-		ProductDao productDao = (ProductDao) this.getServletContext().getAttribute("productDao");
-		productDao.update(product);*/
+		Board board = new Board();
+
+		//날짜 시간 받아오기
+		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date nowDate = new Date();
+		sdFormat.format(nowDate);
 		
+		board.setNo(Integer.parseInt(request.getParameter("no")));
+
+		board.setContent(request.getParameter("content"));
+		board.setDate(sdFormat.format(nowDate));
+		board.setName(request.getParameter("name"));
+		board.setPwd(Integer.parseInt(request.getParameter("pwd")));
+		board.setTitle(request.getParameter("title"));
+
+		BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
+		boardDao.update(board);
+
 		HttpServletResponse orginResponse = (HttpServletResponse)response;
 		orginResponse.sendRedirect("list");
 

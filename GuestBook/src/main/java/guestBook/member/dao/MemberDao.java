@@ -48,7 +48,7 @@ public class MemberDao {
 	}
 
 
-	public void insert(Member member){
+	/*public void insert(Member member){
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		try{
@@ -58,10 +58,10 @@ public class MemberDao {
 		}finally {
 			sqlSession.close();
 		}
-	}
+	}*/
 
 	
-	public void update(Member member) {
+	/*public void update(Member member) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		try{
@@ -71,9 +71,9 @@ public class MemberDao {
 		}finally {
 			sqlSession.close();
 		}
-	}
+	}*/
 
-	public void delete(int no) {
+/*	public void delete(int no) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		try{
@@ -83,6 +83,6 @@ public class MemberDao {
 		}finally {
 			sqlSession.close();
 		}
-	}
+	}*/
 
 }

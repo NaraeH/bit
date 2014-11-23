@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 @WebServlet("/member/list")
-public class ProductListServlet extends GenericServlet{
+public class MemberListServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
 	static final int PAGE_DEFAULT_SIZE = 3;  //변하지 않는 값이고, 만약 3을 대입한다면 눈에 확연히 보이지 않으므로 final상수로 설정해준다.
 	

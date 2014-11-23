@@ -1,10 +1,12 @@
 package guestBook.member;
 
+import guestBook.member.dao.MemberDao;
+import guestBook.member.domain.Member;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.GenericServlet;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -13,7 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 @WebServlet("/member/view")
-public class ProductViewServlet extends GenericServlet{
+public class MemberViewServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
 	
 	SqlSessionFactory sqlSessionFactory = null;
@@ -24,53 +26,36 @@ public class ProductViewServlet extends GenericServlet{
 		
 		int no = Integer.parseInt(request.getParameter("no"));
 
-		/*ProductDao productDao = (ProductDao) this.getServletContext().getAttribute("productDao");
-		Product product = productDao.selectOne(no);
+		MemberDao memberDao = (MemberDao) this.getServletContext().getAttribute("memberDao");
+		Member member = memberDao.selectOne(no);
 		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		out.println("<html>");
 		out.println("<head>");
-		
-		//다른 서블릿을 실행 => 실행 후 제어권이 되돌아 온다.
-		RequestDispatcher rd = request.getRequestDispatcher("/common/header");
-		rd.include(request, response); 
-
+		out.println("<link rel='stylesheet' href='../css/bootstrap.min.css'>");
+		out.println("<link rel='stylesheet' href='../css/bootstrap-theme.min.css'>");
+		out.println("<link rel='stylesheet' href='../css/common.css'>");
 		out.println("</head>");
 		out.println("<body>");
 		
 		out.println("<div class='container'>");
-		out.println("<h1>제품정보</h1>");
+		out.println("<h1>멤버정보</h1>");
 		
-		//placeholder: 입력 전에 미리 들어가 있는 값, 누르면 없어지고
 		out.println("<form class='form-horizontal' role='form' " + "action='update' method='post'>");
 		out.println(" <div class='form-group'>");
 		out.println("   <label for='no' class='col-sm-2 control-label'>#</label>");
 		out.println("   <div class='col-sm-10'>");
 		out.println("    <input type='text' class='form-control' readonly id='no' name='no' value='"
-				+ product.getNo() + "'>");
+				+ member.getName() + "'>");
 		out.println("    </div>");
 		out.println("  </div>");
 		  
 		out.println("  <div class='form-group'>");
 		out.println("    <label for='name' class='col-sm-2 control-label'>제품</label>");
 		out.println("    <div class='col-sm-10'>");
-		out.println("      <input type='text' class='form-control' id='name' name='name' value='" + product.getName() + "'>");
-		out.println("    </div>");
-		out.println(" </div>");
-		
-		out.println("  <div class='form-group'>");
-		out.println("    <label for='qty' class='col-sm-2 control-label'>수량</label>");
-		out.println("    <div class='col-sm-10'>");
-		out.println("      <input type='text' class='form-control' id='qty' name='qty' value='" + product.getQuantity() + "'>");
-		out.println("    </div>");
-		out.println("  </div>");
-		
-		out.println("  <div class='form-group'>");
-		out.println("    <label for='mkno' class='col-sm-2 control-label'>제조사</label>");
-		out.println("    <div class='col-sm-10'>");
-		out.println("    <input type='text' class='form-control' id='mkno' name='mkno' value='"	+ product.getMakerNo() + "'>");
+		out.println("      <input type='text' class='form-control' id='name' name='name' value='" + member.getPhoto() + "'>");
 		out.println("    </div>");
 		out.println(" </div>");
 		
@@ -89,8 +74,8 @@ public class ProductViewServlet extends GenericServlet{
 		out.println("});");
 
 		out.println("$('#btnDelete').click(function(){");
-		out.println("	if(window.confirm('삭제하시겠습니까?z')){");
-		out.println("		location.href = 'delete?no=" + product.getNo()+ "';");
+		out.println("	if(window.confirm('삭제하시겠습니까?')){");
+		out.println("		location.href = 'delete?no=" + member.getId()+ "';");
 		out.println("	}");
 		out.println("});");
 		
@@ -114,7 +99,7 @@ public class ProductViewServlet extends GenericServlet{
 		out.println("</script>");
 		
 		out.println("</body>");
-		out.println("</html>");*/
+		out.println("</html>");
 
 	}
 }

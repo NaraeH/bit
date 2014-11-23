@@ -1,6 +1,13 @@
 package guestBook.board;
 
+import guestBook.board.dao.BoardDao;
+import guestBook.board.domain.Board;
+
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.RequestDispatcher;
@@ -8,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/board/add")
 public class BoardAddServlet extends GenericServlet{
@@ -17,32 +23,38 @@ public class BoardAddServlet extends GenericServlet{
 	@Override
 	public void service(ServletRequest request, ServletResponse response)
 			throws ServletException, IOException {
-		//다음 코드는 필터로 대체함
-		//request.setCharacterEncoding("UTF-8");
 
-		//Product product =new Product();
-
-		//product.setName(request.getParameter("name"));
-		//product.setQuantity(Integer.parseInt(request.getParameter("qty")));
-		//product.setMakerNo(Integer.parseInt(request.getParameter("mkno")));
-		//AppInitServlet.productDao.insert(product);
-		//ContextLoaderListener.productDao.insert(product);
+		Board board =new Board();
 		
-		//ProductDao를 ServletContext보관소에서 꺼내는 방식을 사용
-		//단점: 위의 방식보다 코드가 늘었다.
-		//장점: 특정 클래스에 종속되지 않는다. 유지보수에서 더 중요!
-		//ProductDao productDao = (ProductDao) this.getServletContext().getAttribute("productDao");
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+
+		//날짜 시간 받아오기
+		//DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm");
+		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date nowDate = new Date();
+		sdFormat.format(nowDate);
+		
+		board.setContent(request.getParameter("content"));
+		board.setDate(sdFormat.format(nowDate));
+		board.setName(request.getParameter("name"));
+		board.setPwd(Integer.parseInt(request.getParameter("pwd")));
+		board.setTitle(request.getParameter("title"));
+		board.setUId(Integer.parseInt(request.getParameter("uid")));
+
+		BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
+		
 		try{
-			//productDao.insert(product);
+			boardDao.insert(board);
 		}catch(Exception e){
-			RequestDispatcher rd = request.getRequestDispatcher("/common/error");
+/*			RequestDispatcher rd = request.getRequestDispatcher("../common/error");
 			request.setAttribute("error", rd);
-			//forward는 다른 서블릿에게 제어권 위임하기
-			//=> 제어권이 지나가면 다시 돌아오지 않는다.
-			rd.forward(request, response); 
+
+			rd.forward(request, response); */
+			e.printStackTrace();
 		}
 		
-		HttpServletResponse orginResponse = (HttpServletResponse)response;
-		orginResponse.sendRedirect("list");
+/*		HttpServletResponse orginResponse = (HttpServletResponse)response;
+		orginResponse.sendRedirect("list");*/
 	}
 }
