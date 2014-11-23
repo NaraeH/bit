@@ -30,7 +30,7 @@ public class BoardListServlet extends GenericServlet{
 		
 		if(request.getParameter("pageNo") != null){
 			pageNo = Integer.parseInt(request.getParameter("pageNo"));
-			pageSize = PAGE_DEFAULT_SIZE;
+			pageSize =  PAGE_DEFAULT_SIZE;
 		}
 		
 		if(request.getParameter("pageSize") != null){
