@@ -15,18 +15,20 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/board/add")
 public class BoardAddServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
-	BoardViewServlet bvs;// 뷰에서 선택한 uid
-
-
+	int uId;
+	
 	@Override
 	public void service(ServletRequest request, ServletResponse response)
 			throws ServletException, IOException {
 
 		//http://localhost:8080/guestBook_js/board/add?content=aaa&name=bbb&pwd=999&title=ooo&uid=2
+		uId = Integer.parseInt(request.getParameter("uId"));
+		
 		Board board = new Board();
 
 		response.setContentType("text/html;charset=UTF-8");
@@ -45,7 +47,8 @@ public class BoardAddServlet extends GenericServlet{
 		board.setName(request.getParameter("name"));
 		board.setPwd(Integer.parseInt(request.getParameter("pwd")));
 		board.setTitle(request.getParameter("title"));
-		board.setUId(bvs.no);
+		board.setUId(uId);//-------------------------------------------------
+		//board.setUid(bvs.no);
 		//board.setUid(Integer.parseInt(request.getParameter("uid")));
 		//board.setUid();
 		
@@ -59,6 +62,8 @@ public class BoardAddServlet extends GenericServlet{
 			rd.forward(request, response); 
 			e.printStackTrace();
 		}
+		HttpServletResponse orginResponse = (HttpServletResponse)response;
+	    orginResponse.sendRedirect("list?uId="+uId);
 		
 	}
 }

@@ -14,13 +14,21 @@
 		<result column="UID" property="uId" />
 	</resultMap>
 	
+	<!-- SELECT BNO,BTITLE,BCONTENT,BNAME,BPWD,BDATE,UID,UNAME,UPHOTO
+	FROM MEMBERS JOIN BOARD USING(UID)
+	WHERE UID=4; -->
+	
+	
 	<sql id="boardSelect">
-	SELECT BTITLE, BCONTENT, BNAME, BDATE, UID
-	FROM BOARD
+	SELECT BNO,BTITLE,BCONTENT,BNAME,BPWD,BDATE,UID,UNAME,UPHOTO
+	FROM MEMBERS JOIN BOARD USING(UID)
+	<!-- SELECT BTITLE, BCONTENT, BNAME, BDATE, UID
+	FROM BOARD -->
 	</sql>
 
 	<select id="selectList" parameterType="map" resultMap="boardMap">
 	<include refid="boardSelect"/>
+	WHERE UID=#{uId};
     <if test="pageSize > 0">
       limit #{startNo}, #{pageSize}
     </if>
@@ -28,7 +36,8 @@
   
   <select id="selectOne" parameterType="integer" resultMap="boardMap">
     <include refid="boardSelect"/>
-    WHERE BNO=#{value}
+    WHERE BNO=#{value};
+    <!-- WHERE BNO=#{value} -->
   </select>
   
   <insert id="insert" parameterType="Board">

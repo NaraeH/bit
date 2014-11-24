@@ -19,12 +19,13 @@ public class BoardDao {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}
 
-	public List<Board> selectList(int pageNo, int pageSize) {
+	public List<Board> selectList(int pageNo, int pageSize, int uId) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 
 		HashMap<String, Object> paramMap = new HashMap<>();
 		paramMap.put("startNo", (pageNo - 1) * pageSize);
 		paramMap.put("pageSize", pageSize);
+		paramMap.put("uId", uId);
 		
 		try{
 		return sqlSession.selectList(

@@ -25,30 +25,15 @@ public class BoardDeleteServlet extends GenericServlet{
 			throws ServletException, IOException {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
+		int uId = Integer.parseInt(request.getParameter("uId"));
+		
 		BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
 		boardDao.delete(no);
 		
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<meta http-equiv='Refresh' content='5;url=list'>");
-		out.println("<link rel='stylesheet' href='../../css/bootstrap.min.css'>");
-		out.println("<link rel='stylesheet' href='../../css/bootstrap-theme.min.css'>");
-		out.println("<link rel='stylesheet' href='../../css/common.css'>");
-		out.println("</head>");
-		
-		out.println("<body>");
-		out.println("<div class='container'>");
-		out.println("<h1>삭제결과</h1>");
-		
-		out.println("<p>삭제하였습니다.</p>");
-
-		out.println("</body>");
-		out.println("</html>");
-		
 		HttpServletResponse orginResponse = (HttpServletResponse)response;
-		orginResponse.sendRedirect("list");
+		orginResponse.sendRedirect("list?uId="+uId);
 	}
 }
