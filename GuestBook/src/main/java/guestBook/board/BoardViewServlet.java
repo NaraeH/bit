@@ -17,119 +17,175 @@ import org.apache.ibatis.session.SqlSessionFactory;
 @WebServlet("/board/view")
 public class BoardViewServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
-	
-	SqlSessionFactory sqlSessionFactory = null;
-	public int no;
+	static final int PAGE_DEFAULT_SIZE = 5;  //변하지 않는 값이고, 만약 3을 대입한다면 눈에 확연히 보이지 않으므로 final상수로 설정해준다.
 
+	SqlSessionFactory sqlSessionFactory = null;
+	
+	
 	@Override
 	public void service(ServletRequest request, ServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("service시작");
+		int pageNo = 0;
+		int pageSize = 0;
 		
-		no = Integer.parseInt(request.getParameter("no"));
+		int uId = Integer.parseInt(request.getParameter("uId"));
+		int no = Integer.parseInt(request.getParameter("no"));
 
-		BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
-		Board board = boardDao.selectOne(no);
-		
+		if(request.getParameter("pageNo") != null){
+			pageNo = Integer.parseInt(request.getParameter("pageNo"));
+			pageSize =  PAGE_DEFAULT_SIZE;
+		}
+
+		if(request.getParameter("pageSize") != null){
+			pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		}
+
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		
+
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<link rel='stylesheet' href='../css/bootstrap.min.css'>");
 		out.println("<link rel='stylesheet' href='../css/bootstrap-theme.min.css'>");
 		out.println("<link rel='stylesheet' href='../css/common.css'>");
+		out.println("<link rel='stylesheet' href='//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css'>");
 		out.println("</head>");
 		out.println("<body>");
-		
+
 		out.println("<div class='container'>");
-		out.println("<h1>제품정보</h1>");
+		out.println("<h1>방명록</h1>");
+
+		//-----------------------------------------------
 		
-		//placeholder: 입력 전에 미리 들어가 있는 값, 누르면 없어지고
-		out.println("<form class='form-horizontal' role='form' " + "action='update' method='post'>");
-		out.println(" <div class='form-group'>");
-		out.println("   <label for='no' class='col-sm-2 control-label'>#</label>");
-		out.println("   <div class='col-sm-10'>");
-		out.println("    <input type='text' class='form-control' readonly id='no' name='no' value='"
-				+ board.getNo() + "'>");
-		out.println("    </div>");
-		out.println("  </div>");
+		//Board board2 = boardDao.selectOne(no);
+		//System.out.println(no);
+		BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
+		Board board2 = boardDao.selectOne(no);
+
+		out.println("<div>");
+		out.println("<form class='form-horizontal' role='form' action='update' method='get' >");
+
+		out.println("	<table border='1' cellpadding='10' class='table table-bordered'>");
+		out.println("		<tr>");
+		out.println("			<td rowspan='2'><img src='img00.jpg'></td>");
+		out.println("			<td colspan='2'><input type='text' size='58' maxlength='50'");
+		out.println("				class='form-control' id='title' value='"+ board2.getTitle() +"' name='title' placeholder='제목'>");
+		out.println("		</tr>");
+		out.println("		<tr>");
+		out.println("			<td><textarea rows='6' cols='50' name='content'");
+		out.println("					maxlength='255' id='content'>"+board2.getContent()+"</textarea></td>");
+		out.println("			<td>");
+		out.println("				<div>");
+		out.println("					<div>");
+		out.println("						<input type='text' size='10' maxlength='10' class='form-control'");
+		out.println("							id='name' value='"+ board2.getName() +"' name='name' placeholder='글쓴이'>");
+		out.println("					</div>");
+		out.println("					<br>");
+		out.println("					<div>");
+		out.println("						<input type='password' size='10' maxlength='10'");
+		out.println("							class='form-control' id='pwd' name='pwd' placeholder='비밀번호'>");
 		
-		out.println("  <div class='form-group'>");
-		out.println("    <label for='name' class='col-sm-2 control-label'>제품</label>");
-		out.println("    <div class='col-sm-10'>");
-		out.println("      <input type='text' class='form-control' id='name' name='name' value='" + board.getTitle() + "'>");
-		out.println("    </div>");
-		out.println(" </div>");
-		  
-		out.println("  <div class='form-group'>");
-		out.println("    <label for='name' class='col-sm-2 control-label'>제품</label>");
-		out.println("    <div class='col-sm-10'>");
-		out.println("      <input type='text' class='form-control' id='name' name='name' value='" + board.getContent() + "'>");
-		out.println("    </div>");
-		out.println(" </div>");
-		
-		out.println("  <div class='form-group'>");
-		out.println("    <label for='qty' class='col-sm-2 control-label'>수량</label>");
-		out.println("    <div class='col-sm-10'>");
-		out.println("      <input type='text' class='form-control' id='qty' name='qty' value='" + board.getName() + "'>");
-		out.println("    </div>");
-		out.println("  </div>");
-		
-		out.println("  <div class='form-group'>");
-		out.println("    <label for='mkno' class='col-sm-2 control-label'>제조사</label>");
-		out.println("    <div class='col-sm-10'>");
-		out.println("    <input type='text' class='form-control' id='mkno' name='mkno' value='"	+ board.getDate() + "'>");
-		out.println("    </div>");
-		out.println(" </div>");
-		
-		out.println("  <div class='form-group'>");
-		out.println("    <label for='mkno' class='col-sm-2 control-label'>제조사</label>");
-		out.println("    <div class='col-sm-10'>");
-		out.println("    <input type='text' class='form-control' id='mkno' name='mkno' value='"	+ board.getUId() + "'>");
-		out.println("    </div>");
-		out.println(" </div>");
-		
-		out.println("<div class='form-group'>");
-		out.println("  <button id='btnUpdate' type='submit' class='btn btn-primary'>변경</button>");
-		out.println("  <button id='btnDelete' type='button' class='btn btn-primary'>삭제</button>");
-		out.println("  <button id='btnCancel' type='button' class='btn btn-primary'>취소</button>");
-		out.println("</div>");
-		out.println("</div>");
+		out.println("					</div>");
+		out.println("					<br>");
+		out.println("					<div>");
+		out.println("						<button id='btnDelete' type='button' class='btn btn-primary'>삭제</button>");
+		out.println("						<button id='btnAdd' type='submit' class='btn btn-primary'>수정</button>");
+		out.println("						<button id='btnCancel' type='button' class='btn btn-primary'>취소</button>");
+		out.println("		<input type='text' hidden='' id='uId' name='uId' value='"+uId+"'>");
+		out.println("		<input type='text' hidden='' id='no' name='no' value='"+no+"'>");
+		out.println("					</div>");
+		out.println("				</div>");
+		out.println("			</td>");
+		out.println("		</tr>");
+		out.println("	</table>");
+
 		out.println("</form>");
 
+		out.println("</div>");
+		//-----------------------------------------
+
+		out.println("<div id='accordion'>");
+		
+		
+		for (Board board : boardDao.selectList(pageNo, pageSize,uId)) {
+
+			//board.setUId(Integer.parseInt(request.getParameter("no")));
+			//out.println("<input type='text' hidden='' id='no' name='no'>");
+			out.println("<h3><div class='title'>No." + board.getNo() + " : " + board.getTitle() + "</div>" 
+					+ "<div>" + board.getDate() + "</div></h3>");
+
+			out.println("<div>");
+			out.println("<div style='float: left;'>");
+			out.println("			<textarea rows='6' cols='55' name='content'");
+			out.println("					maxlength='255' id='content' >"+board.getContent()+"</textarea>");
+//			out.println("	<div class='content'>");
+//			out.println("  <p>" + board.getContent() + "</p>");
+//			out.println("	</div>");
+			out.println("</div>");
+			out.println("	<div style='padding-left: 10px'>");
+			out.println("<p><a href='/GuestBook/board/view?no=" + board.getNo() +"&uId="+ uId
+					+ "' class='btn btn-info'>수정</a></p>");
+//			out.println("<p><a href='/GuestBook/board/delete?no=" + board.getNo() +"&uId="+ uId
+//					+ "' class='btn btn-info'>삭제</a></p>");
+			//out.println(" 	<button id='btnModify' type='button' class='btn btn-info'>수정</button>");
+			out.println("	</div>");
+			out.println("</div>");
+
+		}
+
+		out.println("</div>");
+		out.println("</div>");
+
+		out.println("<address class='copyright'>Copyright&copy; Bit</address>");
+		out.println("</body>");
+
 		out.println("<script src='../js/jquery-1.11.1.js'></script>");
+		out.println("<script src='//code.jquery.com/ui/1.11.2/jquery-ui.js'></script>");
 		out.println("<script>");
-		out.println("$('#btnCancel').click(function(){");
+		out.println("$(function() { $( '#accordion' ).accordion();});");
+
+		/*
+		out.println("		$('#btnModify').click(function(){");
+    out.println("    if (window.confirm('수정하시겠습니까?')) {");
+		out.println("			location.href = 'view?no=" + "';"); // no????
+    out.println("    }");
+		out.println("		});");		*/
+		out.println("</script>");
+
+		//-----------------------------
+
+		out.println("<script>");
+
+		out.println("  $('#btnDelete').click(function(){");
+	    out.println("    if (window.confirm('삭제하시겠습니까?')) {");
+	    out.println("      location.href = 'delete?no=" +  board2.getNo() + "&uId="+board2.getUId()+"'");
+	    out.println("    }");
+	    out.println("  });");
+		out.println("$('#btnCancel').click(function() {");
 		out.println("	history.back();");
 		out.println("});");
-
-		out.println("$('#btnDelete').click(function(){");
-		out.println("	if(window.confirm('삭제하시겠습니까?z')){");
-		out.println("		location.href = 'delete?no=" + board.getNo()+ "';");
-		out.println("	}");
-		out.println("});");
-		
-		out.println("$('#btnUpdate').click(function(){");
-		out.println("	if($('#name').val().length == 0){");
-		out.println("		alert('제품명은 필수입력 항목입니다.');");
+		out.println("$('#btnAdd').click(function() {");
+		out.println("	if ($('#name').val().length == 0) {");
+		out.println("		alert('이름은 필수 입력 항목입니다.');");
 		out.println("		return false;");
 		out.println("	}");
-			
-		out.println("	if($('#qty').val().length == 0){");
-		out.println("		alert('수량은 필수입력 항목입니다.');");
-		out.println("return false;");
+		out.println("	if ($('#pwd').val().length == 0) {");
+		out.println("		alert('암호는 필수 입력 항목입니다.');");
+		out.println("		return false;");
 		out.println("	}");
-
-		out.println("if($('#mkno').val().length == 0){");
-		out.println("	alert('제조사 번호는 필수입력 항목입니다.');");
-		out.println("	return false;");
-		out.println("}");
+		out.println("	if ($('#title').val().length == 0) {");
+		out.println("		alert('글 제목은 필수 입력 항목입니다.');");
+		out.println("		return false;");
+		out.println("	}");
+		out.println("	if ($('#content').val().length == 0) {");
+		out.println("		alert('글 내용은 필수 입력 항목입니다.');");
+		out.println("		return false;");
+		out.println("	}");
 		out.println("});");
-			
 		out.println("</script>");
-		
-		out.println("</body>");
-		out.println("</html>");
+		//-------------------------------
 
+		out.println("</html>");
 	}
 }

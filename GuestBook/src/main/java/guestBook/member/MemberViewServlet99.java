@@ -15,7 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 @WebServlet("/member/view")
-public class MemberViewServlet extends GenericServlet{
+public class MemberViewServlet99 extends GenericServlet{
 	private static final long serialVersionUID = 1L;
 	//주석
 	SqlSessionFactory sqlSessionFactory = null; 
@@ -43,17 +43,17 @@ public class MemberViewServlet extends GenericServlet{
 		
 		out.println("<form class='form-horizontal' role='form' " + "action='update' method='post'>");
 		out.println(" <div class='form-group'>");
-		out.println("   <label for='no' class='col-sm-2 control-label'>#</label>");
+		out.println("   <label for='name' class='col-sm-2 control-label'>#</label>");
 		out.println("   <div class='col-sm-10'>");
-		out.println("    <input type='text' class='form-control' readonly id='no' name='no' value='"
+		out.println("    <input type='text' class='form-control' readonly id='name' name='name' value='"
 				+ member.getName() + "'>");
 		out.println("    </div>");
 		out.println("  </div>");
 		  
 		out.println("  <div class='form-group'>");
-		out.println("    <label for='name' class='col-sm-2 control-label'>제품</label>");
+		out.println("    <label for='photo' class='col-sm-2 control-label'>제품</label>");
 		out.println("    <div class='col-sm-10'>");
-		out.println("      <input type='text' class='form-control' id='name' name='name' value='" + member.getPhoto() + "'>");
+		out.println("      <input type='text' class='form-control' id='photo' name='photo' value='" + member.getPhoto() + "'>");
 		out.println("    </div>");
 		out.println(" </div>");
 		

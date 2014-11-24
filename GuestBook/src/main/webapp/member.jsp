@@ -106,8 +106,8 @@
 		    	<img src='../member/photo/2.jpg' id='photoStudent' class='photoSS' title='지용근'/>
 		    </div>
 		    <div>
-		  		<a target="_self" href="../board/list?no=1"  id='writeToTeacher'><button type="button" class='btn btn-info button1'>강사님께 글쓰러가기</button></a>
-		    	<a target="_self" href="../board/list?no=2"  id='writeToStudent'><button type="button" class='btn btn-info button2'>친구에게 글쓰러가기</button></a>
+		  		<a target="_self" href="../board/list?uId=1"  id='writeToTeacher'><button type="button" class='btn btn-info button1'>강사님께 글쓰러가기</button></a>
+		    	<a target="_self" href="../board/list?uId=2"  id='writeToStudent'><button type="button" class='btn btn-info button2'>친구에게 글쓰러가기</button></a>
 		    </div>
 		 </div>
 		<p></p>
@@ -166,7 +166,7 @@
 					console.log($(this).attr("id"));
 					$("#photoStudent").attr("src", '../member/photo/' + $(this).attr("id") + '.jpg')
 									  .attr("title", $(this).attr("title"));
-					$('#writeToStudent').attr("href", '../board/list?no=' + $(this).attr("id"));
+					$('#writeToStudent').attr("href", '../board/list?uId=' + $(this).attr("id"));
 				})
 		});
 	</script>

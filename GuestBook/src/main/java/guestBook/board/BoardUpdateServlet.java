@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -21,7 +22,6 @@ public class BoardUpdateServlet extends GenericServlet{
 	private static final long serialVersionUID = 1L;
 
 	SqlSessionFactory sqlSessionFactory = null;
-	BoardViewServlet bvs;// 뷰에서 선택한 uno
 
 	@Override
 	public void service(ServletRequest request, ServletResponse response)
@@ -38,9 +38,10 @@ public class BoardUpdateServlet extends GenericServlet{
 		
 
 		//http://localhost:8080/guestBook_js/board/update?title=aaa&content=333&name=eee&pwd=221&no=2
+		int temp = Integer.parseInt(request.getParameter("no"));
 		
-		//board.setNo(Integer.parseInt(request.getParameter("no")));
-		board.setUId(bvs.no);
+		board.setNo(temp);
+		board.setUId(Integer.parseInt(request.getParameter("uId")));
 		board.setContent(request.getParameter("content"));
 		board.setDate(sdFormat.format(nowDate));
 		board.setName(request.getParameter("name"));
@@ -50,10 +51,20 @@ public class BoardUpdateServlet extends GenericServlet{
 
 		BoardDao boardDao = (BoardDao) this.getServletContext().getAttribute("boardDao");
 		
-		if(Integer.parseInt(request.getParameter("pwd")) == boardDao.selectOne(bvs.no).getPwd()){
+		
+		int pwd1 = Integer.parseInt(request.getParameter("pwd"));
+		int pwd2 = boardDao.selectOne(temp).getPwd();
+		
+		if(pwd1 == pwd2){
 			boardDao.update(board);
+			System.out.println("맞는듯");
 		}//입력한 비밀번호와 동일 할 경우만 업데이트
 
-
+		int uId = Integer.parseInt(request.getParameter("uId"));
+		
+		
+		HttpServletResponse orginResponse = (HttpServletResponse)response;
+	    orginResponse.sendRedirect("list?uId="+uId);
+		
 	}
 }
