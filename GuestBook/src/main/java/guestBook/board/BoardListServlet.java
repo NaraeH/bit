@@ -64,41 +64,45 @@ public class BoardListServlet extends GenericServlet{
 		out.println("<div>");
 		out.println("<form class='form-horizontal' role='form' action='add' method='get' >");
 
-		out.println("	<table border='1' cellpadding='10' class='table table-bordered'>");
+		out.println("	<table class='table' cellpadding='10' class='table table-bordered'>");
 		out.println("		<tr>");
-		out.println("			<td rowspan='2'><img src='img00.jpg'></td>");
+		out.println("			<td rowspan='3'>");
+		out.println("				<div class='headPhoto'>");
+  	out.println("					<img width ='178px' src='../member/photo/"
+  																	+ uId + ".jpg' />");
+		out.println("</div></td>");
 		out.println("			<td colspan='2'><input type='text' size='58' maxlength='50' ");
 		out.println("				class='form-control' id='title' name='title' placeholder='제목'>");
 		out.println("		</tr>");
 		out.println("		<tr>");
 		out.println("			<td><textarea rows='6' cols='50' name='content'");
 		out.println("					maxlength='255' id='content'></textarea></td>");
-		out.println("			<td>");
-		out.println("				<div>");
-		out.println("					<div>");
-		out.println("						<input type='text' size='10' maxlength='10' class='form-control'");
-		out.println("							id='name' name='name' placeholder='글쓴이'>");
-		out.println("					</div>");
-		out.println("					<br>");
-		out.println("					<div>");
-		out.println("						<input type='password' size='10' maxlength='10'");
-		out.println("							class='form-control' id='pwd' name='pwd' placeholder='비밀번호'>");
-		
-		out.println("					</div>");
-		out.println("					<br>");
-		out.println("					<div>");
-		out.println("						<button id='btnAdd' type='submit' class='btn btn-primary'>등록</button>");
-		out.println("						<button id='btnCancel' type='button' class='btn btn-primary'>취소</button>");
 		out.println("		<input type='text' hidden='' id='uId' name='uId' value='"+uId+"'>");
-		out.println("					</div>");
-		out.println("				</div>");
-		out.println("			</td>");
-		out.println("		</tr>");
+		out.println("				<tr><td colspan='2'>");
+		out.println("					<div style='float: left;>");
+		out.println("						<div class='col-lg-4'>");
+		out.println("							<input type='text' size='10' maxlength='10' class='form-control input-sm'");
+		out.println("								id='name' name='name' placeholder='글쓴이'>");
+		out.println("						</div>");
+		out.println("						<div class='col-lg-4'>");
+		out.println("							<input type='password' size='10' maxlength='10'");
+		out.println("							class='form-control input-sm' id='pwd' name='pwd' placeholder='비밀번호'>");
+		out.println("						</div>");
+		out.println("						<div><button id='btnAdd' type='submit' class='btn btn-primary'>등록</button>");
+		out.println("					<button id='btnCancel' type='button' class='btn btn-primary'>취소</button>");
+		out.println("			</div></div>");
+		out.println("	</table>");
+
+		out.println("</form>");
+		
+		
+		
+		
 		out.println("	</table>");
 
 		out.println("</form>");
 
-		out.println("</div>");
+	
 		//-----------------------------------------
 
 		out.println("<div id='accordion'>");
@@ -108,29 +112,29 @@ public class BoardListServlet extends GenericServlet{
 
 			//board.setUId(Integer.parseInt(request.getParameter("no")));
 			//out.println("<input type='text' hidden='' id='no' name='no'>");
-			out.println("<h3><div class='title'>No." + board.getNo() + " : " + board.getTitle() + "</div>" 
-					+ "<div>" + board.getDate() + "</div></h3>");
-
+			out.println("<h3><div><div class='title'>" + board.getName() + " : " + board.getTitle() + "</div>" 
+					+ "<div text-align: right;'>" + board.getDate());
+			out.println("</div></div></h3>");
+			
 			out.println("<div>");
 			out.println("<div style='float: left;'>");
-			out.println("			<textarea rows='6' cols='55' name='content'");
+			out.println("			<textarea rows='6' cols='65' name='content'");
 			out.println("					maxlength='255' id='content' >"+board.getContent()+"</textarea>");
 //			out.println("	<div class='content'>");
 //			out.println("  <p>" + board.getContent() + "</p>");
 //			out.println("	</div>");
 			out.println("</div>");
-			out.println("	<div style='padding-left: 10px'>");
-			out.println("<p><a href='/GuestBook/board/view?no=" + board.getNo() +"&uId="+ uId
-					+ "' class='btn btn-info'>수정</a></p>");
+			out.println("<div text-align: right;'>");
+			out.println("<a href='/guestbook/board/view?no=" + board.getNo() +"&uId="+ uId
+					+ "' class='btn btn-info btn-xs'>ㅁ</a>");
+			out.println("</div>");
+			
 //			out.println("<p><a href='/GuestBook/board/delete?no=" + board.getNo() +"&uId="+ uId
 //					+ "' class='btn btn-info'>삭제</a></p>");
 			//out.println(" 	<button id='btnModify' type='button' class='btn btn-info'>수정</button>");
-			out.println("	</div>");
 			out.println("</div>");
 
 		}
-
-		out.println("</div>");
 		out.println("</div>");
 
 		out.println("<address class='copyright'>Copyright&copy; Bit</address>");
