@@ -12,15 +12,41 @@
 <style>
 
 .container{
-	width:1100px;
+	width:1500px;
 	height: 1000px;
 	margin: 0 auto;
+	margin-top: 50px;
+	border: 3px dotted #7ccde4;
+	border-radius: 44px;
+	background-color:  rgba(218,241,248,0.3);
+}
+
+.container h1 {
+	height: 65px;
+	width: 390px;
+	background: white;
+	font-size: 50px;
+	/* margin: 0 auto; */
+	margin-top: -32px;
+	text-align: center;
+	border-radius:5px;
+	padding-top: 6px;
+	color: #05639a;
+	text-shadow: 3px 3px #7ccde4;
+	font-weight: bolder;
+	font-family:CURSIVE;
+}
+
+.container p{
+	margin-left:250px;
+	margin-top:35px;
+}
 }
 .mainPhoto{
 	margin: 0 auto;
 }
 #tableList {
-	width: 1020px;
+	width: 1030px;
 	height: 500px;
 	margin: 0 auto;
 	overflow-x: auto;
@@ -40,7 +66,8 @@
 .photoT {
 	width:350px;
 	margin: 15px;
-	margin-left: 180px;
+	margin-top:30px;
+	margin-left: 360px;
 	border-radius: 15px;
 }
 
@@ -59,7 +86,7 @@
 }
 
 .button1 {
-	margin-left: 270px;
+	margin-left: 450px;
 }
 
 .button2 {
@@ -71,7 +98,7 @@
 <body>
 <div>
 	<div class='container'>
-		<h1>java 63기</h1>
+		<!-- <h1>엄진영과 아이들</h1> -->
 	
 		  <div class='form-group'>
 		  	<div class="mainPhoto">
@@ -83,7 +110,8 @@
 		    	<a target="_self" href="../board/list?no=2"  id='writeToStudent'><button type="button" class='btn btn-info button2'>친구에게 글쓰러가기</button></a>
 		    </div>
 		 </div>
-
+		<p></p>
+		<p>글을 쓰고 싶은 친구의 사진을 선택해주세요</p>
 		<div id=tableList>
 			<table id='list' class='table table-hover'>
 			</table>
@@ -115,7 +143,6 @@
 					}
 				}%>
 				
-
 				<%for (int i = 0; i < names.length/5; i++) {%>
  					$("<tr>")
  						.attr("class", "dateRow")
@@ -137,8 +164,8 @@
 					event.stopPropagation();
 					console.log(this);
 					console.log($(this).attr("id"));
-					
-					$("#photoStudent").attr("src", '../member/photo/' + $(this).attr("id") + '.jpg');
+					$("#photoStudent").attr("src", '../member/photo/' + $(this).attr("id") + '.jpg')
+									  .attr("title", $(this).attr("title"));
 					$('#writeToStudent').attr("href", '../board/list?no=' + $(this).attr("id"));
 				})
 		});
