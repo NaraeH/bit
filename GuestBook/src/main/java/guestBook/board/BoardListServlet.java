@@ -125,7 +125,7 @@ public class BoardListServlet extends GenericServlet{
 //			out.println("	</div>");
 			out.println("</div>");
 			out.println("<div text-align: right;'>");
-			out.println("<a href='/guestbook/board/view?no=" + board.getNo() +"&uId="+ uId
+			out.println("<a href='/GuestBook/board/view?no=" + board.getNo() +"&uId="+ uId
 					+ "' class='btn btn-info btn-xs'>ㅁ</a>");
 			out.println("</div>");
 			
@@ -158,7 +158,7 @@ public class BoardListServlet extends GenericServlet{
 		out.println("<script>");
 
 		out.println("$('#btnCancel').click(function() {");
-		out.println("	history.back();");
+		out.println("	location.href='/GuestBook/member/list';");
 		out.println("});");
 		out.println("$('#btnAdd').click(function() {");
 		out.println("	if ($('#name').val().length == 0) {");

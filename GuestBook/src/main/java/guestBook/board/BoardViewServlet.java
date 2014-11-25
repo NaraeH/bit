@@ -184,7 +184,7 @@ public class BoardViewServlet extends GenericServlet{
 
 		out.println("<script>");
 		out.println("$('#btnCancel').click(function() {");
-		out.println("	history.back();");
+		out.println("	location.href='/GuestBook/member/list';");
 		out.println("});");
 		out.println("  $('#btnDelete').click(function(){");
 	    out.println("    if (window.confirm('삭제하시겠습니까?')) {");
