@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<!-- 
+id: javascript 내에서 받을 값
+name: server에 보낼 값 -->
+<body>
+
+	<h1>입력폼 데이터 전송</h1>
+	<form action="http://127.0.0.1:1337/calc" method="GET">
+		<input type="text" name="v1"> 
+		<select name="op">
+			<option value="plus">+</option>
+			<option value="minus">-</option>
+			<option value="multiple">*</option>
+			<option value="divide">/</option>
+		</select> <input type="text" name="v2">
+		<button>=</button>
+	</form>
+</body>
+</html>
