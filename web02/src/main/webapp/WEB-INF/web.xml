@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+  version="3.1"
+  metadata-complete="false">
+  
+  <!-- 스픵의 ContextLoaderListener가 사용할 설정파일 경로정보 -->
+  	<context-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:java63/servlets/test05/application-context.xml</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- characterEncodingFilter filter선언 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<!-- LogFilter filter선언 -->
+	<filter>
+		<filter-name>LogFilter</filter-name>
+		<filter-class>java63.servlets.test05.LogFilter</filter-class>
+
+	</filter>
+	
+
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>LogFilter</filter-name>
+		<url-pattern>/test05/*</url-pattern>
+	</filter-mapping>
+
+</web-app>
