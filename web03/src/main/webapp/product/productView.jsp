@@ -5,11 +5,20 @@
 <html>
 <head>
 <jsp:include page="/common/Header.jsp" />
+<style>
+.prod-pho{
+	width: 200px;
+	height:200px;
+	border: 1px solid gray;
+	border-radius:5px;
+}
+</style>
 </head>
 
 <body>
 	<div class='container'>
-		<h1>제품정보(JSP v1.1)</h1>
+	<jsp:include page="/common/loginPanel.jsp"/>
+		<h1>제품정보</h1>
 		<form class='form-horizontal' role='form' action='update.do'
 			method='post'>
 			<div class='form-group'>
@@ -43,15 +52,28 @@
  				   </select>
 				</div>
 			</div>
-			<div class='form-group'>
-				<label for='qty' class='col-sm-2 control-label'>사진</label>
+	<%-- 내가한것		
+ 			<div class='form-group'>
+				<label for='photo' class='col-sm-2 control-label'>사진</label>
 				<div class='col-sm-10'>
 					<c:choose>
 						<c:when test="${product.photo != null}">
-						<img src='../fileupload/${product.photo}' style="width: 200px;">
+							<img src='../fileupload/${product.photo}' style="width: 200px;">
 						</c:when>
-						<c:otherwise><p class='form-control' disabled>파일이 존재하지 않습니다.</p></c:otherwise>
+						<c:otherwise>
+							<input type='text' class='form-control' readonly value='파일이 존재하지 않습니다.'>
+						</c:otherwise>
 					</c:choose>
+				</div>
+			</div> --%>
+			
+			<!-- 강사님꺼 -->
+			<div class='form-group'>
+				<label for='photosDiv' class='col-sm-2 control-label'>사진</label>
+				<div class='col-sm-10' id='photosDiv'>
+				<c:forEach items="${photos}" var="photo">
+					<img class='prod-pho' src='${pageContext.servletContext.contextPath}/fileupload/${photo.url}'>
+				</c:forEach>
 				</div>
 			</div>
 

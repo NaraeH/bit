@@ -19,4 +19,5 @@ public interface ProductDao {
 	public void update(Product product);
 	public void delete(int no);
 	public void insertPhoto(Product product);
+	public List<?> selectPhoto(int productNo);
 }

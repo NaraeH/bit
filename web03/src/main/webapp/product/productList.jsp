@@ -9,7 +9,8 @@
 
 <body>
 	<div class='container'>
-		<h1>제품목록(JSP v1.1)</h1>
+		<jsp:include page="/common/loginPanel.jsp"/>
+		<h1>제품목록</h1>
 		<p>
 			<a href='add.do' class='btn btn-primary'>새제품</a>
 		</p>
