@@ -27,7 +27,9 @@ public class ProductDeleteServlet extends HttpServlet{
 
 		WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
 		ProductDao productDao = (ProductDao) ctx.getBean("productDao");
-		productDao.delete(no);
+		
+		productDao.deletePhoto(no); //prod_photo 테이블에서 먼저 삭제
+		productDao.delete(no);      //그 후 products 테이블에서 삭제
 		response.setContentType("text/html;charset=UTF-8");
 
 		response.sendRedirect("list.do");

@@ -26,7 +26,8 @@ public class ProductListServlet extends HttpServlet{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			int pageNo = 0;
+
+		int pageNo = 0;
 			int pageSize = 0;
 			try{
 			if(request.getParameter("pageNo") != null){
@@ -53,6 +54,7 @@ public class ProductListServlet extends HttpServlet{
 			//Request(요청) + Dispatcher(배달자) => 요청을 배달하는 역할
 			RequestDispatcher rd = request.getRequestDispatcher("/product/productList.jsp");
 			rd.include(request, response); 
+				
 		}catch(Exception e){
 			e.printStackTrace();
 			RequestDispatcher rd = request.getRequestDispatcher("/common/Error.jsp");

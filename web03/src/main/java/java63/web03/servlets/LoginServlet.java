@@ -81,7 +81,12 @@ public class LoginServlet extends HttpServlet{
 			HttpSession session = request.getSession();
 			if(member != null){
 				session.setAttribute("loginUser", member);
-				response.sendRedirect("../product/list.do");
+				
+				if(session.getAttribute("requestUrl") != null){
+					response.sendRedirect((String)session.getAttribute("requestUrl"));
+				}else{
+					response.sendRedirect("../product/list.do");
+				}
 			}else{
 				session.invalidate();  //기존 세션을 제거하고 새로만든다(무효화)
 				response.sendRedirect("login.do"); //로그인 폼으로 이동

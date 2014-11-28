@@ -29,8 +29,8 @@
 		<result column="MKNO" property="makerNo" />
 		<result column="MKNAME" property="maker" />
 	</resultMap>
-	
-  	<resultMap type="ProductPhoto" id="ProductPhotoMap">
+ 	
+	<resultMap type="ProductPhoto" id="ProductPhotoMap">
 		<result column="COL" property="no" />
 		<result column="PNO" property="productNo" />
 		<result column="URL" property="url" />
@@ -42,7 +42,8 @@
 	</sql>
 
 	<select id="selectList" parameterType="map" resultMap="ProductListItem2Map">
-	select T1.PNO, T1.PNAME, T1.QTY, T2.MKNAME from products T1 LEFT OUTER JOIN makers T2 
+	SELECT T1.PNO, T1.PNAME, T1.QTY, T2.MKNAME 
+	FROM products T1 LEFT OUTER JOIN MAKERS T2 
 	USING(MKNO)
 	ORDER BY T1.PNO
     <if test="pageSize > 0">
@@ -51,13 +52,10 @@
   </select>
   
   <select id="selectOne" parameterType="integer" resultMap="productMap">
-    SELECT T1.PNO, T1.PNAME, T1.QTY, T1.MKNO, T2.URL
-	FROM PRODUCTS T1 LEFT OUTER JOIN PROD_PHOTS T2 
-	USING(PNO) 
-    WHERE PNO=#{value}
+	SELECT PNO, PNAME, QTY, MKNO
+	FROM PRODUCTS
+	WHERE PNO=#{value}
   </select>
-  
-
   
   <!--useGeneratedKeys: 자동 생성된 키 값을 이용하겠다.  keyColumn: 누구를(어떤 컬럼을)?  keyProperty: 어디에 저장하는가(Product에 setNo()를 호출하여 추가해라)-->
   <insert id="insert" parameterType="Product" useGeneratedKeys="true" keyColumn="PNO" keyProperty="no">
@@ -76,6 +74,10 @@
   <delete id="delete" parameterType="integer">
     DELETE FROM PRODUCTS WHERE PNO=#{value}
   </delete>
+  
+   <delete id="deletePhoto" parameterType="integer">
+    DELETE FROM PROD_PHOTS WHERE PNO=#{no}
+  </delete>
  
     <insert id="insertPhoto" parameterType="Product">
     INSERT INTO PROD_PHOTS(PNO,URL) 
@@ -85,9 +87,9 @@
    <select id="selectPhoto" parameterType="integer" resultMap="ProductPhotoMap">
 	SELECT COL, PNO, URL 
 	FROM PROD_PHOTS
-	<!-- <if test="value > 0"> --> 
+	<if test="value > 0">
 		WHERE PNO=#{value};
-	<!-- </if> -->
+	</if>
   </select> 
 </mapper>
 

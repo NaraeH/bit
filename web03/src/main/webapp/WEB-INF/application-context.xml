@@ -34,6 +34,9 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<!--Dao클래스 자동생성 설정  -->
+	<!-- sqlSessionFactory의 <property name="mapperLocations" value="classpath*:java63/web03/dao/*Dao.xml" />의 클래스패스의 경로에서 
+	의 Dao가 필요할 때 value="java63.web03.dao"서 찾아서 객체를 생성하고 id는 그 클래스의 이름으로 해라
+	  -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!--DAO를 위한 인터페이스가 선언된 패키지 지정  -->
   		<property name="basePackage" value="java63.web03.dao" />

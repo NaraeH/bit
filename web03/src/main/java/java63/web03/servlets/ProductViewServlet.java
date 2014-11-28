@@ -1,7 +1,6 @@
 package java63.web03.servlets;
 
 import java.io.IOException;
-import java.util.Map;
 import java63.web03.dao.MakerDao;
 import java63.web03.dao.ProductDao;
 import java63.web03.domain.Product;
@@ -32,7 +31,6 @@ public class ProductViewServlet extends HttpServlet{
 		WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
 		ProductDao productDao = (ProductDao) ctx.getBean("productDao");
 		Product product = productDao.selectOne(no);
-		
 		request.setAttribute("product", product);
 		request.setAttribute("photos", productDao.selectPhoto(product.getNo()));
 		
