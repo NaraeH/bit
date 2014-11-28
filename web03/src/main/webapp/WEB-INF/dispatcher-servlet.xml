@@ -15,6 +15,13 @@
     <!-- java63.web03.control 밑의 모든 @component가 붙은 것을 찾아라  => productDao-->
 	<context:component-scan base-package="java63.web03.control"/>
 	
+    <!-- @RequestMapping과 @ExcepionHandler등의 에노테이션을 처리할 객체를 등록한다. 
+    	이 선언이 있어야만 @RequestMapping 기능을 완전히 사용할 수 있다.
+    	
+    	=>주의!
+    	엄격히 페이지 컨트롤러에 대해서는 @Controller를 사용하라!-->
+    <mvc:annotation-driven/>
+
 	<!--enctype="multipart/form-data"로 값을 받을 때를 위해 주입하여햐 할 것  
 	multipart형식의 데이터를 처리하고 싶다면, 다음 객체를 선언해야 한다.
 	-->
@@ -24,9 +31,6 @@
              서버를 다운 시킨다.-->
     <property name="maxUploadSize" value="10000000"/>
     
-    <!-- @RequestMapping과 @ExcepionHandler등의 에노테이션을 처리할 객체를 등록한다. 
-    	이 선언이 있어야만 @RequestMapping 기능을 완전히 사용할 수 있다.-->
-    <mvc:annotation-driven/>
 
 </bean>
 
