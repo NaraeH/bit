@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+.container {
+	width: 500px;
+	
+}
+
+.copyright {
+	text-align:center;
+	color:blue;
+}
+
+.header{
+	height: 25px;
+	background: #daf1f8;
+	padding: 2px 10px 0px 10px;
+}
+
+.userinfo{
+	/* border:1px solid red; */
+	float: left;
+}
+
+.logout{
+	/* border:1px solid gray; */
+	float:right;
+	
+}

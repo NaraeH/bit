@@ -39,6 +39,8 @@ ex) java.lang.Integer => int
 
 <!-- reulstMap에 해당하는 곳(productMap)에 가서 mapping 하여라!!
 즉, productMap이므로 resultType = Product이고 해당 컬럼은 property에서 getter/setter를 찾는다.
+type은 해당 SQL을 리턴해줄때 리턴해줄 객체의 타입
+resultMap과 resultType을 혼동하지말자!! reulstMap은 resultMap에서 찾으라는 뜻이고 resultType은 리턴 객체의 타입이다!!!
 -->
 	<select id="selectList" parameterType="map" resultMap="productMap">
 	<include refid="productSelect"/>
