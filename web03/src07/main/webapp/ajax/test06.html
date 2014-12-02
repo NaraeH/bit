@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery 사용하여 AJAX처리</title>
+</head>
+<body>
+
+<h1>jQuery 사용하여 AJAX처리</h1>
+<table id='boardTable' border='1' >
+	<tr>
+		<th>번호</th>
+		<th>제목</th>
+		<th>작성자</th>
+	</tr>
+</table>
+
+<script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+	<script type="text/javascript">
+	/* {}는 옵션값
+	$.ajax('주소', {
+		type: 'GET' / 'POST',
+		dataType: 받을 데이터 형식,
+		success: 성공적으로 받아왔을 시, 실행되는 함수 (첫번째 파라미터는 서버에서 넘어오는 데이터 이다.)
+		
+		})  */
+	$.ajax('test04_boardList.jsp', {
+		type: 'GET',
+		dataType: 'json',
+		success:function(data/*서버에서 받은 데이터*/){
+			console.log(data);
+			for(var i = 0; i < data.length; i++){
+				$("<tr>").html(
+					'<td>' + data[i].no + '</td>'
+					+ '<td>' + data[i].subject + '</td>' 
+					+ '<td>' + data[i].writer + '</td>')
+					.appendTo("#boardTable");
+				
+			}
+		}
+	})
+	
+	</script>
+
+</body>
+</html>
+
+
+
+<!-- < JSON >
+property이름 : 반드시 쌍따옴표 안에 넣어야 한다.(작은 따옴표 안됨) 
+ -->

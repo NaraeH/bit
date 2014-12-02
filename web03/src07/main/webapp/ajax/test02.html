@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AJAX 비동기 요청</title>
+</head>
+<body>
+
+<h1>AJAX 비동기요청</h1>
+
+<script type="text/javascript">
+//1. 서버 요청을 수행할 객체 준비
+var xhr = new XMLHttpRequest();
+
+//2. 요청 URL 설정
+// 1) 비동기 요청: open()의 세번째 파라미터 값을 true로 설정한다.
+// 2) server 로 부터 응답을 받았을 때 호출될 리스너를 등록한다. 
+xhr.onreadystatechange = function(){
+	//xhr 객체의 상태가 바뀔 때마다 호출된다.(총 4번째) => 용량이 작다면 세번째 상태가 한번만 호출되지만, 용량이 크다면 3번째 상태가 여러번 호출 될 수도 있다.
+	//상태1. open() 호출 후
+	//상태2. send() 호출 후
+	//상태3. 서버로부터 데이터를 받는 중
+	//상태4. 서버로부터 데이터 수신을 완료했을 때
+	if(xhr.readyState==4){
+		if(xhr.status==200){
+			console.log("바꼇따~");
+		}else{
+			alert("서버요청오류");
+			console.log(xhr.responseText);
+		}
+	}
+}
+xhr.open("GET", "ajax01.jsp", true);
+
+//3. server에 요청하기
+xhr.send();
+
+//4. server가 보낸 값 출력하기
+console.log(xhr.responseText);
+</script>
+
+</body>
+</html>

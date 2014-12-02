@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel='stylesheet' href= '/web03/css/bootstrap.min.css'>
+<link rel='stylesheet' href= '/web03/css/bootstrap-theme.min.css'>
+<link rel='stylesheet' href= '/web03/css/common.css'>
+ 
+</head>
+
+<body>
+	<div class='container'>
+
+		<div class='header'>
+			<p class='userinfo'>
+				<a href='mailto:'></a>
+			</p>
+			<p class='logout'>
+				<a href="/web03/auth/logout.do">로그아웃</a>
+			</p>
+		</div>
+
+		<h1>제품목록</h1>
+		<p>
+			<a href='add.do' class='btn btn-primary'>새제품</a>
+		</p>
+		<table id="productTable" class='table table-hover'>
+			<tr>
+				<th>#</th>
+				<th>제품</th>
+				<th>수량</th>
+				<th>제조사</th>
+			</tr>
+
+		</table>
+		<div id="pagingBar">
+			<input id="prevBtn" type="button" value="이전" class='btn btn-default'> 
+			<span id="pageNo">[1]</span>
+			<input id="nextBtn" type="button" value="다음" class='btn btn-default'>
+		</div>
+	</div>
+	<address class='copyright'>Copyright&copy; NaraeH</address>
+
+<script src='../js/jquery-1.11.1.js'></script>
+<script>
+var currPage;
+var maxPageNo;
+
+loadProductList(1);
+
+$("#prevBtn").click(function(){
+	if(currPageNo > 1){
+		loadProductList(currPageNo - 1);
+	}
+});
+
+$("#nextBtn").click(function(data){
+	if(currPageNo < maxPageNo){ 	
+		loadProductList(currPageNo + 1);
+	}
+});
+
+/* -------------------------- 함수정의 부분 -------------------------- */
+function setPageNo(currenPage, maxPageNo){
+	//console.log(currenPage);
+	
+	this.currPageNo = currenPage;
+	this.maxPageNo = maxPageNo;
+	
+	$("#pageNo").html(currPageNo);
+	
+	if(currPageNo <= 1){
+		$("#prevBtn").css("display", "none");
+	}else{
+		$("#prevBtn").css("display", "");
+	}
+	
+	if(currPageNo >= maxPageNo){
+		$("#nextBtn").css("display", "none");
+	}else{
+		$("#nextBtn").css("display", "");
+	}
+}
+
+function loadProductList(pageNo){
+	
+$('.data-row').remove();
+$.getJSON(
+		'../json/product/list.do?pageNo=' + pageNo,
+		function(data){
+			setPageNo(data.currengPage, data.maxPageNo);
+
+			var currPage = data.currenPage;
+			var products = data.product;
+			
+			for(var i = 0; i<products.length; i++){
+				$("<tr>")
+					.addClass('data-row')
+					.append($('<td>').html(products[i].no))
+					.append($('<td>')
+							.append($("<a>")
+									.attr("href", "../json/product/view.do?no=" + products[i].no)
+									.attr("data-no", products[i].no) //data-로 시작하면 기존에 없는 속성
+									.html(products[i].name)))
+					.append($('<td>').html(products[i].quantity))
+					.append($('<td>').html(products[i].maker))
+					.appendTo($("#productTable"));
+			} 
+});
+}
+
+</script>
+ 
+
+ 
+</body>
+</html>
