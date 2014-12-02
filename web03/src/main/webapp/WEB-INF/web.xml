@@ -47,7 +47,7 @@
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 	
-<!-- 	<filter-mapping>
+<!--  	<filter-mapping>
 		<filter-name>authFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping> -->

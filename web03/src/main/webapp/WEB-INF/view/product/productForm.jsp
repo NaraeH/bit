@@ -26,14 +26,14 @@
   <div class='form-group'>
     <label for='qty' class='col-sm-2 control-label'>수량</label>
     <div class='col-sm-10'>
-      <input type='text' class='form-control' id='qty' name='qty' placeholder='수량 예) 20'>
+      <input type='text' class='form-control' id='qty' name='quantity' placeholder='수량 예) 20'>
     </div>
   </div>
   
   <div class='form-group'>
     <label for='mkno' class='col-sm-2 control-label'>제조사</label>
     <div class='col-sm-10'>
-    <select name="mkno" class='form-control'>
+    <select name="makerNo" class='form-control'>
     	<option value="0">제조사를 선택하세요</option>
     	<c:forEach items="${makers}" var="maker">
     		<option value='${maker.no}'>${maker.name}</option>
@@ -42,10 +42,17 @@
     </div>
  </div>
  
+  <div class='form-group'>
+    <label for='madeDate' class='col-sm-2 control-label'>제조일</label>
+    <div class='col-sm-10'>
+      <input type="date" class='form-control' id='madeDate' name='madeDate' placeholder='제조일 예) 2014-12-25'>
+    </div>
+  </div>
+ 
    <div class='form-group'>
     <label for='photo' class='col-sm-2 control-label'>사진</label>
     <div class='col-sm-10'>
-      <input type='file' class='form-control' id='photo' name='photo'>
+      <input type='file' class='form-control' id='photo' name='photofile'>
     </div>
   </div>
  

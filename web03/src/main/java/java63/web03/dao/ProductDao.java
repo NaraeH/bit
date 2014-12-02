@@ -15,6 +15,7 @@ public interface ProductDao {
  */
 	public List<?> selectList(Map<String, Object> params);
 	public Product selectOne(int no);
+	public int totalSize();
 	public void insert(Product product);
 	public void update(Product product);
 	public void delete(int no);

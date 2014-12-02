@@ -1,28 +1,28 @@
+//list paging 처리하기
+
 package java63.web03.control;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-
 import java63.web03.dao.MakerDao;
 import java63.web03.dao.ProductDao;
 import java63.web03.domain.Product;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller //Spring MVC의 컴포넌트임(Page Controller)을 지정할 때 사용
 @RequestMapping("/product")  
 public class ProductControl{
-	static final int PAGE_DEFAULT_SIZE = 3;
+	static final int PAGE_DEFAULT_SIZE = 5;
 	
 	@Autowired MakerDao makerDao;
 	@Autowired ProductDao productDao;
@@ -32,26 +32,18 @@ public class ProductControl{
 	public ModelAndView form() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("makers", makerDao.selectList());
-		mv.setViewName("/product/productForm.jsp");
+		mv.setViewName("product/productForm");
 		return mv;
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String add(
-			@RequestParam("name") String name,   
-			@RequestParam int qty, //=> 요청 파라미터 이름과 변수의 이름이 같다면 생략가능
-			int mkno,  //@RequestMapping 에노테이션 생략가능
-			@RequestParam MultipartFile photo) throws Exception {
+	public String add(Product product) throws Exception {
 
 		String fileuploadRealPath= servletContext.getRealPath("/fileupload");
 		String filename = System.currentTimeMillis() + "_"; 
 		File file = new File(fileuploadRealPath + "/" + filename);
-		photo.transferTo(file);
+		product.getPhotofile().transferTo(file);
 
-		Product product =new Product();
-		product.setName(name);
-		product.setQuantity(qty);
-		product.setMakerNo(mkno);
 		product.setPhoto(filename);
 
 		productDao.insert(product);
@@ -69,56 +61,56 @@ public class ProductControl{
 		return "redirect:list.do"; //DispatcherServlet에서 jsp파일이 아닌 java파일로 가는 경우는 따로 처리해주자
 	}
 	
-	@RequestMapping("/list.do")
-	public String list(HttpServletRequest request) throws Exception {
-		int pageNo = 0;
-		int pageSize = 0;
+	@RequestMapping("/list")
+	public String list(
+			@RequestParam(defaultValue="1")int pageNo, 
+			@RequestParam(defaultValue="5") int pageSize,
+			Model model) throws Exception {
+		int totalsize = productDao.totalSize();
+		int maxPageNo = (totalsize / pageSize);
+		if(pageSize <= 0){ pageSize = PAGE_DEFAULT_SIZE; }
 
-		if(request.getParameter("pageNo") != null){
-			pageNo = Integer.parseInt(request.getParameter("pageNo"));
-			pageSize = PAGE_DEFAULT_SIZE;
-		}
+		if(pageNo <= 0){ pageNo = 1; }
+		if(totalsize % pageSize > 0){ maxPageNo++; }
 
-		if(request.getParameter("pageSize") != null){
-			pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		}
+		if(pageNo > 1){ model.addAttribute("prevPageNo", pageNo-1); }
+		
+		if(pageNo > maxPageNo){
+			pageNo = maxPageNo; 
+		} else if(pageNo < maxPageNo){
+			model.addAttribute("nextPageNo", pageNo + 1); 
+			}
+		
+		model.addAttribute("currentPageNo", pageNo);
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("startNo", (pageNo - 1) * pageSize);
 		params.put("pageSize", pageSize);
 
-		request.setAttribute("products", productDao.selectList(params));
+		model.addAttribute("products", productDao.selectList(params));
+		
+		
 
-		return "/product/productList.jsp";
+		return "product/productList";
 	}
 	
-	@RequestMapping("/update.do")
-	public String update(HttpServletRequest request) throws Exception {
-		
-		Product product =new Product();
-
-		product.setNo(Integer.parseInt(request.getParameter("no")));
-		product.setName(request.getParameter("name"));
-		product.setQuantity(Integer.parseInt(request.getParameter("qty")));
-		product.setMakerNo(Integer.parseInt(request.getParameter("mkno")));
-		
+	//product로 받기 위해서는 getter,setter의 이름이 호출되어야 하므로
+	//select문에서 준 property이름과 jsp파일의 이름이 동일해야 한다.
+	@RequestMapping("/update")
+	public String update(Product product) throws Exception {
 		productDao.update(product);
 		
 		return "redirect:list.do";
 	}
 	
-	@RequestMapping("/view.do")
-	public String view(HttpServletRequest request) throws Exception {
-		int no = Integer.parseInt(request.getParameter("no"));
+	@RequestMapping("/view")
+	public String view(int no, Model model) throws Exception {
 
 		Product product = productDao.selectOne(no);
-		request.setAttribute("product", product);
-		request.setAttribute("photos", productDao.selectPhoto(product.getNo()));
+		model.addAttribute("product", product);
+		model.addAttribute("photos", productDao.selectPhoto(product.getNo()));
+		model.addAttribute("makers", makerDao.selectList());
 		
-		request.setAttribute("makers", makerDao.selectList());
-		//request.setAttribute("makers", makerDao.selectNameList()); =>error
-		
-		return "/product/productView.jsp";
+		return "product/productView";
 	}
-	
 }

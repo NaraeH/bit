@@ -34,6 +34,15 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<div id="pagingBar">
+			<c:if test="${!empty prevPageNo}">
+				<a href="list.do?pageNo=${prevPageNo}" class='btn btn-default'>이전</a>
+			</c:if>
+			<span>[${currentPageNo}]</span>
+			<c:if test="${!empty nextPageNo}">
+				<a href="list.do?pageNo=${nextPageNo}" class='btn btn-default'>다음</a>
+			</c:if>
+		</div>
 	</div>
 <script src='../js/jquery-1.11.1.js'></script>
  <jsp:include page="/common/Footer.jsp"/> 

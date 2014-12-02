@@ -1,4 +1,5 @@
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@taglib uri='http://java.sun.com/jsp/jstl/fmt' prefix='fmt'%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -38,36 +39,29 @@
 			<div class='form-group'>
 				<label for='qty' class='col-sm-2 control-label'>수량</label>
 				<div class='col-sm-10'>
-					<input type='text' class='form-control' id='qty' name='qty'
+					<input type='text' class='form-control' id='qty' name='quantity'
 						value='${product.quantity}'>
 				</div>
 			</div>
 			<div class='form-group'>
 				<label for='mkno' class='col-sm-2 control-label'>제조사</label>
 				<div class='col-sm-10'>
-					<select id="mkno" name="mkno" class='form-control'>
+					<select id="mkno" name="makerNo" class='form-control'>
     						<c:forEach items="${makers}" var="maker">
     							<option value='${maker.no}'>${maker.name}</option>
     						</c:forEach>
  				   </select>
 				</div>
 			</div>
-	<%-- 내가한것		
- 			<div class='form-group'>
-				<label for='photo' class='col-sm-2 control-label'>사진</label>
+
+			<div class='form-group'>
+				<label for='madeDate' class='col-sm-2 control-label'>제조일</label>
 				<div class='col-sm-10'>
-					<c:choose>
-						<c:when test="${product.photo != null}">
-							<img src='../fileupload/${product.photo}' style="width: 200px;">
-						</c:when>
-						<c:otherwise>
-							<input type='text' class='form-control' readonly value='파일이 존재하지 않습니다.'>
-						</c:otherwise>
-					</c:choose>
+					<input type="date" class='form-control' id='madeDate' name="madeDate"
+					value="<fmt:formatDate value="${product.madeDate}" pattern="yyyy-MM-dd"/>">
 				</div>
-			</div> --%>
-			
-			<!-- 강사님꺼 -->
+			</div> 
+
 			<div class='form-group'>
 				<label for='photosDiv' class='col-sm-2 control-label'>사진</label>
 				<div class='col-sm-10' id='photosDiv'>

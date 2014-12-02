@@ -30,8 +30,16 @@
     <!-- 최대 업로드 사이즈 => 최대 업로드 사이즈를 지정하지 않을경우 디도스 공격을 받을 수 있다. 임시 메모리에 계속 큰 데이터를 보내서 
              서버를 다운 시킨다.-->
     <property name="maxUploadSize" value="10000000"/>
-    
+    </bean>
 
-</bean>
+	<!-- WEB-INF에 들어있는 jsp를 실행시켜주는 해결사 등록 
+	prefix는 앞에 자동으로 붙이고 suffix는 뒤에 자동으로 붙이는 값(value)-->
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 
 </beans>
