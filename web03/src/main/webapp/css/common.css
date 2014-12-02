@@ -1,5 +1,8 @@
 @CHARSET "UTF-8";
 
+.body{
+	background-color:#f0f0f0;
+}
 .container {
 	width: 500px;
 	
@@ -11,7 +14,7 @@
 }
 
 .header{
-	height: 25px;
+	height: 35px;
 	background: #daf1f8;
 	padding: 2px 10px 0px 10px;
 }
@@ -19,6 +22,11 @@
 .userinfo{
 	/* border:1px solid red; */
 	float: left;
+}
+
+.userinfo img{
+	width:30px;
+	height:30px;
 }
 
 .logout{
